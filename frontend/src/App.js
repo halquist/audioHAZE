@@ -16,13 +16,13 @@ function App() {
 
   return (
     <>
+      <LazerGrid />
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
         <Route path='/signup'>
           <SignupFormPage />
         </Route>
-          <LazerGrid />
       </Switch>
       )}
     </>
