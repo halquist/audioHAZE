@@ -5,8 +5,18 @@ const { restoreUser, requireAuth } = require('../../utils/auth');
 const { Song } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { db } = require('../../config');
 
 const router = express.Router();
+
+// get all songs
+router.get(
+  '/',
+  asyncHandler( async (_req, res) => {
+    const songs = await Song.findAll();
+    return res.json(songs);
+  })
+)
 
 // new song validation
 const validateSong = [
