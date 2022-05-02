@@ -11,9 +11,7 @@
 }
 
 .formDiv {
-  /* position: absolute; */
-  /* margin-top: 20%; */
-  min-height: 400px;
+  min-height: fit-content;
   max-width: 500px;
   background-color: rgb(112, 122, 139);
   display: flex;

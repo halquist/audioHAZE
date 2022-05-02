@@ -15,7 +15,7 @@ const NewSongFormPage = () => {
 
 
   // if the user is not logged in, redirect to the signup page
-  if (!sessionUser) return <Redirect to='/signup' />;
+  if (!sessionUser) return <Redirect to='/login' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
