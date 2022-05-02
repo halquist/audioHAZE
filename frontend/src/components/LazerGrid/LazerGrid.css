@@ -1,0 +1,98 @@
+.lazerDiv {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  /* align-items: center; */
+}
+
+.pyramidGlow {
+  /* position: absolute;
+  left: 2px;
+  top: 0px; */
+}
+
+.glow {
+  /* stroke: rgb(0, 195, 255); */
+  stroke-dashoffset: 0;
+  stroke-dasharray: 50, 1000;
+  transition: .5s ease-in-out;
+  /* overflow: hidden; */
+  /* animation: strokeanim 2s ease-in-out forwards; */
+  /* animation: bloodpump 6s ease-out forwards infinite */
+  stroke-width: 0;
+
+}
+
+#glow1 {
+  animation: bloodpump 10.7s 1s forwards infinite;
+}
+#glow2 {
+  animation: bloodpump 10s 2s forwards infinite;
+}
+#glow3 {
+  animation: bloodpump 10.5s 3s  forwards infinite;
+}
+#glow4 {
+  animation: bloodpump2 10.2s 4s forwards infinite;
+}
+#glow5 {
+  animation: bloodpump 11.1s 5s forwards infinite;
+}
+#glow6 {
+  animation: bloodpump 11.7s  6s forwards infinite;
+}
+
+
+ @keyframes bloodpump {
+  0% {
+    stroke: rgba(0, 200, 255, .4);
+    stroke-dashoffset:50;
+    stroke-dasharray: 50 1000;
+    filter: drop-shadow(0px 0px 3px rgba(130, 218, 255, 1));
+    stroke-width: 0;
+
+  }
+  50% {
+    stroke: rgba(0, 200, 255, .4);
+    /* stroke-dashoffset:-425; */
+    /* stroke-dasharray: 50 3000; */
+    filter: drop-shadow(0px 0px 3px rgba(130, 218, 255, 1));
+    stroke-width: 1;
+
+  }
+  100% {
+    stroke: rgba(0, 200, 255, .4);
+    stroke-dashoffset:-800;
+   stroke-dasharray: 50 1000;
+   filter: drop-shadow(0px 0px 3px rgba(151, 236, 255, .1));
+  stroke-width: 0;
+  }
+}
+
+ @keyframes bloodpump2 {
+  0% {
+    stroke: rgba(0, 200, 255, .4);
+    stroke-dashoffset:50;
+    stroke-dasharray: 50 1000;
+    filter: drop-shadow(0px 0px 3px rgba(130, 218, 255, 1));
+    stroke-width: 0;
+
+  }
+  50% {
+    stroke: rgba(0, 200, 255, .4);
+    /* stroke-dashoffset:-525; */
+    /* stroke-dasharray: 50 1000; */
+    filter: drop-shadow(0px 0px 3px rgba(130, 218, 255, 1));
+    stroke-width: 1;
+  }
+  100% {
+    stroke: rgba(0, 200, 255, .4);
+    stroke-dashoffset:-1000;
+   stroke-dasharray: 50 1000;
+   filter: drop-shadow(0px 0px 3px rgba(151, 236, 255, .1));
+  stroke-width: 0;
+  }
+}

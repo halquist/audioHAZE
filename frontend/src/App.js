@@ -5,6 +5,7 @@ import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import * as sessionActions from './store/session';
 import Navigation from "./components/Navigation";
+import LazerGrid from './components/LazerGrid';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,12 +18,13 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-      <Switch>
+        <Switch>
         <Route path='/signup'>
           <SignupFormPage />
         </Route>
       </Switch>
       )}
+      <LazerGrid />
     </>
   );
 }
