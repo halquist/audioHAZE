@@ -7,13 +7,23 @@ import { getOneSong } from '../../store/song';
 import './SongDetail.css';
 
 const SongDetail = () => {
+  const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song[songId]);
 
   useEffect(()=> {
-    dispatchEvent(getOneSong(songId));
+    dispatch(getOneSong(songId));
   }, [songId]);
 
+  if (!song) {
+    return null;
+  }
+
+  return (
+    <div id='mainSongDetailContent'>
+      <div id='songDetailBlade'>{song.title}</div>
+    </div>
+  )
 
 }
 

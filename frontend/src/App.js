@@ -36,7 +36,7 @@ function App() {
         <Route path='/newSong'>
           <NewSongFormPage />
         </Route>
-        <Route path="/song/:songId">
+        <Route path="/songs/:songId">
           <SongDetail />
         </Route>
       </Switch>

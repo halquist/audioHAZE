@@ -16,7 +16,17 @@ router.get(
     const songs = await Song.findAll();
     return res.json(songs);
   })
-)
+);
+
+// get one song
+router.get(
+  '/:id',
+  asyncHandler( async (req, res) => {
+    const songId = req.params.id;
+    const song = await Song.findByPk(songId)
+    return res.json(song);
+  })
+);
 
 // new song validation
 const validateSong = [
@@ -45,5 +55,6 @@ router.post(
     });
   })
 );
+
 
 module.exports = router;

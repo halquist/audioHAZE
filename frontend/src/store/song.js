@@ -4,6 +4,7 @@ import { restoreUser } from './session';
 
 const LOAD = 'song/LOAD';
 const ADD = 'song/ADD';
+const LOAD_ONE = 'song/ADD_ONE';
 const REMOVE = 'song/REMOVE';
 
 const load = (songList) => ({
@@ -14,6 +15,13 @@ const load = (songList) => ({
 const addSong = (song) => {
   return {
     type: ADD,
+    song
+  }
+};
+
+const loadOneSong = (song) => {
+  return {
+    type: LOAD_ONE,
     song
   }
 };
@@ -45,17 +53,17 @@ export const createSong = (song) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  console.log('data+ ', data)
   dispatch(addSong(data.song));
   return <Redirect to='/' />;
 }
 
+// loads a particular song into the store
 export const getOneSong = (id) => async dispatch => {
-  const response = await fetch(`/api/song/${id}`)
-  if (response.ok) {
+  const sendId = parseInt(id, 10);
+  const response = await fetch(`/api/songs/${sendId}`)
+  // console.log('response ', response)
     const song = await response.json();
-    dispatch(addSong(song));
-  }
+    dispatch(loadOneSong(song));
 }
 
 // returns an array of songs ordered by created date, descending
@@ -82,7 +90,13 @@ const songReducer = (state = initialState, action) => {
       case ADD:
         const newState = { ...state, [action.song.id]: action.song, songList: sortList(action.songList)}
         return newState;
-      default:
+      case LOAD_ONE:
+        const songList = state.songList;
+        //may need to add songlist loading here eventually
+        const loadOneState = { ...state }
+        loadOneState.currentSong = action.song;
+        return loadOneState;
+        default:
         return state;
     }
 }
