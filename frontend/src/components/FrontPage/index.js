@@ -26,56 +26,56 @@ const FrontPage = () => {
   }
 
   return (
-    <>
-    <div id='outerFrontPageContainer'>
-      <div className='displayTitle'>Latest Songs</div>
-      <div id='innerFrontPageContainer'>
-        {songList.map((song) => {
-            return (
-              <NavLink key={song.title} to={`/songs/${song.id}`}>
-                <div className='songBlade'>
-                  <div>
-                    <div className="primary-text">{song.title}</div>
+    <div className='mainFrontPageContent'>
+      <div id='outerFrontPageContainer'>
+        <div className='displayTitle'>Latest Songs</div>
+        <div id='innerFrontPageContainer'>
+          {songList.map((song) => {
+              return (
+                <NavLink key={song.title} to={`/songs/${song.id}`}>
+                  <div className='songBlade'>
+                    <div>
+                      <div className="primary-text">{song.title}</div>
+                    </div>
                   </div>
-                </div>
-              </NavLink>
-            );
-          })}
+                </NavLink>
+              );
+            })}
+        </div>
+      </div>
+      <div id='outerFrontPageContainer'>
+        <div className='displayTitle'>Latest Songs</div>
+        <div id='innerFrontPageContainer'>
+          {songList.map((song) => {
+              return (
+                <NavLink key={song.title} to={`/songs/${song.id}`}>
+                  <div className='songBlade'>
+                    <div>
+                      <div className="primary-text">{song.title}</div>
+                    </div>
+                  </div>
+                </NavLink>
+              );
+            })}
+        </div>
+      </div>
+      <div id='outerFrontPageContainer'>
+        <div className='displayTitle'>Latest Songs</div>
+        <div id='innerFrontPageContainer'>
+          {songList.map((song) => {
+              return (
+                <NavLink key={song.title} to={`/songs/${song.id}`}>
+                  <div className='songBlade'>
+                    <div>
+                      <div className="primary-text">{song.title}</div>
+                    </div>
+                  </div>
+                </NavLink>
+              );
+            })}
+        </div>
       </div>
     </div>
-    <div id='outerFrontPageContainer'>
-      <div className='displayTitle'>Latest Songs</div>
-      <div id='innerFrontPageContainer'>
-        {songList.map((song) => {
-            return (
-              <NavLink key={song.title} to={`/songs/${song.id}`}>
-                <div className='songBlade'>
-                  <div>
-                    <div className="primary-text">{song.title}</div>
-                  </div>
-                </div>
-              </NavLink>
-            );
-          })}
-      </div>
-    </div>
-    <div id='outerFrontPageContainer'>
-      <div className='displayTitle'>Latest Songs</div>
-      <div id='innerFrontPageContainer'>
-        {songList.map((song) => {
-            return (
-              <NavLink key={song.title} to={`/songs/${song.id}`}>
-                <div className='songBlade'>
-                  <div>
-                    <div className="primary-text">{song.title}</div>
-                  </div>
-                </div>
-              </NavLink>
-            );
-          })}
-      </div>
-    </div>
-    </>
   );
 }
 

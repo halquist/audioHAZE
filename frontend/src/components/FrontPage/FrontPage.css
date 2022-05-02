@@ -1,9 +1,17 @@
+.mainFrontPageContent {
+  overflow: auto;
+}
+
 #outerFrontPageContainer {
+  background-color: rgba(99, 0, 58, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  margin: 20px 0px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 #innerFrontPageContainer {
@@ -37,10 +45,11 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   height: 10px !important;
+  width: 10px !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #009dff;
+  background: #5da3ff;
   border-radius: 20px;
-  -webkit-box-shadow: inset 0 0 5px rgb(255, 255, 255);
+  /* -webkit-box-shadow: inset 0 0 5px rgb(93, 166, 255); */
 }

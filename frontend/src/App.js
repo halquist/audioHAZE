@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+
 import FrontPage from './components/FrontPage'
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import NewSongFormPage from './components/UploadNewSongFormPage';
-import * as sessionActions from './store/session';
 import Navigation from "./components/Navigation";
+import SongDetail from './components/SongDetail';
 import LazerGrid from './components/LazerGrid';
+
+import * as sessionActions from './store/session';
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +35,9 @@ function App() {
         </Route>
         <Route path='/newSong'>
           <NewSongFormPage />
+        </Route>
+        <Route path="/song/:songId">
+          <SongDetail />
         </Route>
       </Switch>
       )}

@@ -18,6 +18,8 @@ const addSong = (song) => {
   }
 };
 
+
+
 // load songs from database on load
 export const getSongs = () => async dispatch => {
   const response = await fetch(`/api/songs`);
@@ -46,6 +48,14 @@ export const createSong = (song) => async (dispatch) => {
   console.log('data+ ', data)
   dispatch(addSong(data.song));
   return <Redirect to='/' />;
+}
+
+export const getOneSong = (id) => async dispatch => {
+  const response = await fetch(`/api/song/${id}`)
+  if (response.ok) {
+    const song = await response.json();
+    dispatch(addSong(song));
+  }
 }
 
 // returns an array of songs ordered by created date, descending
