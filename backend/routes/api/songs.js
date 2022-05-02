@@ -37,7 +37,6 @@ router.post(
   '/',
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    console.log('woo', req.body)
     const { title, url, userId } = req.body;
     const song = await Song.createSong({title, url, userId});
 

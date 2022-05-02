@@ -8,45 +8,74 @@ import './FrontPage.css';
 const FrontPage = () => {
   const dispatch = useDispatch();
 
-  const songList = useSelector(state => {
-    // return state.songs.list.map(songId => state.pokemon[pokemonId]);
+  // loads all songs in the store into a song list
+  const songList = useSelector(state =>{
+    return state.song.songList.map(song => song)
   });
-  
+
+
+  console.log('songlist', songList);
+
   useEffect(() => {
     dispatch(getSongs());
-  }, [dispatch]);
+  },[]);
+
 
   if (!songList) {
     return null;
   }
 
   return (
-    <div id='frontPageContainer'>
-       {/* {songList.map((pokemon) => {
-          return (
-            <NavLink key={pokemon.name} to={`/pokemon/${pokemon.id}`}>
-              <div
-                className={
-                  Number.parseInt(pokemonId) === pokemon.id
-                    ? "nav-entry is-selected"
-                    : "nav-entry"
-                }
-              >
-                <div
-                  className="nav-entry-image"
-                  style={{ backgroundImage: `url('${pokemon.imageUrl}')` }}
-                ></div>
-                <div>
-                  <div className="primary-text">{pokemon.name}</div>
-                  <div className="secondary-text">
-                    {pokemon.number} {pokemon.captured && "(Captured)"}
+    <>
+    <div id='outerFrontPageContainer'>
+      <div className='displayTitle'>Latest Songs</div>
+      <div id='innerFrontPageContainer'>
+        {songList.map((song) => {
+            return (
+              <NavLink key={song.title} to={`/songs/${song.id}`}>
+                <div className='songBlade'>
+                  <div>
+                    <div className="primary-text">{song.title}</div>
                   </div>
                 </div>
-              </div>
-            </NavLink>
-          );
-        })} */}
+              </NavLink>
+            );
+          })}
+      </div>
     </div>
+    <div id='outerFrontPageContainer'>
+      <div className='displayTitle'>Latest Songs</div>
+      <div id='innerFrontPageContainer'>
+        {songList.map((song) => {
+            return (
+              <NavLink key={song.title} to={`/songs/${song.id}`}>
+                <div className='songBlade'>
+                  <div>
+                    <div className="primary-text">{song.title}</div>
+                  </div>
+                </div>
+              </NavLink>
+            );
+          })}
+      </div>
+    </div>
+    <div id='outerFrontPageContainer'>
+      <div className='displayTitle'>Latest Songs</div>
+      <div id='innerFrontPageContainer'>
+        {songList.map((song) => {
+            return (
+              <NavLink key={song.title} to={`/songs/${song.id}`}>
+                <div className='songBlade'>
+                  <div>
+                    <div className="primary-text">{song.title}</div>
+                  </div>
+                </div>
+              </NavLink>
+            );
+          })}
+      </div>
+    </div>
+    </>
   );
 }
 

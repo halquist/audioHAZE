@@ -23,7 +23,7 @@ export const getSongs = () => async dispatch => {
   const response = await fetch(`/api/songs`);
   if (response.ok) {
     const songList = await response.json();
-    console.log('response', songList)
+    // console.log('response', songList)
     dispatch(load(songList));
   }
 };
@@ -52,13 +52,12 @@ export const createSong = (song) => async (dispatch) => {
 const sortList = (list) => {
   return list.sort((songA, songB) => {
     return new Date(songB.createdAt) - new Date(songA.createdAt);
-  }).map((song) => song.id);
+  }).map((song) => song);
 };
 
-const initialState = {};
+const initialState = {songList: []};
 
 const songReducer = (state = initialState, action) => {
-    // console.log(action.song.id);
     switch (action.type) {
       case LOAD:
         const allSongs = {};
@@ -71,7 +70,7 @@ const songReducer = (state = initialState, action) => {
           songList: sortList(action.songList)
         }
       case ADD:
-        const newState = { ...state, [action.song.id]: action.song}
+        const newState = { ...state, [action.song.id]: action.song, songList: sortList(action.songList)}
         return newState;
       default:
         return state;
