@@ -30,6 +30,7 @@ function SignupFormPage() {
   };
 
   return (
+    <div id='signupFormContainer'>
       <div className='formDiv'>
         <div className='title'>Sign Up</div>
         <form onSubmit={handleSubmit}>
@@ -76,6 +77,7 @@ function SignupFormPage() {
           <button type="submit">Sign Up</button>
         </form>
       </div>
+    </div>
   );
 }
 

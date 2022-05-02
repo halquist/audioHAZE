@@ -16,7 +16,6 @@ function App() {
 
   return (
     <>
-      <LazerGrid />
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -25,6 +24,7 @@ function App() {
         </Route>
       </Switch>
       )}
+      <LazerGrid />
     </>
   );
 }

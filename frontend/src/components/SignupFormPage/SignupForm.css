@@ -1,6 +1,18 @@
+#signupFormContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+
 .formDiv {
-  /* position: relative; */
-  margin-top: 20%;
+  /* position: absolute; */
+  /* margin-top: 20%; */
   min-height: 400px;
   max-width: 500px;
   background-color: rgb(112, 122, 139);
