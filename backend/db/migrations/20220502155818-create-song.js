@@ -19,7 +19,7 @@ module.exports = {
       },
       url: {
         allowNull: false,
-        type: Sequelize.Text(2048)
+        type: Sequelize.TEXT(2048)
       },
       createdAt: {
         allowNull: false,

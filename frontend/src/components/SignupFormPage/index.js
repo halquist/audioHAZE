@@ -8,13 +8,13 @@ import './SignupForm.css';
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ function SignupFormPage() {
             Username
           </label>
             <input
-              type="text"
+              type='text'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -60,7 +60,7 @@ function SignupFormPage() {
             Password
           </label>
             <input
-              type="password"
+              type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -69,12 +69,12 @@ function SignupFormPage() {
             Confirm Password
           </label>
             <input
-              type="password"
+              type='password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-          <button type="submit">Sign Up</button>
+          <button type='submit'>Sign Up</button>
         </form>
       </div>
     </div>
