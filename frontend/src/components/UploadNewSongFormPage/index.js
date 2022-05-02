@@ -19,12 +19,13 @@ const NewSongFormPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(sessionUser)
+    setErrors([]);
       return dispatch(songActions.createSong({ title, url, id: sessionUser.id }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
+    return <Redirect to='/' />;
   };
 
   return (
@@ -44,7 +45,6 @@ const NewSongFormPage = () => {
               onChange={(e) => setTitle(e.target.value)}
               required
             />
-
           <label>
             Song URL
           </label>
