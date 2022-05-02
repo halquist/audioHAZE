@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
     body: {
       allowNull: false,
-      Type: DataTypes.TEXT
+      type: DataTypes.TEXT
     },
     userId: {
       allowNull: false,

@@ -19,6 +19,7 @@ const validateSong = [
   check('url')
     .isURL({ checkFalsy: true })
     .withMessage('Please provide a valid URL link to your song file'),
+  handleValidationErrors
 ]
 
 // create new song
@@ -26,6 +27,14 @@ router.post(
   '/',
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    console.log(req.body)
+    console.log('woo', req.body)
+    const { title, url, userId } = req.body;
+    const song = await Song.createSong({title, url, userId});
+
+    return res.json({
+      song
+    });
   })
-)
+);
+
+module.exports = router;

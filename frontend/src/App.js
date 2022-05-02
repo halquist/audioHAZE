@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
+import NewSongFormPage from './components/UploadNewSongFormPage';
 import * as sessionActions from './store/session';
 import Navigation from "./components/Navigation";
 import LazerGrid from './components/LazerGrid';
@@ -21,6 +22,9 @@ function App() {
         <Switch>
         <Route path='/signup'>
           <SignupFormPage />
+        </Route>
+        <Route path='/newSong'>
+          <NewSongFormPage />
         </Route>
       </Switch>
       )}

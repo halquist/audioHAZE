@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../store/session";
+import * as songActions from "../../store/song";
 
 import './NewSongForm.css';
 
@@ -11,22 +11,55 @@ const NewSongFormPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [errors, setErrors] = useState([]);
+
 
   // if the user is not logged in, redirect to the signup page
   if (!sessionUser) return <Redirect to='/signup' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-      return dispatch(sessionActions.signup({ email, username, password }))
+    console.log(sessionUser)
+      return dispatch(songActions.createSong({ title, url, id: sessionUser.id }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
-    }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  return
+  return (
+    <div id='newSongFormContainer'>
+      <div className='formDiv'>
+        <div className='title'>Upload A Song</div>
+        <form onSubmit={handleSubmit}>
+          <ul>
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul>
+          <label>
+            Song Title
+          </label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+
+          <label>
+            Song URL
+          </label>
+            <input
+              type='text'
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              required
+            />
+          <button type='submit'>Upload</button>
+        </form>
+      </div>
+    </div>
+  );
 
 }
+
+export default NewSongFormPage;
