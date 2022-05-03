@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import * as songActions from "../../store/song";
 
 import './NewSongForm.css';
@@ -8,6 +8,7 @@ import './NewSongForm.css';
 // page for adding new songs
 const NewSongFormPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -15,17 +16,20 @@ const NewSongFormPage = () => {
 
 
   // if the user is not logged in, redirect to the signup page
-  if (!sessionUser) return <Redirect to='/signup' />;
+  if (!sessionUser) return <Redirect to='/login' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-      return dispatch(songActions.createSong({ title, url, id: sessionUser.id }))
+      let newSong = dispatch(songActions.createSong({ title, url, id: sessionUser.id }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
+          // return <Redirect to='/' />;
         });
-    return <Redirect to='/' />;
+        if (newSong) {
+          history.push(`/`);
+        }
   };
 
   return (

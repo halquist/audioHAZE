@@ -1,24 +1,17 @@
-body,html {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-* {
-  box-sizing: border-box;
-}
-.containerDiv {
-  width: 100vw;
-  height: 100vh;
+#loginFormContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 60px;
 }
 
-.loginFormDiv {
-  margin-top: 20%;
-  min-height: 100px;
+.formDiv {
+  min-height: fit-content;
   max-width: 500px;
   background-color: rgb(112, 122, 139);
   display: flex;
@@ -26,7 +19,6 @@ body,html {
   align-items: center;
   border: 2px solid rgb(30, 32, 34);
   border-radius: 20px;
-
 }
 
 textarea:focus, input:focus{
@@ -55,7 +47,6 @@ input {
 ul {
   text-align: center;
   padding-left: 0px;
-
 }
 
 li {

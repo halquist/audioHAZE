@@ -28,7 +28,8 @@ const LoginFormPage = () => {
   }
 
   return (
-      <div className='loginFormDiv'>
+    <div id='loginFormContainer'>
+      <div className='formDiv'>
         <div className='title'>Log In</div>
         <form onSubmit={handleSubmit}>
           <ul>
@@ -55,6 +56,7 @@ const LoginFormPage = () => {
           <button type="submit">Log In</button>
         </form>
       </div>
+    </div>
   )
 }
 

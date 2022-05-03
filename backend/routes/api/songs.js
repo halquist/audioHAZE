@@ -5,8 +5,28 @@ const { restoreUser, requireAuth } = require('../../utils/auth');
 const { Song } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { db } = require('../../config');
 
 const router = express.Router();
+
+// get all songs
+router.get(
+  '/',
+  asyncHandler( async (_req, res) => {
+    const songs = await Song.findAll();
+    return res.json(songs);
+  })
+);
+
+// get one song
+router.get(
+  '/:id',
+  asyncHandler( async (req, res) => {
+    const songId = req.params.id;
+    const song = await Song.findByPk(songId)
+    return res.json(song);
+  })
+);
 
 // new song validation
 const validateSong = [
@@ -27,7 +47,6 @@ router.post(
   '/',
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    console.log('woo', req.body)
     const { title, url, userId } = req.body;
     const song = await Song.createSong({title, url, userId});
 
@@ -36,5 +55,6 @@ router.post(
     });
   })
 );
+
 
 module.exports = router;
