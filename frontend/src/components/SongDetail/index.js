@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
-import { getSongs } from '../../store/song';
+import PlayButton from '../PlayButton';
 import { getOneSong } from '../../store/song';
 
 import './SongDetail.css';
@@ -15,7 +14,7 @@ const SongDetail = () => {
 
   useEffect(()=> {
     dispatch(getOneSong(songId));
-    setCurrentSong(song);
+    // setCurrentSong(song);
   }, []);
 
 
@@ -25,7 +24,15 @@ const SongDetail = () => {
 
   return (
     <div id='mainSongDetailContent'>
-      <div id='songDetailBlade'>{currentSong.title}</div>
+      <div id='songDetailBlade'>
+        <div id='titleArtistPlay'>
+          <PlayButton target={currentSong.id}/>
+          <div id='titleArtist'>
+            <div id='songTitle'>{currentSong.title}</div>
+            <div id='songArtist'>{currentSong.User.username}</div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 

@@ -39,13 +39,15 @@ function App() {
         <Route path='/newSong'>
           <NewSongFormPage />
         </Route>
-        <Route path="/songs/:songId">
+        <Route path='/songs/:songId'>
           <SongDetail />
+        </Route>
+        <Route path='/pyramid'>
+          <LazerGrid />
         </Route>
       </Switch>
       )}
       <AudioBar />
-      {/* <LazerGrid /> */}
     </>
   );
 }

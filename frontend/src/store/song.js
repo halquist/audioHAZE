@@ -5,6 +5,7 @@ import { restoreUser } from './session';
 const LOAD = 'song/LOAD';
 const ADD = 'song/ADD';
 const LOAD_ONE = 'song/ADD_ONE';
+const SET_CURRENT = 'song/SET_CURRENT';
 const REMOVE = 'song/REMOVE';
 
 const load = (songList) => ({
@@ -26,6 +27,12 @@ const loadOneSong = (song) => {
   }
 };
 
+const currentSong = (song) => {
+  return {
+    type: SET_CURRENT,
+    song
+  }
+}
 
 
 // load songs from database on load
@@ -68,12 +75,21 @@ export const getOneSong = (id) => async dispatch => {
     dispatch(loadOneSong(song));
 }
 
+// sets the current song to play in the media bar
+export const selectCurrentSong = (id) => async dispatch => {
+  const songId = parseInt(id, 10);
+  const response = await fetch(`/api/songs/${songId}`)
+  const song = await response.json();
+  dispatch(currentSong(song));
+}
+
 // returns an array of songs ordered by created date, descending
 const sortList = (list) => {
   return list.sort((songA, songB) => {
     return new Date(songB.createdAt) - new Date(songA.createdAt);
   }).map((song) => song);
 };
+
 
 const initialState = {songList: []};
 
@@ -96,8 +112,12 @@ const songReducer = (state = initialState, action) => {
         const songList = state.songList;
         //may need to add songlist loading here eventually
         const loadOneState = { ...state }
-        loadOneState.currentSong = action.song;
+        // loadOneState.currentSong = action.song;
         return loadOneState;
+      case SET_CURRENT:
+        const setCurrentState = { ...state }
+        setCurrentState.currentSong = action.song;
+        return setCurrentState;
         default:
         return state;
     }

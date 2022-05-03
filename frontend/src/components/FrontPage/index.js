@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
-import { getSongs } from '../../store/song';
+import PlayButton from '../PlayButton';
 
 import './FrontPage.css';
 
@@ -30,15 +30,18 @@ const FrontPage = () => {
         <div id='innerFrontPageContainer'>
           {songList.map((song) => {
               return (
-                <NavLink key={song.title} to={`/songs/${song.id}`}>
-                  <div className='songBlade'>
+                <div className='songBlade'>
                     <div>
                       <div className></div>
-                      <div className="primary-text">{song.title}</div>
-                      <div className="secondary-text">{song.User.username}</div>
+                      <div className='mainPlayButtonDiv'>
+                        <PlayButton target={song.id}/>
+                      </div>
+                      <NavLink key={song.title} to={`/songs/${song.id}`}>
+                        <div className="primary-text">{song.title}</div>
+                        <div className="secondary-text">{song.User.username}</div>
+                      </NavLink>
                     </div>
                   </div>
-                </NavLink>
               );
             })}
         </div>

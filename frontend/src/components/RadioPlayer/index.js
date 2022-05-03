@@ -27,17 +27,29 @@ const RadioPlayer = () => {
     songLink = 'https://drive.google.com/uc?export=download&id=' + song.url.split('/')[5];
   }
 
-  console.log(song)
+  let songData;
+  if (song) {
+    songData = (
+      <>
+        <NavLink exact to={`/songs/${song.id}`} className='songTitle'>{song.title}</NavLink>
+        <div className='songArtist'>{song.User.username}</div>
+      </>
+    );
+  }
+
+  const fillerData = (
+    <>
+      <div className='songTitle'>audioHAZE</div>
+      <div className='songArtist'>radio</div>
+    </>
+  );
+
 
   return (
       <div id='audioPlayerWrapper'>
         <div className='songDetails'>
-          {song &&
-          <>
-            <NavLink exact to={`/songs/${song.id}`} className='songTitle'>{song.title}</NavLink>
-            <div className='songArtist'>{song.User.username}</div>
-          </>
-          }
+          {song && songData}
+          {!song && fillerData}
         </div>
       <AudioPlayer
         autoPlay

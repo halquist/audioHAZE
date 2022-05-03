@@ -28,6 +28,7 @@ function Navigation({ isLoaded }){
         <li className='navContent'>
           <NavLink exact to="/" className='homeText'>Home</NavLink>
           <NavLink exact to="/newSong" className='homeText'>New Song</NavLink>
+          <NavLink exact to="/pyramid" className='homeText'>Pyramid</NavLink>
           {isLoaded && sessionLinks}
         </li>
       </ul>
