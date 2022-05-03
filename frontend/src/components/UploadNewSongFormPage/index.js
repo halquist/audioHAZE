@@ -15,20 +15,22 @@ const NewSongFormPage = () => {
   const [errors, setErrors] = useState([]);
 
 
+
   // if the user is not logged in, redirect to the signup page
   if (!sessionUser) return <Redirect to='/login' />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-      let newSong = dispatch(songActions.createSong({ title, url, id: sessionUser.id }))
+      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
           // return <Redirect to='/' />;
         });
         if (newSong) {
-          history.push(`/`);
+
+          history.push(`/songs/${newSong.song.id}`);
         }
   };
 

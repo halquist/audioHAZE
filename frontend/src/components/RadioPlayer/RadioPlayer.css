@@ -17,6 +17,7 @@
    color: rgb(81, 223, 255);
    font-size: 1.5em;
    filter: drop-shadow(0px 0px 5px rgb(0, 221, 255));
+   text-decoration: none;
 }
 
 .songArtist {

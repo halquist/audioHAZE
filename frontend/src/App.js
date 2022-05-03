@@ -10,6 +10,7 @@ import Navigation from "./components/Navigation";
 import SongDetail from './components/SongDetail';
 import LazerGrid from './components/LazerGrid';
 import AudioBar from './components/AudioBar';
+import HomeLoad from './components/HomeLoad';
 
 import * as sessionActions from './store/session';
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <HomeLoad />
       {isLoaded && (
         <Switch>
         <Route path='/' exact>
@@ -43,7 +45,7 @@ function App() {
       </Switch>
       )}
       <AudioBar />
-      <LazerGrid />
+      {/* <LazerGrid /> */}
     </>
   );
 }

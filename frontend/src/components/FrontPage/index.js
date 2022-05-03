@@ -14,11 +14,9 @@ const FrontPage = () => {
   });
 
 
-  console.log('songlist', songList);
-
-  useEffect(() => {
-    dispatch(getSongs());
-  },[]);
+  // useEffect(() => {
+  //   dispatch(getSongs());
+  // },[dispatch]);
 
 
   if (!songList) {
@@ -35,7 +33,9 @@ const FrontPage = () => {
                 <NavLink key={song.title} to={`/songs/${song.id}`}>
                   <div className='songBlade'>
                     <div>
+                      <div className></div>
                       <div className="primary-text">{song.title}</div>
+                      <div className="secondary-text">{song.User.username}</div>
                     </div>
                   </div>
                 </NavLink>

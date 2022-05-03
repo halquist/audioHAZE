@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { getOneSong } from '../../store/song';
 
 import AudioPlayer from 'react-h5-audio-player';
@@ -22,20 +22,22 @@ const RadioPlayer = () => {
 
   let songLink = '';
 
-  if (song) {
+  // converts google drive links to work with audio player
+  if (song && song.url.startsWith('https://drive.google.com')) {
     songLink = 'https://drive.google.com/uc?export=download&id=' + song.url.split('/')[5];
   }
 
-  // converts google drive links to work with audio player
-
+  console.log(song)
 
   return (
       <div id='audioPlayerWrapper'>
         <div className='songDetails'>
           {song &&
-           <div className='songTitle'>{song.title}</div>
+          <>
+            <NavLink exact to={`/songs/${song.id}`} className='songTitle'>{song.title}</NavLink>
+            <div className='songArtist'>{song.User.username}</div>
+          </>
           }
-          <div className='songArtist'>Artist Here</div>
         </div>
       <AudioPlayer
         autoPlay

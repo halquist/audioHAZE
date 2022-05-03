@@ -41,6 +41,7 @@ export const getSongs = () => async dispatch => {
 // create a new song reference with title, userId, and a URL that links to the song
 export const createSong = (song) => async (dispatch) => {
   const { title, url, id } = song;
+  console.log('store song', song)
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {
@@ -53,8 +54,9 @@ export const createSong = (song) => async (dispatch) => {
     })
   });
   const data = await response.json();
+  console.log('store data', data)
   dispatch(addSong(data.song));
-  return <Redirect to='/' />;
+  return data;
 }
 
 // loads a particular song into the store
@@ -88,7 +90,7 @@ const songReducer = (state = initialState, action) => {
           songList: sortList(action.songList)
         }
       case ADD:
-        const newState = { ...state, [action.song.id]: action.song, songList: sortList(action.songList)}
+        const newState = { ...state, [action.song.id]: action.song, if (songList){songList: sortList(action.songList)}}
         return newState;
       case LOAD_ONE:
         const songList = state.songList;
