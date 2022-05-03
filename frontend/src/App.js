@@ -9,6 +9,7 @@ import NewSongFormPage from './components/UploadNewSongFormPage';
 import Navigation from "./components/Navigation";
 import SongDetail from './components/SongDetail';
 import LazerGrid from './components/LazerGrid';
+import AudioBar from './components/AudioBar';
 
 import * as sessionActions from './store/session';
 
@@ -41,6 +42,7 @@ function App() {
         </Route>
       </Switch>
       )}
+      <AudioBar />
       <LazerGrid />
     </>
   );

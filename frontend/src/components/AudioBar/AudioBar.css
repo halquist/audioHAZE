@@ -1,0 +1,29 @@
+.audioBarContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: -4px;
+}
+
+.audioBar {
+  background-color: transparent;
+  /* position: absolute; */
+  /* left: 0; */
+  /* right: 0; */
+  /* bottom: 0; */
+  /* width: 100%; */
+  /* left: -100px; */
+  /* right: 10px; */
+  /* margin-left: -16px; */
+  /* bottom: 1000; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  z-index: 100;
+  /* height: fit-content; */
+}
