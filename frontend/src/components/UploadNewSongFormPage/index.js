@@ -28,7 +28,8 @@ const NewSongFormPage = () => {
           // return <Redirect to='/' />;
         });
         if (newSong) {
-          history.push(`/`);
+          console.log(newSong);
+          history.push(`/${newSong.id}`);
         }
   };
 

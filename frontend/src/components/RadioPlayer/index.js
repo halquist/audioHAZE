@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getOneSong } from '../../store/song';
 
+
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import './RadioPlayer.css';
@@ -22,7 +23,7 @@ const RadioPlayer = () => {
 
   let songLink = '';
 
-  if (song) {
+  if (song && song.url.startsWith('https://drive.google.com')) {
     songLink = 'https://drive.google.com/uc?export=download&id=' + song.url.split('/')[5];
   }
 
