@@ -28,7 +28,7 @@ const SongDetail = () => {
       <div id='songDetailBlade'>{song.title}</div>
       <AudioPlayer
     autoPlay
-    src='./file_example_MP3_700KB.mp3'
+    src={song.url}
     onPlay={e => console.log("onPlay")}
     // other props here
   />
