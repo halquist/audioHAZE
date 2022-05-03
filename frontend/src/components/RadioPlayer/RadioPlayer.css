@@ -100,6 +100,7 @@
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
+
 }
 .rhap_progress-container:focus:not(:focus-visible) {
   outline: 0;
@@ -111,6 +112,7 @@
   -webkit-user-select: none;
   color: rgb(81, 223, 255);
   filter: drop-shadow(0px 0px 5px rgb(0, 221, 255));
+  width: 34px;
 }
 
 .rhap_progress-bar {
@@ -152,8 +154,8 @@
   height: 16px;
   margin-left: 0px;
   top: -7px;
-  background: rgb(81, 223, 255);
   border-radius: 50px;
+  background: rgb(81, 223, 255);
   filter: drop-shadow(0px 0px 3px rgb(0, 221, 255));
 }
 
@@ -174,8 +176,9 @@
   font-size: 26px;
   width: 26px;
   height: 26px;
-  color: #868686;
   margin-right: 6px;
+  color: rgb(81, 223, 255);
+  filter: drop-shadow(0px 0px 3px rgb(0, 221, 255));
 }
 
 .rhap_main-controls {
@@ -187,16 +190,18 @@
 
 .rhap_main-controls-button {
   margin: 0 3px;
-  color: #868686;
-  font-size: 25px;
+  font-size: 20px;
   width: 35px;
   height: 35px;
+  color: rgb(81, 223, 255);
+  filter: drop-shadow(0px 0px 3px rgb(0, 221, 255));
 }
 
 .rhap_play-pause-button {
-  font-size: 35px;
+  font-size: 30px;
   width: 40px;
   height: 40px;
+  background: rgb(81, 223, 255);
 }
 
 .rhap_volume-controls {
@@ -211,8 +216,9 @@
   font-size: 26px;
   width: 26px;
   height: 26px;
-  color: #868686;
   margin-right: 6px;
+  color: rgb(81, 223, 255);
+  filter: drop-shadow(0px 0px 3px rgb(0, 221, 255));
 }
 
 .rhap_volume-container {
@@ -239,8 +245,9 @@
   position: relative;
   width: 100%;
   height: 4px;
-  background: #dddddd;
   border-radius: 2px;
+  background: rgb(81, 223, 255);
+  filter: drop-shadow(0px 0px 3px rgb(0, 221, 255));
 }
 
 .rhap_volume-indicator {
@@ -251,11 +258,11 @@
   margin-left: -6px;
   left: 0;
   top: -4px;
-  background: #868686;
   opacity: 0.9;
   border-radius: 50px;
-  box-shadow: rgba(134, 134, 134, 0.5) 0 0 3px;
   cursor: pointer;
+  background: rgb(81, 223, 255);
+  filter: drop-shadow(0px 0px 3px rgb(0, 221, 255));
 }
 .rhap_volume-indicator:hover {
   opacity: 0.9;
@@ -265,8 +272,9 @@
   height: 100%;
   position: absolute;
   z-index: 2;
-  background-color: #868686;
   border-radius: 2px;
+  background-color: rgb(81, 223, 255);
+  filter: drop-shadow(0px 0px 3px rgb(0, 221, 255));
 }
 
 /* Utils */
