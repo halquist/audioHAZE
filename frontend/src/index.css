@@ -42,3 +42,8 @@ html {
   padding: 100px 0 0;
 
 }
+
+@font-face {
+  font-family: DS-DIGIB;
+  src: url("../public/fonts/DS-DIGIB.TTF");
+}
