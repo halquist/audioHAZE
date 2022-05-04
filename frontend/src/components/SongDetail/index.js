@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 import PlayButton from '../PlayButton';
+import EditSongForm from '../EditSongForm';
+
 import { getOneSong } from '../../store/song';
 
 import './SongDetail.css';
@@ -22,9 +25,21 @@ const SongDetail = (isLoaded) => {
     return null;
   }
 
+  // converts image link to work with google drive hosting
+  let imageLink = '';
+  if (song && song.imageUrl.startsWith('https://drive.google.com')) {
+    imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
+  }
+
   return (
     <div id='mainSongDetailContent'>
       <div id='songDetailBlade'>
+      <div className='imagePlay' style={{
+          backgroundImage: `url(${imageLink})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
+        }}></div>
         <div id='titleArtistPlay'>
           <PlayButton target={currentSong.id}/>
           <div id='titleArtist'>
@@ -38,6 +53,7 @@ const SongDetail = (isLoaded) => {
             }
           </div>
         </div>
+        <EditSongForm currentSong={song} />
       </div>
     </div>
   )

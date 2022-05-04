@@ -6,6 +6,7 @@ const LOAD = 'song/LOAD';
 const ADD = 'song/ADD';
 const LOAD_ONE = 'song/ADD_ONE';
 const SET_CURRENT = 'song/SET_CURRENT';
+const UPDATE = 'song/UPDATE';
 const REMOVE = 'song/REMOVE';
 
 const load = (songList) => ({
@@ -30,6 +31,13 @@ const loadOneSong = (song) => {
 const currentSong = (song) => {
   return {
     type: SET_CURRENT,
+    song
+  }
+}
+
+const update = (song) => {
+  return {
+    type: UPDATE,
     song
   }
 }
@@ -62,6 +70,26 @@ export const createSong = (song) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(addSong(data.song));
+  return data;
+}
+
+// updates a song in the database and store when authorized user submits song update form
+export const updateSong = (song) => async (dispatch) => {
+  const { title, url, id, imageUrl } = song;
+  const response = await csrfFetch('/api/songs', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title,
+      url,
+      userId: id,
+      imageUrl
+    })
+  });
+  const data = await response.json();
+  dispatch(update(data.song));
   return data;
 }
 
@@ -112,6 +140,9 @@ const songReducer = (state = initialState, action) => {
         const loadOneState = { ...state,  [action.song.id]: action.song }
         // loadOneState.currentSong = action.song;
         return loadOneState;
+      case UPDATE:
+        const updateOneState = { ...state,  [action.song.id]: action.song }
+        return updateOneState;
       case SET_CURRENT:
         const setCurrentState = { ...state }
         setCurrentState.currentSong = action.song;
