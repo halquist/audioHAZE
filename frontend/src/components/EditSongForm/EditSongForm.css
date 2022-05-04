@@ -1,0 +1,57 @@
+#editDeleteDiv{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  /* align-items: center; */
+  /* height: 30px; */
+}
+
+#editFormDiv {
+  /* width: 100%; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: flex-start; */
+  border: 1px solid rgb(255, 0, 98);
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 10px rgb(255, 0, 98);
+  padding: 10px;
+  transition: height 0.5s ease-in 0.3s;
+  color: white;
+  /* height: 300px; */
+}
+
+#editForm > input {
+  background-color: transparent;
+  border: 2px solid rgb(255, 0, 98);
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 4px rgb(255, 0, 98);
+  color: white;
+  width: 100%;
+}
+
+#cancelSubmitDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#editSongButton {
+  background-color: transparent;
+  color: rgb(0, 195, 255);
+}
+
+#deleteSongButton {
+  background-color: transparent;
+  color: rgb(0, 195, 255);
+}
+
+
+#editForm {
+  width: 400px;
+  margin-bottom: 0px;
+}
+
+#cancelSubmitDiv > button {
+  color: white;
+  background-color: rgb(255, 0, 98);
+}

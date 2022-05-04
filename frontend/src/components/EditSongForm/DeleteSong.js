@@ -11,7 +11,7 @@ const DeleteSong = ({ currentSong }) => {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
       const songId =  currentSong.id;
       let deleteSong = await dispatch(songActions.deleteSong({ songId }))
@@ -22,9 +22,7 @@ const DeleteSong = ({ currentSong }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type='submit'>Delete Song</button>
-    </form>
+      <button onClick={() => handleSubmit()} id='deleteSongButton'>Delete Song</button>
   )
 }
 

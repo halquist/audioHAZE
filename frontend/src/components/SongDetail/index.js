@@ -42,12 +42,6 @@ const SongDetail = (isLoaded) => {
   return (
     <div id='mainSongDetailContent'>
       <div id='songDetailBlade'>
-      { sessionUserId === song.userId &&
-        <>
-          <DeleteSong currentSong={currentSong} />
-          <EditSongForm currentSong={currentSong} />
-        </>
-        }
         <div className='imagePlay' style={{
             backgroundImage: `url(${imageLink})`,
             backgroundPosition: 'center',
@@ -67,6 +61,12 @@ const SongDetail = (isLoaded) => {
               }
           </div>
         </div>
+        { sessionUserId === song.userId && currentSong &&
+        <div id='editDeleteDiv'>
+          <EditSongForm currentSong={currentSong} />
+          <DeleteSong currentSong={currentSong} />
+        </div>
+        }
       </div>
     </div>
   )

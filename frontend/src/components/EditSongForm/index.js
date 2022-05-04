@@ -4,7 +4,7 @@ import * as songActions from "../../store/song";
 
 import './EditSongForm.css';
 
-const EditSongForm = ({ currentSong, hideEditForm }) => {
+const EditSongForm = ({ currentSong }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState(currentSong.title);
   const [url, setUrl] = useState(currentSong.url);
@@ -22,26 +22,22 @@ const EditSongForm = ({ currentSong, hideEditForm }) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
-        // if (updateSong) {
-        //   history.push(`/songs/${newSong.song.id}`);
-        // }
+        if (updateSong) {
+          setShowEditForm(false);;
+        }
   };
 
   const handleCancelClick = (e) => {
-    e.preventDefault();
-    hideEditForm();
+    setShowEditForm(false);
   };
 
   return(
     <>
-      <div>
-        <button onClick={() => setShowEditForm(!showEditForm)}>Edit Song</button>
-      </div>
+      <button onClick={() => setShowEditForm(!showEditForm)} id='editSongButton'>Edit Song</button>
       {showEditForm &&
       <div id='editSongFormContainer'>
-        <div className='formDiv'>
-          <div className='title'>Edit Song</div>
-          <form onSubmit={handleSubmit}>
+        <div id='editFormDiv'>
+          <form onSubmit={handleSubmit} id='editForm'>
             <ul>
               {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
@@ -71,8 +67,10 @@ const EditSongForm = ({ currentSong, hideEditForm }) => {
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
               />
-              <button type="button" onClick={() => setShowEditForm(false)}>Cancel</button>
-            <button type='submit'>Submit Edit</button>
+              <div id='cancelSubmitDiv'>
+                <button type="button" onClick={() => handleCancelClick()}>Cancel</button>
+                <button type='submit'>Submit Edit</button>
+              </div>
           </form>
         </div>
       </div>}

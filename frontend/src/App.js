@@ -13,6 +13,8 @@ import AudioBar from './components/AudioBar';
 import HomeLoad from './components/HomeLoad';
 
 import * as sessionActions from './store/session';
+import { getSongs } from './store/song';
+
 
 function App() {
   const dispatch = useDispatch();
