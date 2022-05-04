@@ -5,6 +5,7 @@ import { restoreUser } from './session';
 const LOAD = 'song/LOAD';
 const ADD = 'song/ADD';
 const LOAD_ONE = 'song/ADD_ONE';
+const SET_CURRENT = 'song/SET_CURRENT';
 const REMOVE = 'song/REMOVE';
 
 const load = (songList) => ({
@@ -26,6 +27,12 @@ const loadOneSong = (song) => {
   }
 };
 
+const currentSong = (song) => {
+  return {
+    type: SET_CURRENT,
+    song
+  }
+}
 
 
 // load songs from database on load
@@ -40,7 +47,7 @@ export const getSongs = () => async dispatch => {
 
 // create a new song reference with title, userId, and a URL that links to the song
 export const createSong = (song) => async (dispatch) => {
-  const { title, url, id } = song;
+  const { title, url, id, imageUrl } = song;
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {
@@ -49,21 +56,29 @@ export const createSong = (song) => async (dispatch) => {
     body: JSON.stringify({
       title,
       url,
-      userId: id
+      userId: id,
+      imageUrl
     })
   });
   const data = await response.json();
   dispatch(addSong(data.song));
-  return <Redirect to='/' />;
+  return data;
 }
 
 // loads a particular song into the store
 export const getOneSong = (id) => async dispatch => {
   const sendId = parseInt(id, 10);
   const response = await fetch(`/api/songs/${sendId}`)
-  // console.log('response ', response)
-    const song = await response.json();
+  const song = await response.json();
     dispatch(loadOneSong(song));
+}
+
+// sets the current song to play in the media bar
+export const selectCurrentSong = (id) => async dispatch => {
+  const songId = parseInt(id, 10);
+  const response = await fetch(`/api/songs/${songId}`)
+  const song = await response.json();
+  dispatch(currentSong(song));
 }
 
 // returns an array of songs ordered by created date, descending
@@ -72,6 +87,7 @@ const sortList = (list) => {
     return new Date(songB.createdAt) - new Date(songA.createdAt);
   }).map((song) => song);
 };
+
 
 const initialState = {songList: []};
 
@@ -88,14 +104,18 @@ const songReducer = (state = initialState, action) => {
           songList: sortList(action.songList)
         }
       case ADD:
-        const newState = { ...state, [action.song.id]: action.song, songList: sortList(action.songList)}
+        const newState = { ...state, [action.song.id]: action.song, if (songList){songList: sortList(action.songList)}}
         return newState;
       case LOAD_ONE:
         const songList = state.songList;
         //may need to add songlist loading here eventually
-        const loadOneState = { ...state }
-        loadOneState.currentSong = action.song;
+        const loadOneState = { ...state,  [action.song.id]: action.song }
+        // loadOneState.currentSong = action.song;
         return loadOneState;
+      case SET_CURRENT:
+        const setCurrentState = { ...state }
+        setCurrentState.currentSong = action.song;
+        return setCurrentState;
         default:
         return state;
     }

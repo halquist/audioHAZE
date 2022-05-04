@@ -10,6 +10,7 @@ import Navigation from "./components/Navigation";
 import SongDetail from './components/SongDetail';
 import LazerGrid from './components/LazerGrid';
 import AudioBar from './components/AudioBar';
+import HomeLoad from './components/HomeLoad';
 
 import * as sessionActions from './store/session';
 
@@ -23,10 +24,11 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <HomeLoad />
       {isLoaded && (
         <Switch>
         <Route path='/' exact>
-          <FrontPage />
+          <FrontPage isLoaded={isLoaded} />
         </Route>
         <Route path='/signup'>
           <SignupFormPage />
@@ -37,13 +39,15 @@ function App() {
         <Route path='/newSong'>
           <NewSongFormPage />
         </Route>
-        <Route path="/songs/:songId">
-          <SongDetail />
+        <Route path='/songs/:songId'>
+          <SongDetail isLoaded={isLoaded} />
+        </Route>
+        <Route path='/pyramid'>
+          <LazerGrid />
         </Route>
       </Switch>
       )}
       <AudioBar />
-      <LazerGrid />
     </>
   );
 }

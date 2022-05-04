@@ -1,24 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
-
+import PlayButton from '../PlayButton';
 import { getOneSong } from '../../store/song';
 
 import './SongDetail.css';
 
-
-
-const SongDetail = () => {
+const SongDetail = (isLoaded) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song[songId]);
+  const [currentSong, setCurrentSong] = useState(song);
 
   useEffect(()=> {
     dispatch(getOneSong(songId));
-  }, [songId]);
+    // setCurrentSong(song);
+  }, [dispatch, songId]);
 
-  console.log('song detail', song)
 
   if (!song) {
     return null;
@@ -26,8 +24,21 @@ const SongDetail = () => {
 
   return (
     <div id='mainSongDetailContent'>
-      <div id='songDetailBlade'>{song.title}</div>
-
+      <div id='songDetailBlade'>
+        <div id='titleArtistPlay'>
+          <PlayButton target={currentSong.id}/>
+          <div id='titleArtist'>
+            {isLoaded &&
+            <>
+              <div id='songTitle'>{currentSong.title}</div>
+              {currentSong.User &&
+                <div id='songArtist'>{currentSong.User.username}</div>
+              }
+            </>
+            }
+          </div>
+        </div>
+      </div>
     </div>
   )
 

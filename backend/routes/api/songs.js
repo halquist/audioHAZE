@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { Song } = require('../../db/models');
+const { Song, User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { db } = require('../../config');
@@ -13,7 +13,7 @@ const router = express.Router();
 router.get(
   '/',
   asyncHandler( async (_req, res) => {
-    const songs = await Song.findAll();
+    const songs = await Song.findAll( {include: { model: User}} );
     return res.json(songs);
   })
 );
@@ -23,7 +23,7 @@ router.get(
   '/:id',
   asyncHandler( async (req, res) => {
     const songId = req.params.id;
-    const song = await Song.findByPk(songId)
+    const song = await Song.findByPk(songId, {include: { model: User}})
     return res.json(song);
   })
 );
@@ -47,9 +47,8 @@ router.post(
   '/',
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    const { title, url, userId } = req.body;
-    const song = await Song.createSong({title, url, userId});
-
+    const { title, url, userId, imageUrl } = req.body;
+    const song = await Song.createSong({title, url, userId, imageUrl});
     return res.json({
       song
     });

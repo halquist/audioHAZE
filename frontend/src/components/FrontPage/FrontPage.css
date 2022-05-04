@@ -5,9 +5,12 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding: 80px 0px;
+  padding-bottom: 120px;
+
 }
 
-#outerFrontPageContainer {
+.outerFrontPageContainer {
   background-color: rgba(99, 0, 58, 0.5);
   display: flex;
   flex-direction: column;
@@ -19,7 +22,7 @@
   flex-shrink: 1;
 }
 
-#innerFrontPageContainer {
+.innerFrontPageContainer {
   display: flex;
   align-items: center;
   overflow-y: hidden;
@@ -35,16 +38,7 @@
   font-size: 2em;
 }
 
-.songBlade {
-  background-color: black;
-  /* margin: 10px; */
-  padding: 20px;
-  width: 250px;
-  height: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 ::-webkit-scrollbar {
   background: rgba(255, 255, 255, 0.1);

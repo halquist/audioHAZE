@@ -12,23 +12,26 @@ const NewSongFormPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [errors, setErrors] = useState([]);
+
 
 
   // if the user is not logged in, redirect to the signup page
   if (!sessionUser) return <Redirect to='/login' />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log('imageurl', imageUrl)
     e.preventDefault();
     setErrors([]);
-      let newSong = dispatch(songActions.createSong({ title, url, id: sessionUser.id }))
+      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
           // return <Redirect to='/' />;
         });
         if (newSong) {
-          history.push(`/`);
+          history.push(`/songs/${newSong.song.id}`);
         }
   };
 
@@ -56,6 +59,15 @@ const NewSongFormPage = () => {
               type='text'
               value={url}
               onChange={(e) => setUrl(e.target.value)}
+              required
+            />
+          <label>
+            Image URL
+          </label>
+            <input
+              type='text'
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
               required
             />
           <button type='submit'>Upload</button>
