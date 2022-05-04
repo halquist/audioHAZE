@@ -69,8 +69,7 @@ export const createSong = (song) => async (dispatch) => {
 export const getOneSong = (id) => async dispatch => {
   const sendId = parseInt(id, 10);
   const response = await fetch(`/api/songs/${sendId}`)
-  // console.log('response ', response)
-    const song = await response.json();
+  const song = await response.json();
     dispatch(loadOneSong(song));
 }
 
@@ -110,7 +109,7 @@ const songReducer = (state = initialState, action) => {
       case LOAD_ONE:
         const songList = state.songList;
         //may need to add songlist loading here eventually
-        const loadOneState = { ...state }
+        const loadOneState = { ...state,  [action.song.id]: action.song }
         // loadOneState.currentSong = action.song;
         return loadOneState;
       case SET_CURRENT:

@@ -38,11 +38,11 @@
 }
 
 .songBlade {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.187);
   /* margin: 10px; */
   padding: 20px;
   width: 250px;
-  height: 250px;
+  height: 296px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,4 +97,21 @@
 .songArt {
   width: 250px;
   height: 250px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.primary-text {
+  color: rgb(255, 254, 255);
+  padding: 2px 4px;
+  font-size: 1.1em;
+}
+
+.secondary-text {
+  color: rgb(110, 185, 255);
+  font-weight: 100;
+  padding: 2px 4px;
+  font-size: .9em;
 }

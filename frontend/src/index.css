@@ -47,3 +47,10 @@ html {
   font-family: DS-DIGIB;
   src: url("../public/fonts/DS-DIGIB.TTF");
 }
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

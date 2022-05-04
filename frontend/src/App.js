@@ -28,7 +28,7 @@ function App() {
       {isLoaded && (
         <Switch>
         <Route path='/' exact>
-          <FrontPage />
+          <FrontPage isLoaded={isLoaded} />
         </Route>
         <Route path='/signup'>
           <SignupFormPage />
@@ -40,7 +40,7 @@ function App() {
           <NewSongFormPage />
         </Route>
         <Route path='/songs/:songId'>
-          <SongDetail isLoaded={isLoaded}/>
+          <SongDetail isLoaded={isLoaded} />
         </Route>
         <Route path='/pyramid'>
           <LazerGrid />

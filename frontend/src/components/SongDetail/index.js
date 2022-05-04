@@ -15,7 +15,7 @@ const SongDetail = (isLoaded) => {
   useEffect(()=> {
     dispatch(getOneSong(songId));
     // setCurrentSong(song);
-  }, []);
+  }, [dispatch, songId]);
 
 
   if (!song) {
@@ -31,7 +31,9 @@ const SongDetail = (isLoaded) => {
             {isLoaded &&
             <>
               <div id='songTitle'>{currentSong.title}</div>
-              <div id='songArtist'>{currentSong.User.username}</div>
+              {currentSong.User &&
+                <div id='songArtist'>{currentSong.User.username}</div>
+              }
             </>
             }
           </div>

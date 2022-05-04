@@ -29,8 +29,8 @@ const RadioPlayer = () => {
   if (song) {
     songData = (
       <>
-        <NavLink exact to={`/songs/${song.id}`} className='songTitle'>{song.title}</NavLink>
-        <div className='songArtist'>{song.User.username}</div>
+        <NavLink exact to={`/songs/${song.id}`} className='songTitle truncate'>{song.title}</NavLink>
+        <div className='songArtist truncate'>{song.User.username}</div>
       </>
     );
   }
