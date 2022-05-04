@@ -15,8 +15,8 @@ const PlayButton = (target) => {
   return (
     <form onSubmit={handleSubmit} className='playButtonForm'>
       <button type='submit' className='playButton'>
-        <svg version="1.1" class="chromePlayButton" xmlns="http://www.w3.org/2000/svg" x="0px"
-         y="0px" width="80px" height="80px" viewBox="0 0 100 100" enable-background="new 0 0 100 100">
+        <svg version="1.1" className="chromePlayButton" xmlns="http://www.w3.org/2000/svg" x="0px"
+         y="0px" width="80px" height="80px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100">
           <g>
             <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="50.0005" y1="97.2432" x2="50.0005" y2="2.7554">
               <stop  offset="0" stopColor="#FFFFFF"/>

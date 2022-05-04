@@ -20,8 +20,13 @@
   transition: .3s;
 }
 
+.chromePlayButton {
+  width: 80px !important;
+  height: 80px !important;
+}
+
 .playButton:hover {
-  background-color: rgba(0, 0, 0, .4);
+  background-color: transparent;
 }
 
 .chromePlayButton {

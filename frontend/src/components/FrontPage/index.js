@@ -30,20 +30,25 @@ const FrontPage = () => {
         <div id='innerFrontPageContainer'>
           {songList.map((song) => {
               return (
-                <div className='songBlade'>
+                <div className='songBlade' key={song.title}>
                     <div>
-                      <div className='imagePlay'>
+                      <div className='imagePlay' style={{
+                        backgroundImage: `url(${song.imageUrl})`,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat'
+                      }}>
                         <div className='mainPlayButtonDiv'>
                           <PlayButton target={song.id}/>
                         </div>
-                        <img src={`${song.imageUrl}`} className='songArt'></img>
+                        {/* <img src={`${song.imageUrl}`} className='songArt'></img> */}
                       </div>
-                      <NavLink key={song.title} to={`/songs/${song.id}`}>
+                      <NavLink to={`/songs/${song.id}`}>
                         <div className="primary-text">{song.title}</div>
                         <div className="secondary-text">{song.User.username}</div>
                       </NavLink>
                     </div>
-                  </div>
+                </div>
               );
             })}
         </div>
@@ -53,13 +58,25 @@ const FrontPage = () => {
         <div id='innerFrontPageContainer'>
           {songList.map((song) => {
               return (
-                <NavLink key={song.title} to={`/songs/${song.id}`}>
-                  <div className='songBlade'>
+                <div className='songBlade' key={song.title}>
                     <div>
-                      <div className="primary-text">{song.title}</div>
+                      <div className='imagePlay' style={{
+                        backgroundImage: `url(${song.imageUrl})`,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat'
+                      }}>
+                        <div className='mainPlayButtonDiv'>
+                          <PlayButton target={song.id}/>
+                        </div>
+                        {/* <img src={`${song.imageUrl}`} className='songArt'></img> */}
+                      </div>
+                      <NavLink to={`/songs/${song.id}`}>
+                        <div className="primary-text">{song.title}</div>
+                        <div className="secondary-text">{song.User.username}</div>
+                      </NavLink>
                     </div>
-                  </div>
-                </NavLink>
+                </div>
               );
             })}
         </div>
@@ -69,17 +86,30 @@ const FrontPage = () => {
         <div id='innerFrontPageContainer'>
           {songList.map((song) => {
               return (
-                <NavLink key={song.title} to={`/songs/${song.id}`}>
-                  <div className='songBlade'>
+                <div className='songBlade' key={song.title}>
                     <div>
-                      <div className="primary-text">{song.title}</div>
+                      <div className='imagePlay' style={{
+                        backgroundImage: `url(${song.imageUrl})`,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat'
+                      }}>
+                        <div className='mainPlayButtonDiv'>
+                          <PlayButton target={song.id}/>
+                        </div>
+                        {/* <img src={`${song.imageUrl}`} className='songArt'></img> */}
+                      </div>
+                      <NavLink to={`/songs/${song.id}`}>
+                        <div className="primary-text">{song.title}</div>
+                        <div className="secondary-text">{song.User.username}</div>
+                      </NavLink>
                     </div>
-                  </div>
-                </NavLink>
+                </div>
               );
             })}
         </div>
       </div>
+
     </div>
   );
 }

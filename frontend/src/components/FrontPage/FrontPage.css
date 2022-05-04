@@ -62,23 +62,36 @@
 }
 
 .mainPlayButtonDiv {
-  /* opacity: 0; */
+  opacity: 0;
   transition: .3s;
-  position: absolute;
-  /* margin-top: 100px;
-  margin-left: 80px; */
-  z-index: 10;
 }
 
 .mainPlayButtonDiv:hover {
   opacity: 1;
 }
 
+.chromePlayButton {
+  width: 200px;
+  height: 200px;
+}
+
+.playButton {
+  width: 150px;
+  height: 150px;
+}
+
+.playButtonForm {
+  width: 150px;
+  height: 150px;
+}
+
 .imagePlay {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
 }
 
 .songArt {
