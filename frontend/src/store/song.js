@@ -47,8 +47,7 @@ export const getSongs = () => async dispatch => {
 
 // create a new song reference with title, userId, and a URL that links to the song
 export const createSong = (song) => async (dispatch) => {
-  const { title, url, id } = song;
-  console.log('store song', song)
+  const { title, url, id, imageUrl } = song;
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {
@@ -57,11 +56,11 @@ export const createSong = (song) => async (dispatch) => {
     body: JSON.stringify({
       title,
       url,
-      userId: id
+      userId: id,
+      imageUrl
     })
   });
   const data = await response.json();
-  console.log('store data', data)
   dispatch(addSong(data.song));
   return data;
 }

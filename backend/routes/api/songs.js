@@ -47,9 +47,8 @@ router.post(
   '/',
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    const { title, url, userId } = req.body;
-    const song = await Song.createSong({title, url, userId});
-
+    const { title, url, userId, imageUrl } = req.body;
+    const song = await Song.createSong({title, url, userId, imageUrl});
     return res.json({
       song
     });

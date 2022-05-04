@@ -6,7 +6,7 @@ import { getOneSong } from '../../store/song';
 
 import './SongDetail.css';
 
-const SongDetail = () => {
+const SongDetail = (isLoaded) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song[songId]);
@@ -28,8 +28,12 @@ const SongDetail = () => {
         <div id='titleArtistPlay'>
           <PlayButton target={currentSong.id}/>
           <div id='titleArtist'>
-            <div id='songTitle'>{currentSong.title}</div>
-            <div id='songArtist'>{currentSong.User.username}</div>
+            {isLoaded &&
+            <>
+              <div id='songTitle'>{currentSong.title}</div>
+              <div id='songArtist'>{currentSong.User.username}</div>
+            </>
+            }
           </div>
         </div>
       </div>

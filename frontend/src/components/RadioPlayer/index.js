@@ -12,8 +12,6 @@ const RadioPlayer = () => {
   const { songId } = useParams();
   const song = useSelector(state => state.song.currentSong);
 
-  console.log('song', song)
-
   useEffect(()=> {
     if(song) {
       dispatch(getOneSong(song.id));

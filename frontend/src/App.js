@@ -40,7 +40,7 @@ function App() {
           <NewSongFormPage />
         </Route>
         <Route path='/songs/:songId'>
-          <SongDetail />
+          <SongDetail isLoaded={isLoaded}/>
         </Route>
         <Route path='/pyramid'>
           <LazerGrid />

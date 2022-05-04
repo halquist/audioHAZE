@@ -62,10 +62,26 @@
 }
 
 .mainPlayButtonDiv {
-  opacity: 0;
+  /* opacity: 0; */
   transition: .3s;
+  position: absolute;
+  /* margin-top: 100px;
+  margin-left: 80px; */
+  z-index: 10;
 }
 
 .mainPlayButtonDiv:hover {
   opacity: 1;
+}
+
+.imagePlay {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.songArt {
+  width: 250px;
+  height: 250px;
 }

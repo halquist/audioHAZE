@@ -32,9 +32,11 @@ const FrontPage = () => {
               return (
                 <div className='songBlade'>
                     <div>
-                      <div className></div>
-                      <div className='mainPlayButtonDiv'>
-                        <PlayButton target={song.id}/>
+                      <div className='imagePlay'>
+                        <div className='mainPlayButtonDiv'>
+                          <PlayButton target={song.id}/>
+                        </div>
+                        <img src={`${song.imageUrl}`} className='songArt'></img>
                       </div>
                       <NavLink key={song.title} to={`/songs/${song.id}`}>
                         <div className="primary-text">{song.title}</div>

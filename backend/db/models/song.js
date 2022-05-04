@@ -12,14 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     url: {
       allowNull: false,
       type: DataTypes.TEXT
-    }
+    },
+    imageUrl: {
+      type: DataTypes.TEXT
+    },
   }, {});
 
-  Song.createSong = async function ({ title, url, userId }) {
+  Song.createSong = async function ({ title, url, userId, imageUrl }) {
     const song = await Song.create({
       title,
       url,
-      userId
+      userId,
+      imageUrl
     });
     return await Song.findByPk(song.id);
   };
