@@ -95,7 +95,7 @@ export const createSong = (song) => async (dispatch) => {
 
 // updates a song in the database and store when authorized user submits song update form
 export const updateSong = (song) => async (dispatch) => {
-  const { songId, title, url, imageUrl } = song;
+  const { songId, title, url, imageUrl, userId } = song;
   const response = await csrfFetch('/api/songs', {
     method: 'PUT',
     headers: {
@@ -105,15 +105,13 @@ export const updateSong = (song) => async (dispatch) => {
       songId,
       title,
       url,
-      imageUrl
+      imageUrl,
+      userId
     })
   });
   const data = await response.json();
   await dispatch(update(data.song));
-
-  getSongs();
-  addToSongList();
-
+  console.log('store song', data.song)
   return data;
 }
 
@@ -130,8 +128,8 @@ export const deleteSong = (id) => async (dispatch) => {
   const data = await response.json();
   dispatch(remove(id));
 
-  getSongs();
-  addToSongList();
+  // getSongs();
+  // addToSongList();
 
   return data;
 }
@@ -180,14 +178,16 @@ const songReducer = (state = initialState, action) => {
         newState.songList = sortList(newState.songList)
         return newState;
       case LOAD_ONE:
-        const songList = state.songList;
+        // const songList = state.songList;
         //may need to add songlist loading here eventually
         const loadOneState = { ...state,  [action.song.id]: action.song }
         // loadOneState.currentSong = action.song;
         return loadOneState;
       case UPDATE:
         const updateOneState = { ...state,  [action.song.id]: action.song }
-        updateOneState.songList.push(action.song);
+        const listIdx = updateOneState.songList.findIndex(el => el.id === action.song.id);
+        action.song.User = updateOneState.songList[listIdx].User // have to add the user object back to the updated song or it wont show up without refresh
+        updateOneState.songList[listIdx] = action.song;
         updateOneState.songList = sortList(updateOneState.songList)
         return updateOneState;
       case SET_CURRENT:
@@ -197,6 +197,9 @@ const songReducer = (state = initialState, action) => {
       case REMOVE:
         const removeOneState = { ...state }
         delete removeOneState[action.id];
+        const removeIdx = removeOneState.songList.findIndex(el => el.id === action.song.songId);
+        removeOneState.songList.splice(removeIdx, 1);
+        removeOneState.songList = sortList(removeOneState.songList);
         return removeOneState;
       case ADD_SONG_LIST:
         const addSongListState = { ...state }

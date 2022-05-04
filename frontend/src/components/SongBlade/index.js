@@ -1,18 +1,20 @@
 import { NavLink, Route, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import PlayButton from '../PlayButton';
 
 import './SongBlade.css';
 
 const SongBlade = ({songPass}) => {
-  // const { song } = songPass;
+
+  const song = useSelector(state => state.song[songPass.id]);
 
   // converts google drive links to work for direct access
   let imageLink = '';
-  if (songPass && songPass.imageUrl.startsWith('https://drive.google.com')) {
-    imageLink = 'https://drive.google.com/uc?export=download&id=' + songPass.imageUrl.split('/')[5];
+  if (song && song.imageUrl.startsWith('https://drive.google.com')) {
+    imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
   }
 
-  if (!songPass) {
+  if (!song) {
     return null;
   }
 
@@ -26,13 +28,13 @@ const SongBlade = ({songPass}) => {
           backgroundRepeat: 'no-repeat'
         }}>
           <div className='mainPlayButtonDiv'>
-            <PlayButton target={songPass.id}/>
+            <PlayButton target={song.id}/>
           </div>
           {/* <img src={`${song.imageUrl}`} className='songArt'></img> */}
         </div>
-        <NavLink to={`/songs/${songPass.id}`}>
-          <div className="primary-text truncate">{songPass.title}</div>
-          <div className="secondary-text truncate">{songPass.User.username}</div>
+        <NavLink to={`/songs/${song.id}`}>
+          <div className="primary-text truncate">{song.title}</div>
+          <div className="secondary-text truncate">{song.User.username}</div>
         </NavLink>
       </div>
   </div>

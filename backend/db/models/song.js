@@ -1,4 +1,8 @@
 'use strict';
+
+const { User } = require('./user');
+const { Op } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   const Song = sequelize.define('Song', {
     title: {
@@ -28,16 +32,14 @@ module.exports = (sequelize, DataTypes) => {
     return await Song.findByPk(song.id);
   };
 
-  Song.updateSong = async function ({ songId, title, url, imageUrl }) {
+  Song.updateSong = async function ({ songId, title, url, imageUrl, userId }) {
     const song = await Song.findByPk(songId)
 
     song.title = title;
     song.url = url;
     song.imageUrl = imageUrl;
-
     await song.save();
-
-    return await Song.findByPk(song.id);
+    return song;
   };
 
   Song.deleteSong = async function ({ id }) {

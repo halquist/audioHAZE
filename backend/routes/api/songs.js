@@ -55,29 +55,50 @@ router.post(
   })
 );
 
+// edit song
 router.put(
   '/',
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    const { songId, title, url, imageUrl } = req.body;
-    const song = await Song.updateSong({songId, title, url, imageUrl});
+    const { songId, title, url, imageUrl, userId } = req.body;
+    const findSong = await Song.findByPk(songId, {include: { model: User}});
+
+    if (findSong.User.id === req.user.id) {
+    const song = await Song.updateSong({songId, title, url, imageUrl, userId});
     return res.json({
       song
     });
+  } else {
+    res.errors = new Error('Unauthorized');
+    err.errors = errors;
+    err.status = 403;
+    err.title = 'Unauthorized';
+    next(err);
+  }
   })
 )
 
 router.delete(
   '/',
   requireAuth, restoreUser,
-  asyncHandler( async (req, res) => {
+  asyncHandler( async (req, res, next) => {
+
+    console.log('req.user', req.user.id)
     const { id } = req.body;
-    const song = await Song.deleteSong({ id });
+    const findSong = await Song.findByPk(id.songId, {include: { model: User}});
 
-    return res.json({
-      song
-    });
-
+    if (findSong.User.id === req.user.id) {
+      const song = await Song.deleteSong({ id });
+      return res.json({
+        song
+      });
+    } else {
+      res.errors = new Error('Unauthorized');
+      err.errors = errors;
+      err.status = 403;
+      err.title = 'Unauthorized';
+      next(err);
+    }
   })
 )
 

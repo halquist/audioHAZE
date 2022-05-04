@@ -16,8 +16,16 @@ const SongDetail = (isLoaded) => {
   const song = useSelector(state => state.song[songId]);
   const [currentSong, setCurrentSong] = useState(song);
 
+
+  const sessionUserId = useSelector(state => {
+    if (state.session.user) {
+      return state.session.user.id
+    }
+  });
+
   useEffect(()=> {
     dispatch(getOneSong(songId));
+    setCurrentSong(song)
   }, [dispatch, songId]);
 
 
@@ -34,27 +42,31 @@ const SongDetail = (isLoaded) => {
   return (
     <div id='mainSongDetailContent'>
       <div id='songDetailBlade'>
-      <div className='imagePlay' style={{
-          backgroundImage: `url(${imageLink})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat'
-        }}></div>
-        <div id='titleArtistPlay'>
-          <PlayButton target={currentSong.id}/>
-          <div id='titleArtist'>
-            {isLoaded &&
-            <>
-              <div id='songTitle'>{currentSong.title}</div>
-              {currentSong.User &&
-                <div id='songArtist'>{currentSong.User.username}</div>
+      { sessionUserId === song.userId &&
+        <>
+          <DeleteSong currentSong={currentSong} />
+          <EditSongForm currentSong={currentSong} />
+        </>
+        }
+        <div className='imagePlay' style={{
+            backgroundImage: `url(${imageLink})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'
+          }}></div>
+          <div id='titleArtistPlay'>
+            <PlayButton target={song.id}/>
+            <div id='titleArtist'>
+              {isLoaded &&
+              <>
+                <div id='songTitle'>{song.title}</div>
+                {song.User &&
+                  <div id='songArtist'>{song.User.username}</div>
+                }
+              </>
               }
-            </>
-            }
           </div>
         </div>
-        <EditSongForm currentSong={currentSong} />
-        <DeleteSong currentSong={currentSong}/>
       </div>
     </div>
   )
