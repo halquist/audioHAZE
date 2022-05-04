@@ -11,22 +11,20 @@ const EditSongForm = ({ currentSong }) => {
   const [imageUrl, setImageUrl] = useState(currentSong.imageUrl);
   const [errors, setErrors] = useState([]);
 
-    const handleSubmit = '';
 
-  // const handleSubmit = async (e) => {
-  //   console.log('imageurl', imageUrl)
-  //   e.preventDefault();
-  //   setErrors([]);
-  //     let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl }))
-  //       .catch(async (res) => {
-  //         const data = await res.json();
-  //         if (data && data.errors) setErrors(data.errors);
-  //         // return <Redirect to='/' />;
-  //       });
-  //       if (newSong) {
-  //         history.push(`/songs/${newSong.song.id}`);
-  //       }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors([]);
+      const songId = currentSong.id;
+      let updateSong = await dispatch(songActions.updateSong({ songId, title, url, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        });
+        // if (updateSong) {
+        //   history.push(`/songs/${newSong.song.id}`);
+        // }
+  };
 
   return(
     <div id='editSongFormContainer'>
@@ -61,7 +59,6 @@ const EditSongForm = ({ currentSong }) => {
               type='text'
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
-              required
             />
           <button type='submit'>Submit Edit</button>
         </form>

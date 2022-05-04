@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import PlayButton from '../PlayButton';
 import EditSongForm from '../EditSongForm';
+import DeleteSong from '../EditSongForm/DeleteSong';
 
 import { getOneSong } from '../../store/song';
 
@@ -17,7 +18,6 @@ const SongDetail = (isLoaded) => {
 
   useEffect(()=> {
     dispatch(getOneSong(songId));
-    // setCurrentSong(song);
   }, [dispatch, songId]);
 
 
@@ -53,7 +53,8 @@ const SongDetail = (isLoaded) => {
             }
           </div>
         </div>
-        <EditSongForm currentSong={song} />
+        <EditSongForm currentSong={currentSong} />
+        <DeleteSong currentSong={currentSong}/>
       </div>
     </div>
   )

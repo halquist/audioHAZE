@@ -28,6 +28,26 @@ module.exports = (sequelize, DataTypes) => {
     return await Song.findByPk(song.id);
   };
 
+  Song.updateSong = async function ({ songId, title, url, imageUrl }) {
+    const song = await Song.findByPk(songId)
+
+    song.title = title;
+    song.url = url;
+    song.imageUrl = imageUrl;
+
+    await song.save();
+
+    return await Song.findByPk(song.id);
+  };
+
+  Song.deleteSong = async function ({ id }) {
+    const song = await Song.findByPk(id.songId);
+    await song.destroy();
+    return {
+      message: 'Success'
+    }
+  }
+
   Song.associate = function(models) {
     // associations can be defined here
     Song.belongsTo(models.User, { foreignKey: 'userId' })

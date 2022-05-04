@@ -55,5 +55,31 @@ router.post(
   })
 );
 
+router.put(
+  '/',
+  validateSong, requireAuth, restoreUser,
+  asyncHandler( async (req, res) => {
+    const { songId, title, url, imageUrl } = req.body;
+    const song = await Song.updateSong({songId, title, url, imageUrl});
+    return res.json({
+      song
+    });
+  })
+)
+
+router.delete(
+  '/',
+  requireAuth, restoreUser,
+  asyncHandler( async (req, res) => {
+    const { id } = req.body;
+    const song = await Song.deleteSong({ id });
+
+    return res.json({
+      song
+    });
+
+  })
+)
+
 
 module.exports = router;
