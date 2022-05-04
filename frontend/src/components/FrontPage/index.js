@@ -25,9 +25,35 @@ const FrontPage = ({isLoaded}) => {
 
   return (
     <div className='mainFrontPageContent'>
-      <div id='outerFrontPageContainer'>
+      <div className='outerFrontPageContainer'>
         <div className='displayTitle'>Latest Songs</div>
-        <div id='innerFrontPageContainer'>
+        <div className='innerFrontPageContainer'>
+          {isLoaded &&
+          songList.map((song) => {
+              return (
+                <SongBlade songPass={song} key={song.title} />
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <div className='outerFrontPageContainer'>
+        <div className='displayTitle'>Latest Songs</div>
+        <div className='innerFrontPageContainer'>
+          {isLoaded &&
+          songList.map((song) => {
+              return (
+                <SongBlade songPass={song} key={song.title} />
+              );
+            })
+          }
+        </div>
+      </div>
+      
+      <div className='outerFrontPageContainer'>
+        <div className='displayTitle'>Latest Songs</div>
+        <div className='innerFrontPageContainer'>
           {isLoaded &&
           songList.map((song) => {
               return (

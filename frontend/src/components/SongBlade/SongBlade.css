@@ -1,0 +1,65 @@
+.songBlade {
+  background-color: rgba(0, 0, 0, 0.187);
+  /* margin: 10px; */
+  padding: 20px;
+  width: 250px;
+  height: 296px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainPlayButtonDiv {
+  opacity: 0;
+  transition: .3s;
+}
+
+.mainPlayButtonDiv:hover {
+  opacity: 1;
+}
+
+.chromePlayButton {
+  width: 200px;
+  height: 200px;
+}
+
+.playButton {
+  width: 150px;
+  height: 150px;
+}
+
+.playButtonForm {
+  width: 150px;
+  height: 150px;
+}
+
+.imagePlay {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+}
+
+.songArt {
+  width: 250px;
+  height: 250px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.primary-text {
+  color: rgb(255, 254, 255);
+  padding: 2px 4px;
+  font-size: 1.1em;
+}
+
+.secondary-text {
+  color: rgb(110, 185, 255);
+  font-weight: 100;
+  padding: 2px 4px;
+  font-size: .9em;
+}
