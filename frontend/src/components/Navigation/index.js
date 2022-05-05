@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModalButton from '../LoginFormModal';
 import Icon from '../Icon/Icon';
+import PyramidLogo from '../Icon/PyramidLogo';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -17,8 +18,8 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
-        <LoginFormModalButton displayText='Log In' />
-        <NavLink to="/signup">Sign Up</NavLink>
+        <LoginFormModalButton displayText='Log In'/>
+        <NavLink to="/signup" className='homeText'>Sign Up</NavLink>
       </>
     );
   }
@@ -35,7 +36,7 @@ function Navigation({ isLoaded }){
             sessionUser ? <NavLink exact to="/newSong" className='homeText'>Upload</NavLink> :
             <LoginFormModalButton displayText='Upload' warning='Please Log In to Upload a Song' />
           }
-          <NavLink exact to="/pyramid" className='homeText'>Pyramid</NavLink>
+          <NavLink exact to="/pyramid" className='homeText'><PyramidLogo /></NavLink>
           {isLoaded && sessionLinks}
         </li>
       </ul>

@@ -7,7 +7,7 @@ function LoginFormModalButton({ displayText, warning }) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>{displayText}</button>
+      <button onClick={() => setShowModal(true)} className='homeText'>{displayText}</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <LoginForm warning={warning} />
@@ -15,6 +15,6 @@ function LoginFormModalButton({ displayText, warning }) {
       )}
     </>
   );
-}
+};
 
 export default LoginFormModalButton;
