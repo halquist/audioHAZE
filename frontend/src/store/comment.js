@@ -29,9 +29,9 @@ const remove = (comment) => {
 export const getComments = (songId) => async dispatch => {
   const sendId = parseInt(songId, 10);
   const response = await fetch(`/api/comments/${sendId}`);
-
   if (response.ok) {
     const comments = await response.json();
+    console.log('comment response', comments);
     dispatch(load(comments));
   }
 };
@@ -50,6 +50,7 @@ export const postComment = (comment) => async (dispatch) => {
     })
   });
   const data = await response.json();
+  console.log('data comment', data.comment)
   dispatch(addComment(data.comment));
 
   return data;
@@ -75,7 +76,10 @@ const commentReducer = (state = {commentList: []}, action) => {
         commentList: sortList(action.comments)
       }
     case ADD:
+      console.log('reducer comment', action)
       newState = { ...state, [action.comment.id]: action.comment }
+      // const listIdx = newState.commentList.findIndex(el => el.id === action.comment.id);
+      // action.comment.User = newState.commentList[listIdx].User
       newState.commentList.push(action.comment);
       newState.commentList = sortList(newState.commentList)
       return newState;

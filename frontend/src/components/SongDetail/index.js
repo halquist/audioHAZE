@@ -7,8 +7,9 @@ import EditSongForm from '../EditSongForm';
 import DeleteSong from '../EditSongForm/DeleteSong';
 import CommentForm from '../CommentForm';
 import LoginFormModalButton from '../LoginFormModal';
+import CommentDisplay from '../CommentDisplay';
 
-
+import { getComments } from "../../store/comment";
 import { getOneSong } from '../../store/song';
 
 import './SongDetail.css';
@@ -29,6 +30,7 @@ const SongDetail = (isLoaded) => {
   useEffect(()=> {
     dispatch(getOneSong(songId));
     setCurrentSong(song)
+    dispatch(getComments(songId));
   }, [dispatch, songId]);
 
 
@@ -74,7 +76,7 @@ const SongDetail = (isLoaded) => {
         <CommentForm currentSong={currentSong}/> :
         <LoginFormModalButton displayText='Leave Comment' warning='Please Log In to Leave a Comment'/>
         }
-
+        <CommentDisplay />
       </div>
     </div>
   )

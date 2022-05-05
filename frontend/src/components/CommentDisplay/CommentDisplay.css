@@ -1,0 +1,21 @@
+#commentContainer {
+  margin-top: 20px;
+  border: 1px solid rgb(0, 255, 179);
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 10px rgb(0, 255, 179);
+  padding: 10px;
+  transition: height 0.5s ease-in 0.3s;
+  width: 80%;
+  min-width: 450px;
+}
+
+.oneCommentContainer {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: fit-content;
+  color: white;
+  width: 100%;
+}

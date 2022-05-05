@@ -1,6 +1,7 @@
 #editDeleteDiv{
   display: flex;
-  width: fit-content;
+  width: 100%;
+  max-width: 450px;
   justify-content: space-around;
   /* align-items: center; */
   /* height: 30px; */

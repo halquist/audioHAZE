@@ -1,3 +1,5 @@
+const { User } = require('./user');
+
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
@@ -21,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       userId,
       songId
     });
-    return await Comment.findByPk(comment.id);
+    return await Comment.findByPk(comment.id, { model: User });
   };
 
   Comment.associate = function(models) {

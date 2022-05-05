@@ -17,6 +17,9 @@ const CommentForm = ({ currentSong }) => {
     }
   });
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);

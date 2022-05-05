@@ -11,7 +11,7 @@ const router = express.Router();
 // get all comments for a particular song
 router.get(
   '/:id',
-  asyncHandler( async (_req, res) => {
+  asyncHandler( async (req, res) => {
     const commentId = req.params.id;
     const comments = await Comment.findAll({where: {
       songId: commentId
@@ -40,6 +40,7 @@ router.post(
   asyncHandler( async (req, res) => {
     const { body, userId, songId } = req.body;
     const comment = await Comment.createComment({ body, userId, songId });
+
     return res.json({
       comment
     });
