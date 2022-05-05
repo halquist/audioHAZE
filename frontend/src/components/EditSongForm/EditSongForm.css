@@ -1,6 +1,6 @@
 #editDeleteDiv{
   display: flex;
-  width: 100%;
+  width: fit-content;
   justify-content: space-around;
   /* align-items: center; */
   /* height: 30px; */
@@ -11,9 +11,9 @@
   /* display: flex; */
   /* flex-direction: column; */
   /* align-items: flex-start; */
-  border: 1px solid rgb(255, 0, 98);
+  border: 1px solid rgb(0, 255, 179);
   border-radius: 3px;
-  box-shadow: inset 0px 0px 10px rgb(255, 0, 98);
+  box-shadow: inset 0px 0px 10px rgb(0, 255, 179);
   padding: 10px;
   transition: height 0.5s ease-in 0.3s;
   color: white;
@@ -21,12 +21,13 @@
 }
 
 #editForm > input {
-  background-color: transparent;
-  border: 2px solid rgb(255, 0, 98);
+  background-color: rgb(38, 102, 134);
+  border: 1px solid rgb(0, 255, 179);
   border-radius: 3px;
-  box-shadow: inset 0px 0px 4px rgb(255, 0, 98);
+  box-shadow: inset 0px 0px 4px rgb(0, 255, 179);
   color: white;
-  width: 100%;
+  width: 80%;
+  font-size: 1em;
 }
 
 #cancelSubmitDiv {
@@ -52,6 +53,6 @@
 }
 
 #cancelSubmitDiv > button {
-  color: white;
+  color: rgb(0, 0, 0);
   background-color: rgb(255, 0, 98);
 }

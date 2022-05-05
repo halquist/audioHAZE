@@ -14,6 +14,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
   }, {});
+
+  Comment.createComment = async function ({ title, url, userId, imageUrl }) {
+    const song = await Song.create({
+      title,
+      url,
+      userId,
+      imageUrl
+    });
+    return await Song.findByPk(song.id);
+  };
+
   Comment.associate = function(models) {
     // associations can be defined here
     Comment.belongsTo(models.User, { foreignKey: 'userId' })
