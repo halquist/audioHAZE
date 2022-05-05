@@ -20,15 +20,14 @@ const NewSongFormPage = () => {
   // if the user is not logged in, redirect to the signup page
   if (!sessionUser) return <Redirect to='/login' />;
 
+  // submits new song to database - if they don't specify an image a default one is used
   const handleSubmit = async (e) => {
-    console.log('imageurl', imageUrl)
     e.preventDefault();
     setErrors([]);
-      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl }))
+      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
-          // return <Redirect to='/' />;
         });
         if (newSong) {
           history.push(`/songs/${newSong.song.id}`);
@@ -68,7 +67,6 @@ const NewSongFormPage = () => {
               type='text'
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
-              required
             />
           <button type='submit'>Upload</button>
         </form>

@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 import PlayButton from '../PlayButton';
+import EditSongForm from '../EditSongForm';
+import DeleteSong from '../EditSongForm/DeleteSong';
+
 import { getOneSong } from '../../store/song';
 
 import './SongDetail.css';
@@ -12,9 +16,16 @@ const SongDetail = (isLoaded) => {
   const song = useSelector(state => state.song[songId]);
   const [currentSong, setCurrentSong] = useState(song);
 
+
+  const sessionUserId = useSelector(state => {
+    if (state.session.user) {
+      return state.session.user.id
+    }
+  });
+
   useEffect(()=> {
     dispatch(getOneSong(songId));
-    // setCurrentSong(song);
+    setCurrentSong(song)
   }, [dispatch, songId]);
 
 
@@ -22,22 +33,40 @@ const SongDetail = (isLoaded) => {
     return null;
   }
 
+  // converts image link to work with google drive hosting
+  let imageLink = '';
+  if (song && song.imageUrl.startsWith('https://drive.google.com')) {
+    imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
+  }
+
   return (
     <div id='mainSongDetailContent'>
       <div id='songDetailBlade'>
-        <div id='titleArtistPlay'>
-          <PlayButton target={currentSong.id}/>
-          <div id='titleArtist'>
-            {isLoaded &&
-            <>
-              <div id='songTitle'>{currentSong.title}</div>
-              {currentSong.User &&
-                <div id='songArtist'>{currentSong.User.username}</div>
+        <div className='imagePlay' style={{
+            backgroundImage: `url(${imageLink})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'
+          }}></div>
+          <div id='titleArtistPlay'>
+            <PlayButton target={song.id}/>
+            <div id='titleArtist'>
+              {isLoaded &&
+              <>
+                <div id='songTitle'>{song.title}</div>
+                {song.User &&
+                  <div id='songArtist'>{song.User.username}</div>
+                }
+              </>
               }
-            </>
-            }
           </div>
         </div>
+        { sessionUserId === song.userId && currentSong &&
+        <div id='editDeleteDiv'>
+          <EditSongForm currentSong={currentSong} />
+          <DeleteSong currentSong={currentSong} />
+        </div>
+        }
       </div>
     </div>
   )
