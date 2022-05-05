@@ -37,7 +37,7 @@ const CommentForm = ({ currentSong }) => {
 
   return (
     <>
-      <button onClick={() => setShowCommentForm(!showCommentForm)} id='editCommentButton'>Leave Comment</button>
+      <button onClick={() => setShowCommentForm(!showCommentForm)} id='commentButton'>Leave Comment</button>
       {showCommentForm &&
       <div id='commentFormContainer'>
         <div id='commentFormDiv'>
@@ -54,7 +54,7 @@ const CommentForm = ({ currentSong }) => {
                 onChange={(e) => setBody(e.target.value)}
                 required
               />
-              <div id='cancelSubmitDiv'>
+              <div id='commentCancelSubmitDiv'>
                 <button type="button" onClick={() => handleCancelClick()}>Cancel</button>
                 <button type='submit'>Submit Comment</button>
               </div>

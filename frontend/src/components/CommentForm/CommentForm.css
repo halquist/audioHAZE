@@ -1,0 +1,44 @@
+#commentButton {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  z-index: 1;
+}
+
+#commentFormContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;
+  height: 100px;
+  color: white;
+}
+
+#commentForm {
+  margin-top: 0px;
+  padding-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content
+
+}
+
+#commentForm > textarea {
+  margin-top: 10px;
+  min-width: 300px;
+  background-color: rgb(38, 102, 134);
+  border: 1px solid rgb(0, 255, 179);
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 4px rgb(0, 255, 179);
+  color: white;
+  width: 80%;
+  font-size: 1em;
+  padding: 4px 6px;
+}
+
+#commentCancelSubmitDiv {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
