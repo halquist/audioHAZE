@@ -54,3 +54,19 @@
 .imagePlay {
   box-shadow: 0px 0px 10px rgb(255, 0, 98);
 }
+
+#commentLoginButton {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  z-index: 1;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(255, 0, 98);
+  transition: .2s;
+  font-size: .9em;
+  font-weight: normal;
+  height: fit-content;
+}
