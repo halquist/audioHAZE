@@ -7,15 +7,41 @@
   transition: height 0.5s ease-in 0.3s;
   width: 80%;
   min-width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .oneCommentContainer {
-  margin: 10px;
+  margin: 5px 10px;
   padding: 10px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   height: fit-content;
+  flex-direction: column;
   color: white;
-  width: 100%;
+  width: 98%;
+  /* border: 1px solid rgb(0, 255, 179); */
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 10px rgba(0, 255, 179, 0.26);
+}
+
+
+.commentBody {
+  color: rgb(255, 254, 255);
+  padding: 2px 4px;
+  font-size: 1.1em;
+  word-break: break-word;
+}
+
+.commentUsername {
+  color: rgb(110, 185, 255);
+  font-weight: 100;
+  padding: 2px 4px;
+  font-size: .9em;
+}
+.displayComments {
+  font-size: 1.6em;
 }

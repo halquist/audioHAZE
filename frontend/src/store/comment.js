@@ -50,8 +50,7 @@ export const postComment = (comment) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  console.log('data comment', data.comment)
-  dispatch(addComment(data.comment));
+  dispatch(addComment(data));
 
   return data;
 }

@@ -11,8 +11,11 @@ const CommentDisplay = ({ comments }) => {
     return state.comment.commentList.map(comment => comment)
   });
 
+  const numSongComments = songComments.length
+
   return(
     <div id='commentContainer'>
+      <div className='displayTitle displayComments'>{numSongComments} Comments</div>
       {songComments.map((comment) => {
         return (
         <IndividualComment comment={comment} key={comment.id} />

@@ -14,6 +14,7 @@ const FrontPage = ({isLoaded}) => {
     return state.song.songList.map(song => song)
   });
 
+
   // useEffect(() => {
   //   dispatch(getSongs());
   // },[dispatch]);
@@ -50,7 +51,7 @@ const FrontPage = ({isLoaded}) => {
           }
         </div>
       </div>
-      
+
       <div className='outerFrontPageContainer'>
         <div className='displayTitle'>Latest Songs</div>
         <div className='innerFrontPageContainer'>

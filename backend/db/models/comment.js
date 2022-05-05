@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       userId,
       songId
     });
-    return await Comment.findByPk(comment.id, { model: User });
+    // const result = await Comment.findByPk(comment.id);
+    return comment;
   };
 
   Comment.associate = function(models) {

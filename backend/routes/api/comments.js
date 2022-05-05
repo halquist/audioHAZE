@@ -40,10 +40,10 @@ router.post(
   asyncHandler( async (req, res) => {
     const { body, userId, songId } = req.body;
     const comment = await Comment.createComment({ body, userId, songId });
-
-    return res.json({
-      comment
-    });
+    const findComment = await Comment.findByPk(comment.id, {include: { model: User}});
+    return res.json(
+      findComment
+    );
   })
 );
 
