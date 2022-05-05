@@ -16,7 +16,7 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
-        <LoginFormModalButton />
+        <LoginFormModalButton displayText='Log In' />
         <NavLink to="/signup">Sign Up</NavLink>
       </>
     );
@@ -27,7 +27,10 @@ function Navigation({ isLoaded }){
       <ul className='navContainer'>
         <li className='navContent'>
           <NavLink exact to="/" className='homeText'>Home</NavLink>
-          <NavLink exact to="/newSong" className='homeText'>New Song</NavLink>
+          {
+            sessionUser ? <NavLink exact to="/newSong" className='homeText'>Upload</NavLink> :
+            <LoginFormModalButton displayText='Upload' warning='Please Log In to Upload a Song' />
+          }
           <NavLink exact to="/pyramid" className='homeText'>Pyramid</NavLink>
           {isLoaded && sessionLinks}
         </li>

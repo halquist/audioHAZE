@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf';
-import { Redirect } from "react-router-dom";
-import { restoreUser } from './session';
-import DeleteSong from '../components/EditSongForm/DeleteSong';
+// import { Redirect } from "react-router-dom";
+// import { restoreUser } from './session';
+
 
 const LOAD = 'song/LOAD';
 const ADD = 'song/ADD';
@@ -11,10 +11,12 @@ const UPDATE = 'song/UPDATE';
 const REMOVE = 'song/REMOVE';
 const ADD_SONG_LIST = 'song/ADD_SONG_LIST';
 
-const load = (songs) => ({
-  type: LOAD,
-  songs
-});
+const load = (songs) => {
+  return {
+    type: LOAD,
+    songs
+  }
+};
 
 const addSong = (song) => {
   return {
@@ -35,28 +37,28 @@ const currentSong = (song) => {
     type: SET_CURRENT,
     song
   }
-}
+};
 
 const update = (song) => {
   return {
     type: UPDATE,
     song
   }
-}
+};
 
 const remove = (song) => {
   return {
     type: REMOVE,
     song
   }
-}
+};
 
 const addToSongList = (song) => {
   return {
     type: ADD_SONG_LIST,
     song
   }
-}
+};
 
 
 // load songs from database on load
@@ -86,9 +88,6 @@ export const createSong = (song) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(addSong(data.song));
-
-  getSongs();
-  addToSongList();
 
   return data;
 }

@@ -9,7 +9,9 @@ import './NewSongForm.css';
 const NewSongFormPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
   const sessionUser = useSelector((state) => state.session.user);
+  
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
