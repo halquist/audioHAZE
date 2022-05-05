@@ -5,7 +5,7 @@ const { restoreUser, requireAuth } = require('../../utils/auth');
 const { Song, User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { db } = require('../../config');
+
 
 const router = express.Router();
 
@@ -48,7 +48,7 @@ router.post(
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     const { title, url, userId, imageUrl } = req.body;
-    const song = await Song.createSong({title, url, userId, imageUrl});
+    const song = await Song.createSong({ title, url, userId, imageUrl });
     return res.json({
       song
     });
@@ -83,7 +83,6 @@ router.delete(
   requireAuth, restoreUser,
   asyncHandler( async (req, res, next) => {
 
-    console.log('req.user', req.user.id)
     const { id } = req.body;
     const findSong = await Song.findByPk(id.songId, {include: { model: User}});
 

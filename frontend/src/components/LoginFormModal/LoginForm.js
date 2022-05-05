@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-function LoginForm() {
+function LoginForm({ warning }) {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -19,14 +22,21 @@ function LoginForm() {
     );
   };
 
+  const signUp = (e) => {
+    history.push(`/signup`)
+  }
+
   return (
     <>
       <div className='title'>Log In</div>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <>
+              <li key={idx}>{error}</li>
+            </>
           ))}
+          {warning && <li>{warning}</li>}
         </ul>
         <label>
           Username or Email

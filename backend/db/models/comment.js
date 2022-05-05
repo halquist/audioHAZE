@@ -14,6 +14,27 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
   }, {});
+
+  Comment.createComment = async function ({ body, userId, songId }) {
+    const comment = await Comment.create({
+      body,
+      userId,
+      songId
+    });
+
+    return comment;
+  };
+
+  Comment.deleteComment = async function ({ id }) {
+    const comment = await Comment.findByPk(id);
+
+    await comment.destroy();
+
+    return {
+      message: 'Success'
+    }
+  }
+
   Comment.associate = function(models) {
     // associations can be defined here
     Comment.belongsTo(models.User, { foreignKey: 'userId' })

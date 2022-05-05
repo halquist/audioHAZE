@@ -1,8 +1,4 @@
 'use strict';
-
-const { User } = require('./user');
-const { Op } = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
   const Song = sequelize.define('Song', {
     title: {
