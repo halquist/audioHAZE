@@ -1,9 +1,17 @@
+#navLogoDiv {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
 #sakura > g > path,
 #sakura > g > polygon {
   /* animation: spin 11.7s forwards infinite; */
   -webkit-transform-origin-x: 75px;
   -webkit-transform-origin-y: 75px;
 }
+
+
 
 #petal-1 {
   animation: grow 1s forwards infinite;
@@ -19,12 +27,6 @@
 }
 #petal-5 {
   animation: grow 1s .8s forwards infinite;
-}
-
-#logo {
-  /* transform-box: fill-box; */
-  /* transform: rotate(0deg); */
-
 }
 
 @keyframes grow {
