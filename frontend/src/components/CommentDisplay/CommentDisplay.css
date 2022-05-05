@@ -42,6 +42,13 @@
   padding: 2px 4px;
   font-size: .9em;
 }
+
 .displayComments {
   font-size: 1.6em;
+}
+
+.deleteDiv{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

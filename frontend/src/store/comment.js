@@ -55,6 +55,22 @@ export const postComment = (comment) => async (dispatch) => {
   return data;
 }
 
+export const deleteComment = (id) => async (dispatch) => {
+  const response = await csrfFetch('/api/comments', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id
+    })
+  });
+  const data = await response.json();
+  dispatch(remove(id));
+
+  return data;
+}
+
 // returns an array of comments ordered by created date, Ascending
 const sortList = (list) => {
   return list.sort((commentA, commentB) => {
@@ -75,12 +91,17 @@ const commentReducer = (state = {commentList: []}, action) => {
         commentList: sortList(action.comments)
       }
     case ADD:
-      console.log('reducer comment', action)
       newState = { ...state, [action.comment.id]: action.comment }
-      // const listIdx = newState.commentList.findIndex(el => el.id === action.comment.id);
-      // action.comment.User = newState.commentList[listIdx].User
       newState.commentList.push(action.comment);
       newState.commentList = sortList(newState.commentList)
+      return newState;
+    case REMOVE:
+      newState = { ...state }
+      delete newState[action.comment];
+      const removeIdx = newState.commentList.findIndex(el => el.id === action.comment);
+      console.log('removeIdx', removeIdx)
+      newState.commentList.splice(removeIdx, 1);
+      newState.commentList = sortList(newState.commentList);
       return newState;
     default:
       return state;

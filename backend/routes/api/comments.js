@@ -47,5 +47,28 @@ router.post(
   })
 );
 
+router.delete(
+  '/',
+  requireAuth, restoreUser,
+  asyncHandler( async (req, res, next) => {
+
+    const { id } = req.body;
+    const findComment = await Comment.findByPk(id, {include: { model: User}});
+
+    if (findComment.User.id === req.user.id) {
+      const comment = await Comment.deleteComment({ id });
+      return res.json({
+        comment
+      });
+    } else {
+      res.errors = new Error('Unauthorized');
+      err.errors = errors;
+      err.status = 403;
+      err.title = 'Unauthorized';
+      next(err);
+    }
+  })
+)
+
 
 module.exports = router;

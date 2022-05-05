@@ -5,7 +5,7 @@ import * as commentActions from "../../store/comment";
 
 import './CommentDisplay.css';
 
-const CommentDisplay = ({ comments }) => {
+const CommentDisplay = ({ sessionUser }) => {
 
   const songComments = useSelector(state =>{
     return state.comment.commentList.map(comment => comment)
@@ -18,7 +18,7 @@ const CommentDisplay = ({ comments }) => {
       <div className='displayTitle displayComments'>{numSongComments} Comments</div>
       {songComments.map((comment) => {
         return (
-        <IndividualComment comment={comment} key={comment.id} />
+        <IndividualComment comment={comment} sessionUser={sessionUser} key={comment.id} />
         )
       })}
     </div>

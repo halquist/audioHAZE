@@ -83,7 +83,6 @@ router.delete(
   requireAuth, restoreUser,
   asyncHandler( async (req, res, next) => {
 
-    console.log('req.user', req.user.id)
     const { id } = req.body;
     const findSong = await Song.findByPk(id.songId, {include: { model: User}});
 

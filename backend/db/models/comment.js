@@ -1,5 +1,3 @@
-const { User } = require('./user');
-
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
@@ -23,9 +21,19 @@ module.exports = (sequelize, DataTypes) => {
       userId,
       songId
     });
-    // const result = await Comment.findByPk(comment.id);
+
     return comment;
   };
+
+  Comment.deleteComment = async function ({ id }) {
+    const comment = await Comment.findByPk(id);
+
+    await comment.destroy();
+
+    return {
+      message: 'Success'
+    }
+  }
 
   Comment.associate = function(models) {
     // associations can be defined here

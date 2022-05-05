@@ -3,6 +3,7 @@
   width: 100%;
   max-width: 450px;
   justify-content: space-around;
+  z-index: 1;
   /* align-items: center; */
   /* height: 30px; */
 }
