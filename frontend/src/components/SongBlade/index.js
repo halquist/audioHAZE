@@ -20,7 +20,7 @@ const SongBlade = ({songPass}) => {
 
   return (
     <div className='songBlade'>
-      <div>
+      <div className='bladeContent'>
         <div className='imagePlay' style={{
           backgroundImage: `url(${imageLink})`,
           backgroundPosition: 'center',
