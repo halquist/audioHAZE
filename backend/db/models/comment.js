@@ -15,14 +15,13 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
 
-  Comment.createComment = async function ({ title, url, userId, imageUrl }) {
-    const song = await Song.create({
-      title,
-      url,
+  Comment.createComment = async function ({ body, userId, songId }) {
+    const comment = await Comment.create({
+      body,
       userId,
-      imageUrl
+      songId
     });
-    return await Song.findByPk(song.id);
+    return await Comment.findByPk(comment.id);
   };
 
   Comment.associate = function(models) {
