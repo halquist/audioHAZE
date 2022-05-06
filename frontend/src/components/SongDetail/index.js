@@ -21,6 +21,9 @@ const SongDetail = (isLoaded) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song[songId]);
+  const hearts = useSelector(state => state.heart);
+  const heartsList = hearts.heartList;
+
   const [currentSong, setCurrentSong] = useState(song);
 
   let sessionUserId = null;
@@ -36,6 +39,18 @@ const SongDetail = (isLoaded) => {
     dispatch(getHearts(songId));
   }, [dispatch, songId]);
 
+
+    let hearted = false; // variable passed to the hearted form to style the heart based on if session user has hearted or not
+    let thisHeart = {};
+
+    for (let i = 0; i < heartsList.length; i++) {
+      if (heartsList[i].userId === sessionUserId) {
+        hearted = true;
+        thisHeart = heartsList[i]
+        break;
+      }
+      hearted = false;
+    }
 
   if (!song) {
     return null;
@@ -56,6 +71,7 @@ const SongDetail = (isLoaded) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
           }}></div>
+        <HeartForm target={song.id} hearted={hearted} thisHeart={thisHeart} numHearts={heartsList.length}/>
           <div id='titleArtistPlay'>
             <PlayButton target={song.id}/>
             <div id='titleArtist'>
@@ -69,7 +85,6 @@ const SongDetail = (isLoaded) => {
               }
           </div>
         </div>
-        <HeartForm target={song.id} />
         { sessionUserId === song.userId && currentSong &&
         <div id='editDeleteDiv'>
           <EditSongForm currentSong={currentSong} />

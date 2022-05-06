@@ -42,7 +42,8 @@ router.delete(
   asyncHandler( async (req, res, next) => {
 
     const { id } = req.body;
-    const findHeart = await Heart.findByPk(heart.id, {include: [User, Song]});
+    
+    const findHeart = await Heart.findByPk(id.id, {include: [User, Song]});
 
     if (findHeart.User.id === req.user.id) {
       const heart = await Heart.deleteHeart({ id });

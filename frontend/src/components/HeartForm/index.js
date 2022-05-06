@@ -1,29 +1,46 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { createHeart } from '../../store/heart';
+import { createHeart, deleteHeart } from '../../store/heart';
 import HeartIcon from "./HeartIcon";
 
 import './HeartForm.css'
 
-const HeartForm = (target, hearted) => {
+const HeartForm = ({target, hearted, thisHeart, numHearts}) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
-
   const handleSubmit = (e) => {
-    console.log('target', target)
     e.preventDefault();
-    const heart = {
-      songId: target.target,
-      userId: sessionUser.id
+    if (sessionUser) {
+      const heart = {
+        songId: target,
+        userId: sessionUser.id
     }
-    dispatch(createHeart(heart));
+     dispatch(createHeart(heart));
+    }
+  };
+
+  const handleUnheart = (e) => {
+    e.preventDefault();
+    if (sessionUser) {
+      const heart = {
+        songId: target,
+        userId: sessionUser.id,
+        id: thisHeart.id
+    }
+      dispatch(deleteHeart(heart));
+    }
   };
 
   return (
-    <button onClick={handleSubmit} className='heartButton'><HeartIcon hearted={hearted}/></button>
+    <div id='heartedContainer'>
+      {hearted === false ?
+      <button onClick={handleSubmit} className='heartButton'><HeartIcon classPass='notHearted'/></button> :
+      <button onClick={handleUnheart} className='heartButton'><HeartIcon classPass='hearted'/></button>
+    }
+    <div>{numHearts} Hearts</div>
+    </div>
   )
-
 }
 
 export default HeartForm;

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Heart.deleteHeart = async function ({ id }) {
-    const heart = await Heart.findByPk(id.heartId);
+    const heart = await Heart.findByPk(id.id);
     await heart.destroy();
     return {
       message: 'Success'
