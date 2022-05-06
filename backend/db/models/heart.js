@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const heart = sequelize.define('Heart', {
+  const Heart = sequelize.define('Heart', {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -10,8 +10,28 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {});
-  heart.associate = function(models) {
-    // associations can be defined here
+
+  Heart.createHeart = async function ({ userId, songId }) {
+    const Heart = await Heart.create({
+      userId,
+      songId
+    });
+    return await Heart.findByPk(heart.id);
   };
-  return heart;
+
+  Heart.deleteHeart = async function ({ id }) {
+    const heart = await Heart.findByPk(id.heartId);
+    await heart.destroy();
+    return {
+      message: 'Success'
+    }
+  }
+
+
+  Heart.associate = function(models) {
+    // associations can be defined here
+    Heart.belongsTo(models.User, { foreignKey: 'userId' })
+    Heart.belongsTo(models.Song, { foreignKey: 'songId' })
+  };
+  return Heart;
 };

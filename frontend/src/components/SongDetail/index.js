@@ -11,6 +11,7 @@ import CommentDisplay from '../CommentDisplay';
 
 import { getComments } from "../../store/comment";
 import { getOneSong } from '../../store/song';
+import { getHearts } from '../../store/heart';
 
 import './SongDetail.css';
 
@@ -31,6 +32,7 @@ const SongDetail = (isLoaded) => {
     dispatch(getOneSong(songId));
     setCurrentSong(song)
     dispatch(getComments(songId));
+    dispatch(getHearts(songId));
   }, [dispatch, songId]);
 
 

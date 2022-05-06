@@ -127,9 +127,6 @@ export const deleteSong = (id) => async (dispatch) => {
   const data = await response.json();
   dispatch(remove(id));
 
-  // getSongs();
-  // addToSongList();
-
   return data;
 }
 
