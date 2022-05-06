@@ -29,6 +29,15 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  const demoSubmit = (e) => {
+    return dispatch(sessionActions.login({ credential: 'Hiro_Protagonist', password: 'password'})).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+  }
+
   return (
     <div id='signupFormContainer'>
       <div className='formDiv'>
@@ -74,7 +83,10 @@ function SignupFormPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-          <button type='submit'>Sign Up</button>
+          <div id='loginButtonDiv'>
+            <button type="submit">SignUp</button>
+            <button onClick={()=> demoSubmit()}>Demo User</button>
+          </div>
         </form>
       </div>
     </div>

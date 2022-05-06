@@ -22,6 +22,15 @@ function LoginForm({ warning }) {
     );
   };
 
+  const demoSubmit = (e) => {
+    return dispatch(sessionActions.login({ credential: 'Hiro_Protagonist', password: 'password'})).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+  }
+
   const signUp = (e) => {
     history.push(`/signup`)
   }
@@ -56,7 +65,10 @@ function LoginForm({ warning }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        <button type="submit">Log In</button>
+          <div id='loginButtonDiv'>
+            <button type="submit">Log In</button>
+            <button onClick={()=> demoSubmit()}>Demo User</button>
+          </div>
       </form>
     </>
   );
