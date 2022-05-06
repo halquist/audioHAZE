@@ -71,16 +71,21 @@
   box-shadow: inset 0px -4px 10px -1px rgb(0, 255, 179);
 }
 
+.dropDownDiv {
+
+}
+
 .profile-dropdown {
   background-color: rgb(0, 0, 0);
   color: white;
   border-bottom: 1px solid rgba(255, 0, 98, 0.705);
   box-shadow: inset 0px -4px 10px -4px rgb(255, 0, 98);
   border-radius: 0px 0px 3px 3px;
-  position: fixed;
-  /* right: 10vw; */
+  position: absolute;
   top: 60px;
   padding: 10px 20px;
+  text-align: center;
+  transform: translate(-30%, 0);
 }
 
 .profile-dropdown > li {
