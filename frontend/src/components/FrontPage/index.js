@@ -1,23 +1,47 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Route, useParams } from 'react-router-dom';
+import { NavLink, Route, useParams, useLocation } from 'react-router-dom';
 import PlayButton from '../PlayButton';
 import SongBlade from '../SongBlade';
+import SongBladeChannel from '../SongBladeChannel';
 
 import './FrontPage.css';
 
 const FrontPage = ({isLoaded}) => {
-  const dispatch = useDispatch();
 
   // loads all songs in the store into a song list
   const songList = useSelector(state =>{
     return state.song.songList.map(song => song)
   });
 
+  // shuffles the songlist to return some random songs
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
 
-  // useEffect(() => {
-  //   dispatch(getSongs());
-  // },[dispatch]);
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+
+  // creates a random songlist to give variety to home page lists
+  let randomSongList = songList.map(song => song);
+  randomSongList = shuffle(randomSongList);
+
+  // create various category lists of songs for front page display
+  const [ latestList, setLatestList ] = useState(songList.slice(0, 10)) // 10 most recently uploaded songs
+  const [ oldestList, setOldestList ] = useState(songList.slice(songList.length - 10, songList.length)) // 10 oldest uploaded songs
+  const [ popList, setPopList ] = useState(randomSongList.slice(0, 10))
+  const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 10, songList.length))
 
 
   if (!songList) {
@@ -26,44 +50,10 @@ const FrontPage = ({isLoaded}) => {
 
   return (
     <div className='mainFrontPageContent'>
-      <div className='outerFrontPageContainer'>
-        <div className='displayTitle'>Latest Songs</div>
-        <div className='innerFrontPageContainer'>
-          {isLoaded &&
-          songList.map((song) => {
-              return (
-                <SongBlade songPass={song} key={song.title} />
-              );
-            })
-          }
-        </div>
-      </div>
-
-      <div className='outerFrontPageContainer'>
-        <div className='displayTitle'>Latest Songs</div>
-        <div className='innerFrontPageContainer'>
-          {isLoaded &&
-          songList.map((song) => {
-              return (
-                <SongBlade songPass={song} key={song.title} />
-              );
-            })
-          }
-        </div>
-      </div>
-
-      <div className='outerFrontPageContainer'>
-        <div className='displayTitle'>Latest Songs</div>
-        <div className='innerFrontPageContainer'>
-          {isLoaded &&
-          songList.map((song) => {
-              return (
-                <SongBlade songPass={song} key={song.title} />
-              );
-            })
-          }
-        </div>
-      </div>
+      <SongBladeChannel title='Popular Tracks' themeList={popList} isLoaded={isLoaded} />
+      <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} />
+      <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} />
+      <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} />
     </div>
   );
 }
