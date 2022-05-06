@@ -30,3 +30,9 @@
   align-items: center;
   color: white;
 }
+
+#loginButtonDiv {
+  min-width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
