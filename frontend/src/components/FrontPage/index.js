@@ -9,10 +9,14 @@ import './FrontPage.css';
 
 const FrontPage = ({isLoaded}) => {
 
+  const song = useSelector(state=> state.song);
+
   // loads all songs in the store into a song list
   const songList = useSelector(state =>{
     return state.song.songList.map(song => song)
   });
+
+  console.log('songlist', songList)
 
   // shuffles the songlist to return some random songs
   function shuffle(array) {
@@ -39,9 +43,6 @@ const FrontPage = ({isLoaded}) => {
 
   let popSongList = songList.map(song => song).sort((songA, songB) => songB.Hearts.length - songA.Hearts.length);
 
-  console.log(popSongList);
-
-
   // create various category lists of songs for front page display
   const [ latestList, setLatestList ] = useState(songList.slice(0, 10)) // 10 most recently uploaded songs
   const [ oldestList, setOldestList ] = useState(songList.slice(songList.length - 10, songList.length)) // 10 oldest uploaded songs
@@ -49,10 +50,15 @@ const FrontPage = ({isLoaded}) => {
   const [ popList, setPopList ] = useState(popSongList.slice(0, 10))
   const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 10, songList.length))
 
+  useEffect(() => {
+    setLatestList(songList.slice(0, 10));
+    setOldestList(songList.slice(songList.length - 10, songList.length));
+    setUpAndComingList(randomSongList.slice(0, 10));
+    setPopList(popSongList.slice(0, 10));
+    setPicksList(randomSongList.slice(songList.length - 10, songList.length))
+  }, [song]);
 
-  if (!songList) {
-    return null;
-  }
+
 
   return (
     <div className='mainFrontPageContent'>
