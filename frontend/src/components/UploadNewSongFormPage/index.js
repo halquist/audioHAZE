@@ -11,7 +11,7 @@ const NewSongFormPage = () => {
   const history = useHistory();
 
   const sessionUser = useSelector((state) => state.session.user);
-  
+
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -32,7 +32,7 @@ const NewSongFormPage = () => {
           if (data && data.errors) setErrors(data.errors);
         });
         if (newSong) {
-          history.push(`/songs/${newSong.song.id}`);
+          history.push(`/songs/${newSong.findSong.id}`);
         }
   };
 

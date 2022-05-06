@@ -49,8 +49,9 @@ router.post(
   asyncHandler( async (req, res) => {
     const { title, url, userId, imageUrl } = req.body;
     const song = await Song.createSong({ title, url, userId, imageUrl });
+    const findSong = await Song.findByPk(song.id, {include: { model: User}});
     return res.json({
-      song
+      findSong
     });
   })
 );
