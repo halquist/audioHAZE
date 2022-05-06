@@ -38,10 +38,10 @@ html {
   height: 100vh;
 }
 
-.root {
+#root {
   margin: 0;
   padding: none;
-
+  width: 100%;
 }
 
 @font-face {

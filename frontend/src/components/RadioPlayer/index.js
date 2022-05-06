@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { getOneSong } from '../../store/song';
@@ -11,6 +11,7 @@ const RadioPlayer = () => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song.currentSong);
+
 
   useEffect(()=> {
     if(song) {
