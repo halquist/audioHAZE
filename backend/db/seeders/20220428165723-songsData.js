@@ -112,8 +112,8 @@ module.exports = {
       userId: 2,
       url: 'https://drive.google.com/file/d/1NslY8Ur1PIaRA2P2dG_I7v_AQWV7RvBk/view?usp=sharing',
       imageUrl: 'https://drive.google.com/file/d/1hpOVSNX1Q-9P9RwLtcC6-fd8wn5dp68i/view?usp=sharing',
-      createdAt: '2022-02-29 18:11:23.873-05',
-      updatedAt: '2022-02-29 18:11:23.873-05'
+      createdAt: '2022-02-21 18:11:23.873-05',
+      updatedAt: '2022-02-21 18:11:23.873-05'
     },
     {
       title: "In the Belly of the Whale",
@@ -279,13 +279,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
       return queryInterface.bulkDelete("Songs", null, {});
   }
 };
