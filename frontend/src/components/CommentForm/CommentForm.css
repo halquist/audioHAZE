@@ -19,20 +19,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: fit-content
-
+  height: fit-content;
+  width: fit-content;
 }
 
 #commentForm > textarea {
   margin-top: 10px;
-  min-width: 300px;
+  width: 100%;
   min-height: 100px;
   background-color: rgb(38, 102, 134);
   border: 1px solid rgb(0, 255, 179);
   border-radius: 3px;
   box-shadow: inset 0px 0px 4px rgb(0, 255, 179);
   color: white;
-  width: 100%;
   font-size: 1em;
   padding: 4px 6px;
   resize: none;

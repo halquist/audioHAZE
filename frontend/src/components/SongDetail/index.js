@@ -74,7 +74,7 @@ const SongDetail = (isLoaded) => {
         }
         {sessionUser ?
         <CommentForm currentSong={currentSong}/> :
-        <LoginFormModalButton displayText='Leave Comment' warning='Please Log In to Leave a Comment'/>
+        <LoginFormModalButton displayText='Leave Comment' warning='Please Log In to Leave a Comment' passId='commentLoginButton'/>
         }
         <CommentDisplay />
       </div>
