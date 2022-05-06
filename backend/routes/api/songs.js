@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { Song, User } = require('../../db/models');
+const { Song, User, Heart } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -13,7 +13,12 @@ const router = express.Router();
 router.get(
   '/',
   asyncHandler( async (_req, res) => {
-    const songs = await Song.findAll( {include: { model: User}} );
+    const songs = await Song.findAll( {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    });
     return res.json(songs);
   })
 );
@@ -23,7 +28,12 @@ router.get(
   '/:id',
   asyncHandler( async (req, res) => {
     const songId = req.params.id;
-    const song = await Song.findByPk(songId, {include: { model: User}})
+    const song = await Song.findByPk(songId, {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    })
     return res.json(song);
   })
 );

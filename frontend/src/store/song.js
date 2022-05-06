@@ -53,13 +53,6 @@ const remove = (song) => {
   }
 };
 
-const addToSongList = (song) => {
-  return {
-    type: ADD_SONG_LIST,
-    song
-  }
-};
-
 
 // load songs from database on load
 export const getSongs = () => async dispatch => {
@@ -126,9 +119,6 @@ export const deleteSong = (id) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(remove(id));
-
-  // getSongs();
-  // addToSongList();
 
   return data;
 }
