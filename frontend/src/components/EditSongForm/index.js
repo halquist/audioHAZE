@@ -29,6 +29,9 @@ const EditSongForm = ({ currentSong }) => {
 
   const handleCancelClick = (e) => {
     setShowEditForm(false);
+    setTitle(currentSong.title);
+    setUrl(currentSong.url);
+    setImageUrl(currentSong.imageUrl);
   };
 
   return(
