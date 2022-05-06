@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Heart.createHeart = async function ({ userId, songId }) {
-    const Heart = await Heart.create({
+    const newHeart = await Heart.create({
       userId,
       songId
     });
-    return await Heart.findByPk(heart.id);
+    return await Heart.findByPk(newHeart.id);
   };
 
   Heart.deleteHeart = async function ({ id }) {

@@ -85,9 +85,10 @@ const heartReducer = (state = { heartList: [] }, action) => {
       };
     case ADD:
       newState = { ...state, [action.heart.id]: action.heart}
+      newState.heartList.push(action.heart);
       return newState;
     case REMOVE:
-      const newState = { ...state }
+      newState = { ...state }
       delete newState[action.id];
       const removeIdx = newState.heartList.findIndex(el => el.id === action.heart.heartId);
       newState.heartList.splice(removeIdx, 1);

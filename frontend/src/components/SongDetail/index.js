@@ -8,6 +8,7 @@ import DeleteSong from '../EditSongForm/DeleteSong';
 import CommentForm from '../CommentForm';
 import LoginFormModalButton from '../LoginFormModal';
 import CommentDisplay from '../CommentDisplay';
+import HeartForm from '../HeartForm';
 
 import { getComments } from "../../store/comment";
 import { getOneSong } from '../../store/song';
@@ -68,6 +69,7 @@ const SongDetail = (isLoaded) => {
               }
           </div>
         </div>
+        <HeartForm target={song.id} />
         { sessionUserId === song.userId && currentSong &&
         <div id='editDeleteDiv'>
           <EditSongForm currentSong={currentSong} />

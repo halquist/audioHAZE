@@ -29,7 +29,7 @@ router.post(
   asyncHandler( async (req, res) => {
     const { userId, songId } = req.body;
     const heart = await Heart.createHeart({ userId, songId });
-    const findHeart = await Heart.findByPk(heart.id, {include: { model: [User, Song]}});
+    const findHeart = await Heart.findByPk(heart.id, {include: [User, Song]});
     return res.json({
       findHeart
     });
@@ -42,7 +42,7 @@ router.delete(
   asyncHandler( async (req, res, next) => {
 
     const { id } = req.body;
-    const findHeart = await Heart.findByPk(heart.id, {include: { model: [User, Song]}});
+    const findHeart = await Heart.findByPk(heart.id, {include: [User, Song]});
 
     if (findHeart.User.id === req.user.id) {
       const heart = await Heart.deleteHeart({ id });
