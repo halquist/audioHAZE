@@ -30,12 +30,14 @@ const CommentForm = ({ currentSong }) => {
           if (data && data.errors) setErrors(data.errors);
         });
         if (postedComment) {
-          setShowCommentForm(false);;
+          setShowCommentForm(false);
+          setBody('');
         }
   };
 
   const handleCancelClick = (e) => {
     setShowCommentForm(false);
+    setBody('');
   };
 
   return (
@@ -56,6 +58,7 @@ const CommentForm = ({ currentSong }) => {
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 required
+                id='textArea'
               />
               <div id='commentCancelSubmitDiv'>
                 <button type="button" onClick={() => handleCancelClick()}>Cancel</button>
