@@ -37,10 +37,16 @@ const FrontPage = ({isLoaded}) => {
   let randomSongList = songList.map(song => song);
   randomSongList = shuffle(randomSongList);
 
+  let popSongList = songList.map(song => song).sort((songA, songB) => songB.Hearts.length - songA.Hearts.length);
+
+  console.log(popSongList);
+
+
   // create various category lists of songs for front page display
   const [ latestList, setLatestList ] = useState(songList.slice(0, 10)) // 10 most recently uploaded songs
   const [ oldestList, setOldestList ] = useState(songList.slice(songList.length - 10, songList.length)) // 10 oldest uploaded songs
-  const [ popList, setPopList ] = useState(randomSongList.slice(0, 10))
+  const [ upAndComingList, setUpAndComingList ] = useState(randomSongList.slice(0, 10))
+  const [ popList, setPopList ] = useState(popSongList.slice(0, 10))
   const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 10, songList.length))
 
 
@@ -54,6 +60,7 @@ const FrontPage = ({isLoaded}) => {
       <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} />
       <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} />
       <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} />
+      <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} />
     </div>
   );
 }
