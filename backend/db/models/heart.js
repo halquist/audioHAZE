@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const heart = sequelize.define('heart', {
+  const heart = sequelize.define('Heart', {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
