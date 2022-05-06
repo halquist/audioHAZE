@@ -3,7 +3,7 @@
 const ProfileIcon = () => {
   return (
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50px"
-	 height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" >
+	 height="50px" viewBox="0 0 50 50" enableBackground="new 0 0 50 50" >
 <g id="Layer_2_copy">
 	<path fill="#00ffb3" d="M25,0C11.193,0,0,11.193,0,25c0,6.91,2.805,13.166,7.337,17.691C11.86,47.207,18.104,50,25,50
 		s13.14-2.793,17.663-7.309C47.195,38.166,50,31.91,50,25C50,11.193,38.807,0,25,0z M15.834,20.577v-3.484
