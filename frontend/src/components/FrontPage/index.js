@@ -11,17 +11,22 @@ const FrontPage = ({isLoaded}) => {
 
   // const song = useSelector(state=> state.song);
   const sessionUser = useSelector(state => state.session.user);
-  const song = useSelector(state => state.session.song);
+  const song = useSelector(state => state.song);
+  const heart = useSelector(state => state.heart)
+  const [songList, setSongList] = useState(song.songList);
 
   let sessionUserId = null;
   if (sessionUser) {
     sessionUserId = sessionUser.id
   }
 
+
   // loads all songs in the store into a song list
-  const songList = useSelector(state =>{
-    return state.song.songList.map(song => song)
-  });
+  // const songList = useSelector(state =>{
+  //   return state.song.songList.map(song => song)
+  // });
+
+  // const [songList, setsongList] = useState(songList);
 
   // shuffles the songlist to return some random songs
   function shuffle(array) {
@@ -56,14 +61,17 @@ const FrontPage = ({isLoaded}) => {
   const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 10, songList.length))
 
   useEffect(() => {
+    setSongList(song.songList);
     setLatestList(songList.slice(0, 10));
     setOldestList(songList.slice(songList.length - 10, songList.length));
     setUpAndComingList(randomSongList.slice(0, 10));
     setPopList(popSongList.slice(0, 10));
     setPicksList(randomSongList.slice(songList.length - 10, songList.length))
-  }, [song]);
+  }, [song, songList, heart]);
 
-
+  // if(!songList.length) {
+  //   setSongList(song.songList)
+  // }
 
 
   return (

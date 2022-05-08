@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createHeart, deleteHeart } from '../../store/heart';
 import HeartIcon from "./HeartIcon";
@@ -11,12 +11,16 @@ import './HeartForm.css'
 const HeartForm = ({ target, sessionUserId }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const heart = useSelector(state => state.heart);
   const heartList = useSelector(state => state.heart.heartList);
 
   const heartsList = heartList.filter(heart => heart.songId === target)
 
-  const numHearts = heartsList.length;
+  const [numHearts, setNumHearts] = useState(heartsList.length);
 
+  useEffect (() => {
+    setNumHearts(heartsList.length)
+  },[heart])
 
   const handleSubmit = (e) => {
     e.preventDefault();
