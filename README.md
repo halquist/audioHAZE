@@ -19,7 +19,7 @@ Try it out at the live site: [Audiohaze](https://audiohaze.herokuapp.com/)
 
 3. Create a .env file based on the .env.example given
 
-4. Setup your username and database based on what you setup in your .env
+4. Set up your username and database based on the names you chose in your .env
 
 5. Migrate and Seed models
 
