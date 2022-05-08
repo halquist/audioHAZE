@@ -39,62 +39,24 @@ Try asking and answering questions at our live site: [Oraql](https://oraql.herok
 
    `npm start`
 
-7. You can use the Demo user or create an account
+#Deploy to Heroku
 
+1. Create a Heroku account if you don't have one [Here](https://signup.heroku.com/)
 
+2. Create a new project on Heroku
 
-### Features
+3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
 
-Oraql is a question-and-answer website for users to post/edit/delete questions and answers. Logged in sers can dynamically edit and delete answers without redirecting.
+4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 
-Logged out users can:
+5. Run `heroku login` in the root console of the Audiohaze directory
 
-- View Questions and Associated Answers
-- Search for Questions
-- View Questions by Topics/Tags 
+5. Run `heroku git:remote -a <name-of-Heroku-app>` in the root console of the Audiohaze directory with the name of the project you created on Heroku in step 2
 
-Logged in users can:
+6. On Heroku under 'Settings' there is a section for 'Config Vars'. Click the `Reveal Config Vars` button. You should already have a `DATABASE_URL` environment variable from the Heroku Postgres add-on. Add environment variables for `JWT_EXPIRES_IN` and `JWT_SECRET` which match the values in your .env file.
 
-- Add/Edit/Delete Questions
-- Add/Edit/Delete Answers
-- Search for Questions
-- View Questions by Topics/Tags 
+7. From the root directory console of Audiohaze run `git push heroku master` if your branch is named master or `git push heroku main:master` if your branch is named main.
 
-### Home Page
+8. To set up the database run `heroku run npm run sequelize db:migrate` and then `heroku run npm run sequelize db:seed:all`
 
-![image](https://user-images.githubusercontent.com/95883222/163737543-051ee342-f2f7-4d63-8a10-a820ca4a5f59.png)
-
-### User Sign Up Page
-
-![image](https://user-images.githubusercontent.com/95883222/163737581-632827b6-aae9-4e2f-9718-0a912bc0d35f.png)
-
-### Add Question Page
-
-![image](https://user-images.githubusercontent.com/95883222/163737606-f8fd437c-87f5-45cc-ab3b-6e971fd97ff7.png)
-
-
-### Question Detail Page
-![image](https://user-images.githubusercontent.com/95883222/163737976-1a12534b-8c50-42e5-ace9-1ddb2f6ea5e7.png)
-
-
-### Search Results Page
-
-![image](https://user-images.githubusercontent.com/95883222/163737653-481b15fe-6315-4f85-8bab-b489340b9fbc.png)
-
-
-# Future Features
-
-- Comments on Answers:
-  - Logged-in users can add comments on answers.
-  - Logged-in users can upvote comments/answers/questions.
-- Likes on Questions/Answers/Comments
-  - Logged-in users can remove their own like from questions/answers/comments.
-  - All users can see how many users have liked a question/answer/comment.
-- User profiles
-
-# Technical Implementation
-
-- One of our first challenges was search bar functionality: how to process an input and search for related information in the database. Our solution is to segment the input string into a list of words and query the question.content column for data containing any of the words.
-
-
-
+9. You should be able to view your deployed site from the Heroku dashboard now!
