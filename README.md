@@ -30,7 +30,7 @@ Try it out at the live site: [Audiohaze](https://audiohaze.herokuapp.com/)
 
    `npm start`
 
-#Deploy to Heroku
+# Deploy to Heroku
 
 1. Create a Heroku account if you don't have one [Here](https://signup.heroku.com/)
 
