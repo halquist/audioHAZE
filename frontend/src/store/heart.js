@@ -28,7 +28,7 @@ const remove = (heart) => {
 // load hearts from database on load
 export const getHearts = (songId) => async dispatch => {
   const sendId = parseInt(songId, 10);
-  const response = await fetch(`/api/hearts/${sendId}`);
+  const response = await fetch(`/api/hearts`);
 
   if (response.ok) {
     const hearts = await response.json();
@@ -67,7 +67,6 @@ export const deleteHeart = (id) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(remove(id));
-
   return data;
 }
 

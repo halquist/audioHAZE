@@ -11,25 +11,29 @@ import './HeartForm.css'
 const HeartForm = ({ target, sessionUserId }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const song = useSelector(state => state.song);
-  const heartsList = song[target].Hearts;
-  const numHearts = heartsList.length;
+  const heartList = useSelector(state => state.heart.heartList);
 
-  useEffect(()=> {
-    dispatch(getHearts(target));
-  }, [dispatch]);
+  const heartsList = heartList.filter(heart => heart.songId === target)
+
+  const numHearts = heartsList.length;
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (sessionUser) {
-      const heart = {
-        songId: target,
-        userId: sessionUser.id
+    let heartedCatch = true;
+    for (let i = 0; i < heartsList.length; i++) {
+      if (heartsList[i].userId === sessionUserId) {
+        heartedCatch = false;
       }
-      dispatch(createHeart(heart));
     }
-    dispatch(getHearts(target));
+      if (sessionUser && heartedCatch) {
+        const heart = {
+          songId: target,
+          userId: sessionUser.id
+        }
+        dispatch(createHeart(heart));
+      }
+
   };
 
   const handleUnheart = (e) => {
@@ -42,9 +46,9 @@ const HeartForm = ({ target, sessionUserId }) => {
       }
       dispatch(deleteHeart(heart));
     }
-    dispatch(getHearts(target));
+    // dispatch(getHearts(target));
   };
-  
+
   let hearted = false; // variable passed to the hearted form to style the heart based on if session user has hearted or not
   let thisHeart = {};
 

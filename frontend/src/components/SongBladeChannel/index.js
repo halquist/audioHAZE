@@ -1,11 +1,29 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import SongBlade from '../SongBlade';
+import { getSongs } from '../../store/song';
+
 
 import './SongBladeChannel.css';
 
 // front page display for a category of songs
 
 const SongBladeChannel = ({ title, themeList, isLoaded, sessionUserId }) => {
+  const dispatch = useDispatch();
+
+  // const songs = useSelector(state => state.song);
+
+console.log(themeList)
+
+
+
+  useEffect(() => {
+    if (!themeList.length) {
+      dispatch(getSongs());
+    }
+  }, [])
+
+
   return (
       <div className='outerFrontPageContainer'>
         <div className='displayTitle'>{title}</div>

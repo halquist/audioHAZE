@@ -9,8 +9,9 @@ import './FrontPage.css';
 
 const FrontPage = ({isLoaded}) => {
 
-  const song = useSelector(state=> state.song);
+  // const song = useSelector(state=> state.song);
   const sessionUser = useSelector(state => state.session.user);
+  const song = useSelector(state => state.session.song);
 
   let sessionUserId = null;
   if (sessionUser) {
@@ -61,6 +62,7 @@ const FrontPage = ({isLoaded}) => {
     setPopList(popSongList.slice(0, 10));
     setPicksList(randomSongList.slice(songList.length - 10, songList.length))
   }, [song]);
+
 
 
 
