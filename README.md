@@ -1,16 +1,7 @@
 # Audiohaze
 Audiohaze is a Retrowave themed clone of soundcloud. Users can browse original Synthwave, Darkwave, and Chillwave music uploaded by other users, participate in a discussion about the songs, and upload their own music.
 
-Try asking and answering questions at our live site: [Oraql](https://oraql.herokuapp.com/)
-
-# Index
-
-|
-[MVP Feature List](https://github.com/starsabhi/Oraql/wiki/Oraql-feature-list) |
-[Database Schema](https://github.com/starsabhi/Oraql/wiki/Database-Schema) |
-[API Documentation](https://github.com/starsabhi/Oraql/wiki/API-Documentation) |
-[Frontend Routes](https://github.com/starsabhi/Oraql/wiki/Front-End-Routes) |
-[User Stories](https://github.com/starsabhi/Oraql/wiki/User-Stories) |
+Try it out at the live site: [Audiohaze](https://audiohaze.herokuapp.com/)
 
 # Technologies Used
 
