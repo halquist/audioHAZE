@@ -1,10 +1,11 @@
 import { NavLink, Route, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PlayButton from '../PlayButton';
+import HeartForm from '../HeartForm';
 
 import './SongBlade.css';
 
-const SongBlade = ({songPass}) => {
+const SongBlade = ({songPass, sessionUserId}) => {
 
   const song = useSelector(state => state.song[songPass.id]);
 
@@ -30,7 +31,9 @@ const SongBlade = ({songPass}) => {
           <div className='mainPlayButtonDiv'>
             <PlayButton target={song.id}/>
           </div>
-          {/* <img src={`${song.imageUrl}`} className='songArt'></img> */}
+            <div className='heartContainerFront'>
+              <HeartForm target={song.id} sessionUserId={sessionUserId}/>
+            </div>
         </div>
         <NavLink to={`/songs/${song.id}`}>
           <div className="primary-text truncate">{song.title}</div>

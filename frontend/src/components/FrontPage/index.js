@@ -10,13 +10,17 @@ import './FrontPage.css';
 const FrontPage = ({isLoaded}) => {
 
   const song = useSelector(state=> state.song);
+  const sessionUser = useSelector(state => state.session.user);
+
+  let sessionUserId = null;
+  if (sessionUser) {
+    sessionUserId = sessionUser.id
+  }
 
   // loads all songs in the store into a song list
   const songList = useSelector(state =>{
     return state.song.songList.map(song => song)
   });
-
-  console.log('songlist', songList)
 
   // shuffles the songlist to return some random songs
   function shuffle(array) {
@@ -62,11 +66,11 @@ const FrontPage = ({isLoaded}) => {
 
   return (
     <div className='mainFrontPageContent'>
-      <SongBladeChannel title='Popular Tracks' themeList={popList} isLoaded={isLoaded} />
-      <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} />
-      <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} />
-      <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} />
-      <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} />
+      <SongBladeChannel title='Popular Tracks' themeList={popList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
     </div>
   );
 }

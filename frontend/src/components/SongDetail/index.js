@@ -71,7 +71,9 @@ const SongDetail = (isLoaded) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
           }}></div>
-        <HeartForm target={song.id} hearted={hearted} thisHeart={thisHeart} numHearts={heartsList.length}/>
+          <div id='heartedContainer'>
+            <HeartForm target={song.id} sessionUserId={sessionUserId}/>
+          </div>
           <div id='titleArtistPlay'>
             <PlayButton target={song.id}/>
             <div id='titleArtist'>

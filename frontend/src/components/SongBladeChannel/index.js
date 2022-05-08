@@ -5,7 +5,7 @@ import './SongBladeChannel.css';
 
 // front page display for a category of songs
 
-const SongBladeChannel = ({ title, themeList, isLoaded }) => {
+const SongBladeChannel = ({ title, themeList, isLoaded, sessionUserId }) => {
   return (
       <div className='outerFrontPageContainer'>
         <div className='displayTitle'>{title}</div>
@@ -13,7 +13,7 @@ const SongBladeChannel = ({ title, themeList, isLoaded }) => {
           {isLoaded &&
           themeList.map((song) => {
               return (
-                <SongBlade songPass={song} key={song.title} />
+                <SongBlade songPass={song} sessionUserId={sessionUserId} key={song.title} />
               );
             })
           }
