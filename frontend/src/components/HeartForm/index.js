@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createHeart, deleteHeart } from '../../store/heart';
+import { createHeart, deleteHeart, getHearts } from '../../store/heart';
 import HeartIcon from "./HeartIcon";
 
 import { getOneSong } from '../../store/song'
@@ -10,16 +10,16 @@ import './HeartForm.css'
 
 const HeartForm = ({ target }) => {
   const dispatch = useDispatch();
+
   const sessionUser = useSelector((state) => state.session.user);
   const heart = useSelector(state => state.heart);
   const song = useSelector(state => state.song[target]);
   const sessionUserId = sessionUser.id || -1;
-
   const heartList = useSelector(state => state.heart.heartList);
 
+
+
   const [currentSongHearts, setCurrentSongHearts] = useState(heartList.filter(heart => heart.songId === target))
-
-
 
   const [numHearts, setNumHearts] = useState(currentSongHearts.length);
 
@@ -32,23 +32,21 @@ const HeartForm = ({ target }) => {
       return thisHeart.id
     })
 
-
+  // useEffect(() => {
+  //   dispatch(getHearts())
+  // }, [])
 
 
   useEffect(() => {
-    // setTestThisHeart(() => {
-    //   for (const [key, value] of Object.entries(heart)){
-    //     if (value.userId === sessionUser.id && value.songId === target) {
-    //       return key;
-    //     }
-    //   }})
+    setCurrentSongHearts(heartList.filter(heart => heart.songId === target));
+    // setNumHearts(currentSongHearts.length);
     setTestThisHeart(() => {
       const thisHeart = heartList.filter(heart => heart.userId === sessionUserId && heart.songId === target)
       if(thisHeart.length) {
         return thisHeart[0].id
       }
     })
-  }, [heart, hearted])
+  }, [heart, hearted, song, heartList])
 
 
   useEffect(() => {
@@ -67,6 +65,7 @@ const HeartForm = ({ target }) => {
 
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
     if (sessionUser) {
       const heart = {
@@ -87,19 +86,20 @@ const HeartForm = ({ target }) => {
         }
       })
     }
+    dispatch(getHearts());
   };
 
   const handleUnheart = (e) => {
     e.preventDefault();
     if (sessionUser) {
     if (!testThisHeart) {
-      const subHeartList = heartList.map(heart => heart)
+      //  dispatch(getOneSong(target))
+      // const subHeartList = heartList.map(heart => heart)
       setTestThisHeart(() => {
-        const thisHeart = subHeartList.filter(heart => heart.userId === sessionUserId && heart.songId === target)
+        const thisHeart = heartList.filter(heart => heart.userId === sessionUserId && heart.songId === target)
         if(thisHeart.length) {
           return thisHeart[0].id
         }
-        console.log('thisHeart', thisHeart)
       })
     }
     dispatch(getOneSong(target))

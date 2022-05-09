@@ -51,7 +51,6 @@ export const createHeart = (heart) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(addHeart(data.findHeart));
-
   return data;
 }
 
