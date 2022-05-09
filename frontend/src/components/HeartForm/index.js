@@ -87,15 +87,12 @@ const HeartForm = ({ target }) => {
       })
     }
     dispatch(getHearts());
-    console.log(target, sessionUserId, heart.heartList)
   };
 
   const handleUnheart = (e) => {
     e.preventDefault();
     if (sessionUser) {
     if (!testThisHeart) {
-       console.log('old hearts', heartList)
-       console.log('new hearts', heartList)
       //  dispatch(getOneSong(target))
       // const subHeartList = heartList.map(heart => heart)
       setTestThisHeart(() => {
@@ -125,7 +122,6 @@ const HeartForm = ({ target }) => {
         }
       })
     }
-    console.log(target, sessionUserId, heart.heartList)
   };
 
 
