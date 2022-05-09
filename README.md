@@ -10,6 +10,7 @@ Try it out at the live site: [Audiohaze](https://audiohaze.herokuapp.com/)
 |
 [Database Schema](https://github.com/halquist/audioHAZE/wiki/Database-Schema-Diagram) |
 [Feature List](https://github.com/halquist/audioHAZE/wiki/AudioHAZE-Feature-List) |
+[API Routes](https://github.com/halquist/audioHAZE/wiki/API-Routes) |
 
 # Technologies Used
 
