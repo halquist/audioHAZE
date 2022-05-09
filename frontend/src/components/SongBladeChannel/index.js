@@ -13,11 +13,11 @@ const SongBladeChannel = ({ title, themeList, isLoaded, sessionUserId }) => {
 
   // const songs = useSelector(state => state.song);
 
-  useEffect(() => {
-    if (!themeList.length) {
-      dispatch(getSongs());
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!themeList.length) {
+  //     dispatch(getSongs());
+  //   }
+  // }, [])
 
 
   return (
