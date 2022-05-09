@@ -10,7 +10,7 @@ const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getSongs());
-    dispatch(getHearts());
+    // dispatch(getHearts());
   },[]);
 
 return(null);
