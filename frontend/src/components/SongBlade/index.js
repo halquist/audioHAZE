@@ -37,7 +37,7 @@ const SongBlade = ({songPass, sessionUserId}) => {
           </div>
             <div className='heartContainerPush'>
               <div className='heartContainerFront'>
-                <HeartForm target={song.id} sessionUserId={sessionUserId}/>
+                {/* <HeartForm target={song.id} sessionUserId={sessionUserId}/> */}
               </div>
             </div>
         </div>
