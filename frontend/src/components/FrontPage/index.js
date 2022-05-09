@@ -56,7 +56,7 @@ const FrontPage = ({isLoaded}) => {
   // create various category lists of songs for front page display
   const [ latestList, setLatestList ] = useState(songList.slice(0, 8)) // 8 most recently uploaded songs
   const [ oldestList, setOldestList ] = useState(songList.slice(songList.length - 8, songList.length)) // 8 oldest uploaded songs
-  const [ upAndComingList, setUpAndComingList ] = useState(randomSongList.slice(0, 8))
+  // const [ upAndComingList, setUpAndComingList ] = useState(randomSongList.slice(0, 8))
   const [ popList, setPopList ] = useState(popSongList.slice(0, 8))
   const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 8, songList.length))
 
@@ -65,7 +65,7 @@ const FrontPage = ({isLoaded}) => {
     setSongList(song.songList);
     setLatestList(songList.slice(0, 8));
     setOldestList(songList.slice(songList.length - 8, songList.length));
-    setUpAndComingList(randomSongList.slice(0, 8));
+    // setUpAndComingList(randomSongList.slice(0, 8));
     setPopList(popSongList.slice(0, 8));
     setPicksList(randomSongList.slice(songList.length - 8, songList.length))
   }, [song, songList]);
@@ -81,7 +81,7 @@ const FrontPage = ({isLoaded}) => {
       <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
       <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
       <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-      <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      {/* <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} sessionUserId={sessionUserId} /> */}
     </div>
   );
 }
