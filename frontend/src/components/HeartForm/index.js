@@ -13,7 +13,7 @@ const HeartForm = ({ target }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const heart = useSelector(state => state.heart);
   const song = useSelector(state => state.song[target]);
-  const sessionUserId = sessionUser || -1;
+  const sessionUserId = sessionUser.id || -1;
 
   const heartList = useSelector(state => state.heart.heartList);
 
@@ -91,21 +91,22 @@ const HeartForm = ({ target }) => {
 
   const handleUnheart = (e) => {
     e.preventDefault();
+    if (sessionUser) {
     if (!testThisHeart) {
-      const subHeartList = heart.heartList.map(heart => heart)
+      const subHeartList = heartList.map(heart => heart)
       setTestThisHeart(() => {
         const thisHeart = subHeartList.filter(heart => heart.userId === sessionUserId && heart.songId === target)
         if(thisHeart.length) {
           return thisHeart[0].id
         }
+        console.log('thisHeart', thisHeart)
       })
     }
+    dispatch(getOneSong(target))
+    setHearted(false);
 
     // setSongHearts(heart.heartList.filter(heart => heart.songId === target))
     // setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
-    if (sessionUser) {
-      dispatch(getOneSong(target))
-      setHearted(false);
       const heart = {
         songId: target,
         userId: sessionUserId,

@@ -26,6 +26,7 @@ router.post(
  requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     const { userId, songId } = req.body;
+    console.log('req body', req.body)
     const heart = await Heart.createHeart({ userId, songId });
     const findHeart = await Heart.findByPk(heart.id, {include: [User, Song]});
     return res.json({

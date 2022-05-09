@@ -49,11 +49,9 @@ const FrontPage = ({isLoaded}) => {
 
   // creates a random songlist to give variety to home page lists
   let randomSongList = songList.map(song => song);
-  // randomSongList = shuffle(randomSongList);
   randomSongList = shuffle(randomSongList);
 
   let popSongList = songList.map(song => song).sort((songA, songB) => songB.Hearts.length - songA.Hearts.length);
-
 
   // create various category lists of songs for front page display
   const [ latestList, setLatestList ] = useState(songList.slice(0, 10)) // 10 most recently uploaded songs
@@ -62,31 +60,28 @@ const FrontPage = ({isLoaded}) => {
   const [ popList, setPopList ] = useState(popSongList.slice(0, 10))
   const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 10, songList.length))
 
-  // useEffect(() => {
-  //   setSongList(song.songList);
-  //   setLatestList(songList.slice(0, 10));
-  //   setOldestList(songList.slice(songList.length - 10, songList.length));
-  //   setUpAndComingList(randomSongList.slice(0, 10));
-  //   setPopList(popSongList.slice(0, 10));
-  //   setPicksList(randomSongList.slice(songList.length - 10, songList.length))
-  // }, [song]);
 
-  // if(!songList.length) {
-  //   setSongList(song.songList)
-  // }
+  useEffect(() => {
+    setSongList(song.songList);
+    setLatestList(songList.slice(0, 10));
+    setOldestList(songList.slice(songList.length - 10, songList.length));
+    setUpAndComingList(randomSongList.slice(0, 10));
+    setPopList(popSongList.slice(0, 10));
+    setPicksList(randomSongList.slice(songList.length - 10, songList.length))
+  }, [song, songList, heart]);
+
+  if(!songList.length) {
+    setSongList(song.songList)
+  }
 
 
   return (
     <div className='mainFrontPageContent'>
-    {isLoaded &&
-      <>
-        <SongBladeChannel title='Popular Tracks' themeList={popList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-        <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-        <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-        <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-        <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-      </>
-    }
+      <SongBladeChannel title='Popular Tracks' themeList={popList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
     </div>
   );
 }
