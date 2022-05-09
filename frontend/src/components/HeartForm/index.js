@@ -8,16 +8,16 @@ import { getOneSong } from '../../store/song'
 
 import './HeartForm.css'
 
-const HeartForm = ({ target }) => {
+const HeartForm = ({ target, sessionUserId }) => {
   const dispatch = useDispatch();
 
   const sessionUser = useSelector((state) => state.session.user);
   const heart = useSelector(state => state.heart);
   const song = useSelector(state => state.song[target]);
-  const sessionUserId = sessionUser.id || -1;
+  // const sessionUserId = sessionUser.id || -1;
   const heartList = useSelector(state => state.heart.heartList);
 
-
+  // const [sessionUserId, setSessionUserId] = useState(sessionUser.id)
 
   const [currentSongHearts, setCurrentSongHearts] = useState(heartList.filter(heart => heart.songId === target))
 
@@ -46,7 +46,7 @@ const HeartForm = ({ target }) => {
         return thisHeart[0].id
       }
     })
-  }, [heart, hearted, song, heartList])
+  }, [heart, hearted, song])
 
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const HeartForm = ({ target }) => {
       setHearted(true);
       // setSongHearts(heart.heartList.filter(heart => heart.songId === target))
       // setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
-      dispatch(getOneSong(target))
+      // dispatch(getOneSong(target))
       setCurrentSongHearts(heartList.filter(heart => heart.songId === target))
       setNumHearts((prevNumHearts) => prevNumHearts + 1)
       setTestThisHeart(() => {
@@ -102,7 +102,7 @@ const HeartForm = ({ target }) => {
         }
       })
     }
-    dispatch(getOneSong(target))
+    // dispatch(getOneSong(target))
     setHearted(false);
 
     // setSongHearts(heart.heartList.filter(heart => heart.songId === target))

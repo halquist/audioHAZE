@@ -54,21 +54,21 @@ const FrontPage = ({isLoaded}) => {
   let popSongList = songList.map(song => song).sort((songA, songB) => songB.Hearts.length - songA.Hearts.length);
 
   // create various category lists of songs for front page display
-  const [ latestList, setLatestList ] = useState(songList.slice(0, 10)) // 10 most recently uploaded songs
-  const [ oldestList, setOldestList ] = useState(songList.slice(songList.length - 10, songList.length)) // 10 oldest uploaded songs
-  const [ upAndComingList, setUpAndComingList ] = useState(randomSongList.slice(0, 10))
-  const [ popList, setPopList ] = useState(popSongList.slice(0, 10))
-  const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 10, songList.length))
+  const [ latestList, setLatestList ] = useState(songList.slice(0, 8)) // 8 most recently uploaded songs
+  const [ oldestList, setOldestList ] = useState(songList.slice(songList.length - 8, songList.length)) // 8 oldest uploaded songs
+  const [ upAndComingList, setUpAndComingList ] = useState(randomSongList.slice(0, 8))
+  const [ popList, setPopList ] = useState(popSongList.slice(0, 8))
+  const [ picksList, setPicksList ] = useState(randomSongList.slice(songList.length - 8, songList.length))
 
 
   useEffect(() => {
     setSongList(song.songList);
-    setLatestList(songList.slice(0, 10));
-    setOldestList(songList.slice(songList.length - 10, songList.length));
-    setUpAndComingList(randomSongList.slice(0, 10));
-    setPopList(popSongList.slice(0, 10));
-    setPicksList(randomSongList.slice(songList.length - 10, songList.length))
-  }, [song, songList, heart]);
+    setLatestList(songList.slice(0, 8));
+    setOldestList(songList.slice(songList.length - 8, songList.length));
+    setUpAndComingList(randomSongList.slice(0, 8));
+    setPopList(popSongList.slice(0, 8));
+    setPicksList(randomSongList.slice(songList.length - 8, songList.length))
+  }, [song, songList]);
 
   if(!songList.length) {
     setSongList(song.songList)
