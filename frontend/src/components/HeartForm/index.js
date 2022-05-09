@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createHeart, deleteHeart } from '../../store/heart';
 import HeartIcon from "./HeartIcon";
 
-import { getHearts } from '../../store/heart';
+import { getOneSong } from '../../store/song';
 
 import './HeartForm.css'
 
@@ -12,36 +12,55 @@ const HeartForm = ({ target, sessionUserId }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const heart = useSelector(state => state.heart);
-  const heartList = useSelector(state => state.heart.heartList);
+  // const heartList = useSelector(state => state.song[target].Hearts);
+  // const songHeartList = useSelector(state => state.song[target].Hearts);
+  const [songHearts, setSongHearts] = useState(heart.heartList.filter(heart => heart.songId === target));
+  const [numHearts, setNumHearts] = useState(songHearts.length);
+  const [thisHeart, setThisHeart] = useState(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id));
+  const [hearted, setHearted] = useState(false); // variable passed to the hearted form to style the heart based on if session user has hearted or not
+  // const [testThisHeart, setTestThisHeart] = useState(Object.keys(heart).find(obj => obj.userId === sessionUser.id && obj.songId == target))
+  const [testThisHeart, setTestThisHeart] = useState(Object.keys(heart))
 
-  const heartsList = heartList.filter(heart => heart.songId === target)
+  console.log(testThisHeart)
 
-  const [numHearts, setNumHearts] = useState(heartsList.length);
+  useEffect(() => {
+    setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
+    setSongHearts(heart.heartList.filter(heart => heart.songId === target))
+  }, [heart])
 
-  useEffect (() => {
-    setNumHearts(heartsList.length)
-  },[heart])
+
+  useEffect(() => {
+    if(thisHeart.length) {
+      setHearted(true)
+    }
+  }, [thisHeart])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let heartedCatch = true;
-    for (let i = 0; i < heartsList.length; i++) {
-      if (heartsList[i].userId === sessionUserId) {
-        heartedCatch = false;
-      }
-    }
-      if (sessionUser && heartedCatch) {
-        const heart = {
-          songId: target,
+    if (sessionUser) {
+      const heart = {
+        songId: target,
           userId: sessionUser.id
         }
         dispatch(createHeart(heart));
       }
-
+      setHearted(true);
+      // dispatch(getOneSong(target))
+      setSongHearts(heart.heartList.filter(heart => heart.songId === target))
+      setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
+      setNumHearts((prevNumHearts) => prevNumHearts + 1)
+      console.log('submit', songHearts)
+      console.log('this heart submit', thisHeart.id)
   };
 
   const handleUnheart = (e) => {
     e.preventDefault();
+    // dispatch(getOneSong(target))
+    setSongHearts(heart.heartList.filter(heart => heart.songId === target))
+    setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
+    console.log('delete', songHearts)
+    console.log('this heart delete', thisHeart.id)
     if (sessionUser) {
       const heart = {
         songId: target,
@@ -50,20 +69,10 @@ const HeartForm = ({ target, sessionUserId }) => {
       }
       dispatch(deleteHeart(heart));
     }
-    // dispatch(getHearts(target));
+     setHearted(false);
+     setNumHearts((prevNumHearts) => prevNumHearts -1)
   };
 
-  let hearted = false; // variable passed to the hearted form to style the heart based on if session user has hearted or not
-  let thisHeart = {};
-
-  for (let i = 0; i < heartsList.length; i++) {
-    if (heartsList[i].userId === sessionUserId) {
-      hearted = true;
-      thisHeart = heartsList[i]
-      break;
-    }
-    hearted = false;
-  }
 
   return (
     <>
