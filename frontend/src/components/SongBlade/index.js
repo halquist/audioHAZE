@@ -31,7 +31,7 @@ const SongBlade = ({songPass, sessionUserId}) => {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'
         }}>
-          <div className='spacerDiv'></div>
+          {/* <div className='spacerDiv'></div> */}
           <div className='mainPlayButtonDiv'>
             <PlayButton target={song.id}/>
           </div>
