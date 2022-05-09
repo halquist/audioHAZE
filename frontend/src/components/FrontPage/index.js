@@ -70,9 +70,9 @@ const FrontPage = ({isLoaded}) => {
     setPicksList(randomSongList.slice(songList.length - 8, songList.length))
   }, [song, songList]);
 
-  if(!songList.length) {
-    setSongList(song.songList)
-  }
+  // if(!songList.length) {
+  //   setSongList(song.songList)
+  // }
 
 
   return (
