@@ -15,8 +15,8 @@
 .notHearted {
   fill: grey;
   transition: .3s;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .notHearted:hover {
@@ -26,8 +26,8 @@
 .hearted {
   fill: rgb(255, 0, 98);
   transition: .3s;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .hearted:hover {
@@ -36,17 +36,4 @@
 
 .heartButton:hover {
   background-color: transparent;
-}
-
-#heartedContainer {
-  margin-top: 16px;
-  padding: 0px 10px 0px 0px;
-  border: 1px solid rgb(0, 255, 179);
-  border-radius: 3px;
-  box-shadow: inset 0px 0px 10px rgb(0, 255, 179);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 1.5em;
 }

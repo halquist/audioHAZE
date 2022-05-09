@@ -15,7 +15,6 @@ const DeleteSong = ({ currentSong }) => {
 
       const songId =  currentSong.id;
       let deleteSong = await dispatch(songActions.deleteSong({ songId }))
-      console.log('handle submit', deleteSong.song);
         if (deleteSong.song.message === 'Success') {
           history.push(`/`);
         }

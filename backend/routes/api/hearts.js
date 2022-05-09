@@ -8,12 +8,10 @@ const router = express.Router();
 
 // get all hearts
 router.get(
-  '/:id',
+  '/',
   asyncHandler( async (req, res) => {
-    const songId = req.params.id;
-    const hearts = await Heart.findAll({where: {
-      songId: songId
-  },
+    // const songId = req.params.id;
+    const hearts = await Heart.findAll({
   include: [
       { model: User },
       { model: Song }
@@ -42,9 +40,7 @@ router.delete(
   asyncHandler( async (req, res, next) => {
 
     const { id } = req.body;
-    
     const findHeart = await Heart.findByPk(id.id, {include: [User, Song]});
-
     if (findHeart.User.id === req.user.id) {
       const heart = await Heart.deleteHeart({ id });
       return res.json({

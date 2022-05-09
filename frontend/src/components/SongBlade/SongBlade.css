@@ -12,6 +12,7 @@
 
 .bladeContent {
   height: fit-content;
+
 }
 
 
@@ -41,13 +42,19 @@
 
 .imagePlay {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   width: 250px;
   height: 250px;
   border-radius: 4px;
 
+}
+
+.spacerDiv {
+  height: 34px;
+  pointer-events: none;
+  margin-top: 10px;
 }
 
 .songArt {
@@ -70,4 +77,24 @@ a {
   font-weight: 100;
   padding: 2px 4px;
   font-size: .9em;
+}
+
+.heartContainerFront {
+  padding: 0px 0px 0px 10px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.499);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5em;
+}
+
+.heartContainerPush {
+  margin-bottom: 10px;
+  padding: 0px 10px 0px 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
 }

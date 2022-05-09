@@ -102,8 +102,7 @@ export const updateSong = (song) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  await dispatch(update(data.song));
-  console.log('store song', data.song)
+  await dispatch(update(data.findSong));
   return data;
 }
 

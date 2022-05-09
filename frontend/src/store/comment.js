@@ -31,7 +31,6 @@ export const getComments = (songId) => async dispatch => {
   const response = await fetch(`/api/comments/${sendId}`);
   if (response.ok) {
     const comments = await response.json();
-    console.log('comment response', comments);
     dispatch(load(comments));
   }
 };
@@ -99,7 +98,6 @@ const commentReducer = (state = {commentList: []}, action) => {
       newState = { ...state }
       delete newState[action.comment];
       const removeIdx = newState.commentList.findIndex(el => el.id === action.comment);
-      console.log('removeIdx', removeIdx)
       newState.commentList.splice(removeIdx, 1);
       newState.commentList = sortList(newState.commentList);
       return newState;

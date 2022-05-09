@@ -7,13 +7,13 @@
   /* top: 70px; */
   align-items: center;
   z-index: 1;
-  overflow: hidden !important;
   height: 100%;
   width: fit-content;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow: hidden !important;
 }
 
 .pyramidGlow {
@@ -90,7 +90,7 @@
   0% {
     stroke: rgba(0, 200, 255, .4);
     stroke-dashoffset:50;
-    stroke-dasharray: 50 1000;
+    stroke-dasharray: 50 500;
     filter: drop-shadow(0px 0px 3px rgba(130, 218, 255, 1));
     stroke-width: 0;
 
@@ -105,7 +105,7 @@
   100% {
     stroke: rgba(0, 200, 255, .4);
     stroke-dashoffset:-1000;
-   stroke-dasharray: 50 1000;
+   stroke-dasharray: 50 500;
    filter: drop-shadow(0px 0px 3px rgba(151, 236, 255, .1));
   stroke-width: 0;
   }

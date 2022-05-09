@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { getSongs } from '../../store/song';
-import { useSelector, useDispatch } from 'react-redux';
+import { getHearts } from '../../store/heart';
+import { useDispatch } from 'react-redux';
 
 // this loads songs back into the store on refresh
 
@@ -9,7 +10,8 @@ const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getSongs());
-  },[dispatch]);
+    dispatch(getHearts());
+  },[]);
 
 return(null);
 }

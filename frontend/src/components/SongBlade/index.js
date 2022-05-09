@@ -1,12 +1,19 @@
 import { NavLink, Route, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSongs } from '../../store/song';
+
 import PlayButton from '../PlayButton';
+import HeartForm from '../HeartForm';
 
 import './SongBlade.css';
 
-const SongBlade = ({songPass}) => {
+const SongBlade = ({songPass, sessionUserId}) => {
 
   const song = useSelector(state => state.song[songPass.id]);
+  // const songs = useSelector(state => state.song);
+
+  const dispatch = useDispatch();
 
   // converts google drive links to work for direct access
   let imageLink = '';
@@ -14,9 +21,6 @@ const SongBlade = ({songPass}) => {
     imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
   }
 
-  if (!song) {
-    return null;
-  }
 
   return (
     <div className='songBlade'>
@@ -27,10 +31,15 @@ const SongBlade = ({songPass}) => {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'
         }}>
+          <div className='spacerDiv'></div>
           <div className='mainPlayButtonDiv'>
             <PlayButton target={song.id}/>
           </div>
-          {/* <img src={`${song.imageUrl}`} className='songArt'></img> */}
+            <div className='heartContainerPush'>
+              <div className='heartContainerFront'>
+                <HeartForm target={song.id} sessionUserId={sessionUserId}/>
+              </div>
+            </div>
         </div>
         <NavLink to={`/songs/${song.id}`}>
           <div className="primary-text truncate">{song.title}</div>

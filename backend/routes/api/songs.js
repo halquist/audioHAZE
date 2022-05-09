@@ -28,6 +28,7 @@ router.get(
   '/:id',
   asyncHandler( async (req, res) => {
     const songId = req.params.id;
+    console.log('api songId', songId)
     const song = await Song.findByPk(songId, {
       include: [
         { model: User },
@@ -59,7 +60,12 @@ router.post(
   asyncHandler( async (req, res) => {
     const { title, url, userId, imageUrl } = req.body;
     const song = await Song.createSong({ title, url, userId, imageUrl });
-    const findSong = await Song.findByPk(song.id, {include: { model: User}});
+    const findSong = await Song.findByPk(song.id, {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    })
     return res.json({
       findSong
     });
@@ -72,12 +78,24 @@ router.put(
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     const { songId, title, url, imageUrl, userId } = req.body;
-    const findSong = await Song.findByPk(songId, {include: { model: User}});
+    const updateSong = await Song.findByPk(songId, {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    });
+    console.log('update song updateSong', updateSong)
 
-    if (findSong.User.id === req.user.id) {
+    if (updateSong.User.id === req.user.id) {
     const song = await Song.updateSong({songId, title, url, imageUrl, userId});
+    const findSong = await Song.findByPk(song.id, {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    })
     return res.json({
-      song
+      findSong
     });
   } else {
     res.errors = new Error('Unauthorized');
