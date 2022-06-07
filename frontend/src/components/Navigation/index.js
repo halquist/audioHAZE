@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModalButton from '../LoginFormModal';
 import Icon from '../Icon/Icon';
+import TestLogo from '../TestLogo';
 import PyramidLogo from '../Icon/PyramidLogo';
 import './Navigation.css';
 
@@ -29,7 +30,8 @@ function Navigation({ isLoaded }){
       <ul className='navContainer'>
         <li className='navContent'>
           <NavLink exact to="/" className='iconLink'>
-            <Icon />
+            {/* <Icon /> */}
+            <TestLogo />
           </NavLink>
           <NavLink exact to="/" className='homeText'>Home</NavLink>
           {
