@@ -42,9 +42,10 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
 
   useEffect(() => {
     // setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
-    setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
+    // setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
     setCurrentSongHearts(target.Hearts.filter(heart => heart.songId === target.id))
     setNumHearts(target.Hearts.length);
+    console.log('hearted', hearted)
     // setNumHearts(currentSongHearts.length);
     // setNumHearts(currentSongHearts.length);
     // setTestThisHeart(() => {
@@ -85,9 +86,9 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
         .then((ret) => {
           setCurrentSongHearts(ret.findSong.Hearts)
           setNumHearts(ret.findSong.Hearts.length)
+          setHearted(true);
         })
         .then(() => setLoaded(true))
-      setHearted(true);
       trigger((prev) => !prev)
       // setSongHearts(heart.heartList.filter(heart => heart.songId === target))
       // setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
@@ -101,7 +102,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
       //   }
       // })
     }
-    dispatch(getHearts());
+    // dispatch(getHearts());
   };
 
   const handleUnheart = (e) => {
@@ -144,7 +145,10 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
 
   if (!loaded) {
     return (
-        null
+      <>
+        <div>{numHearts}</div>
+        <button onClick={handleSubmit} className='heartButton'><HeartIcon classPass='notHearted'/></button>
+      </>
     )
   };
 
