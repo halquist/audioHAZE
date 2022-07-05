@@ -11,6 +11,7 @@ import SongDetail from './components/SongDetail';
 import LazerGrid from './components/LazerGrid';
 import AudioBar from './components/AudioBar';
 import HomeLoad from './components/HomeLoad';
+import TestLogo2 from './components/TestLogo2';
 
 import * as sessionActions from './store/session';
 import { getSongs } from './store/song';
@@ -27,6 +28,7 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       <HomeLoad />
+      <TestLogo2 />
       {isLoaded && (
         <Switch>
         <Route path='/' exact>

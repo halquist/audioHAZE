@@ -1,20 +1,23 @@
-
+#logo_container {
+  margin: 100px;
+}
 
 #logo_svg {
-  height: 60px;
+  height: 100px;
+  /* animation: rotate 4s linear infinite; */
+  transform-origin: center;
 }
 
 #middle_line {
-  /* transition: .5s; */
-  animation: wiggle_line .5s ease-in-out alternate 8;
+  animation: wiggle_line .8s ease-in-out alternate infinite;
 }
 
 #upper_circle {
-  animation: wiggle_upper .5s ease-in-out alternate 8;
+  animation: wiggle_upper .8s ease-in-out alternate infinite;
 }
 
 #lower_circle {
-  animation: wiggle_lower .5s ease-in-out alternate 8;
+  animation: wiggle_lower .8s ease-in-out alternate infinite;
 }
 
 

@@ -31,7 +31,7 @@ function Navigation({ isLoaded }){
         <li className='navContent'>
           <NavLink exact to="/" className='iconLink'>
             {/* <Icon /> */}
-            <TestLogo />
+            {/* <TestLogo /> */}
           </NavLink>
           <NavLink exact to="/" className='homeText'>Home</NavLink>
           {
