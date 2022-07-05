@@ -16,6 +16,7 @@ const FrontPage = ({isLoaded}) => {
   // const heart = useSelector(state => state.heart)
   const [songList, setSongList] = useState(song.songList);
   const [hearted, setHearted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   let sessionUserId = null;
   if (sessionUser) {
@@ -27,18 +28,17 @@ const FrontPage = ({isLoaded}) => {
       .then((ret) => {
         setSongList(ret)
       })
-      console.log('get songs')
-    // dispatch(getHearts());
+      .then(setLoaded(true))
   },[]);
 
-  useEffect(() => {
-    dispatch(getSongs())
-      .then((ret) => {
-        setSongList(ret)
-      })
-      console.log('hearted', hearted)
-    // dispatch(getHearts());
-  },[hearted]);
+  // useEffect(() => {
+  //   dispatch(getSongs())
+  //     .then((ret) => {
+  //       setSongList(ret)
+  //     })
+  //     console.log('hearted', hearted)
+  //   // dispatch(getHearts());
+  // },[hearted]);
 
   // loads all songs in the store into a song list
   // const songList = useSelector(state =>{
@@ -92,6 +92,12 @@ const FrontPage = ({isLoaded}) => {
   // if(!songList.length) {
   //   setSongList(song.songList)
   // }
+
+  if (!loaded) {
+    return (
+        <div>Loading</div>
+    )
+  };
 
 
   return (

@@ -26,6 +26,8 @@ const SongDetail = (isLoaded) => {
 
   const [currentSong, setCurrentSong] = useState(song);
   const [hearted, setHearted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
 
   let sessionUserId = null;
   if (sessionUser) {
@@ -38,9 +40,12 @@ const SongDetail = (isLoaded) => {
       .then((ret) => {
         setCurrentSong(ret)
       })
-      // setCurrentSong(song)
-      dispatch(getComments(songId));
-      // dispatch(getHearts(songId));
+      .then(() => {
+        dispatch(getComments(songId));
+      })
+      .then(() => {
+        setLoaded(true)
+      })
     }, [dispatch, songId, hearted]);
 
     useEffect(() => {
@@ -69,6 +74,12 @@ const SongDetail = (isLoaded) => {
   if (song && song.imageUrl.startsWith('https://drive.google.com')) {
     imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
   }
+
+  if (!loaded) {
+    return (
+        <div>Loading</div>
+    )
+  };
 
   return (
     <div id='mainSongDetailContent'>

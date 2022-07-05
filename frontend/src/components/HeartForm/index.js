@@ -26,6 +26,8 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
 
   const [hearted, setHearted] = useState(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false); // variable passed to the hearted form to style the heart based on if session user has hearted or not
 
+  const [loaded, setLoaded] = useState(false);
+
   // const [testThisHeart, setTestThisHeart] = useState(() => {
   //     const thisHeart = heartList.filter(heart => heart.userId === sessionUserId && heart.songId === target.id)
   //     return thisHeart.id
@@ -34,7 +36,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
   useEffect(() => {
     setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
     setNumHearts(target.Hearts.length);
-    console.log(target.Hearts.length)
+    setLoaded(true);
   }, [])
 
 
@@ -78,15 +80,20 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
         songId: target,
         userId: sessionUserId
       }
-
-      dispatch(createHeart(heart));
+      setLoaded(false)
+      dispatch(createHeart(heart))
+        .then((ret) => {
+          setCurrentSongHearts(ret.findSong.Hearts)
+          setNumHearts(ret.findSong.Hearts.length)
+        })
+        .then(() => setLoaded(true))
       setHearted(true);
       trigger((prev) => !prev)
       // setSongHearts(heart.heartList.filter(heart => heart.songId === target))
       // setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
       // dispatch(getOneSong(target))
-      setCurrentSongHearts(target.Hearts.filter(heart => heart.songId === target.id))
-      setNumHearts((prevNumHearts) => prevNumHearts + 1)
+      // setCurrentSongHearts(target.Hearts.filter(heart => heart.songId === target.id))
+      // setNumHearts((prevNumHearts) => prevNumHearts + 1)
       // setTestThisHeart(() => {
       //   const thisHeart = heartList.filter(heart => heart.userId === sessionUserId && heart.songId === target.id)
       //   if(thisHeart.length) {
@@ -112,11 +119,12 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
     // }
     // dispatch(getOneSong(target))
     setHearted(false);
-    trigger((prev) => !prev)
+    trigger((prev) => !prev);
 
     // setSongHearts(heart.heartList.filter(heart => heart.songId === target))
     // setThisHeart(songHearts.filter(heart => heart.songId === target && heart.userId === sessionUser.id))
       const thisHeartHere = target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id)[0].id
+      console.log('heartHere', thisHeartHere)
       const heart = {
         songId: target,
         userId: sessionUserId,
@@ -134,7 +142,11 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
     }
   };
 
-
+  if (!loaded) {
+    return (
+        null
+    )
+  };
 
   return (
     <>

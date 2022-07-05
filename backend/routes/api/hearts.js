@@ -28,8 +28,15 @@ router.post(
     const { userId, songId } = req.body;
     const heart = await Heart.createHeart({ userId, songId });
     const findHeart = await Heart.findByPk(heart.id, {include: [User, Song]});
+    const findSong = await Song.findByPk(songId, {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    })
     return res.json({
-      findHeart
+      findHeart,
+      findSong
     });
   })
 );
