@@ -8,11 +8,11 @@ import DeleteSong from '../EditSongForm/DeleteSong';
 import CommentForm from '../CommentForm';
 import LoginFormModalButton from '../LoginFormModal';
 import CommentDisplay from '../CommentDisplay';
-// import HeartForm from '../HeartForm';
+import HeartForm from '../HeartForm';
 
 import { getComments } from "../../store/comment";
 import { getOneSong } from '../../store/song';
-// import { getHearts } from '../../store/heart';
+import { getHearts } from '../../store/heart';
 
 import './SongDetail.css';
 
@@ -21,10 +21,11 @@ const SongDetail = (isLoaded) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song[songId]);
-  // const hearts = useSelector(state => state.heart);
+  // const hearts = song.Hearts;
   // const heartsList = hearts.heartList;
 
   const [currentSong, setCurrentSong] = useState(song);
+  const [hearted, setHearted] = useState(false);
 
   let sessionUserId = null;
   if (sessionUser) {
@@ -33,12 +34,21 @@ const SongDetail = (isLoaded) => {
 
 
   useEffect(()=> {
-    dispatch(getOneSong(songId));
-    setCurrentSong(song)
-    dispatch(getComments(songId));
-    // dispatch(getHearts(songId));
-  }, [dispatch, songId]);
+    dispatch(getOneSong(songId))
+      .then((ret) => {
+        setCurrentSong(ret)
+      })
+      // setCurrentSong(song)
+      dispatch(getComments(songId));
+      // dispatch(getHearts(songId));
+    }, [dispatch, songId, hearted]);
 
+    useEffect(() => {
+
+    },[currentSong])
+
+
+    console.log(currentSong)
 
 
     // for (let i = 0; i < heartsList.length; i++) {
@@ -50,7 +60,7 @@ const SongDetail = (isLoaded) => {
     //   hearted = false;
     // }
 
-  if (!song) {
+  if (!currentSong) {
     return null;
   }
 
@@ -69,17 +79,17 @@ const SongDetail = (isLoaded) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat'
           }}></div>
-          {/* <div id='heartedContainer'>
-            <HeartForm target={song.id} sessionUserId={sessionUserId}/>
-          </div> */}
+          <div id='heartedContainer'>
+            <HeartForm target={currentSong} sessionUserId={sessionUserId} trigger ={setHearted}/>
+          </div>
           <div id='titleArtistPlay'>
-            <PlayButton target={song.id}/>
+            <PlayButton target={currentSong.id}/>
             <div id='titleArtist'>
               {isLoaded &&
               <>
-                <div id='songTitle'>{song.title}</div>
-                {song.User &&
-                  <div id='songArtist'>{song.User.username}</div>
+                <div id='songTitle'>{currentSong.title}</div>
+                {currentSong.User &&
+                  <div id='songArtist'>{currentSong.User.username}</div>
                 }
               </>
               }

@@ -28,7 +28,6 @@ router.get(
   '/:id',
   asyncHandler( async (req, res) => {
     const songId = req.params.id;
-    console.log('api songId', songId)
     const song = await Song.findByPk(songId, {
       include: [
         { model: User },
@@ -84,7 +83,6 @@ router.put(
         { model: Heart }
       ]
     });
-    console.log('update song updateSong', updateSong)
 
     if (updateSong.User.id === req.user.id) {
     const song = await Song.updateSong({songId, title, url, imageUrl, userId});

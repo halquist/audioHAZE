@@ -4,22 +4,41 @@ import { NavLink, Route, useParams, useLocation } from 'react-router-dom';
 import PlayButton from '../PlayButton';
 import SongBlade from '../SongBlade';
 import SongBladeChannel from '../SongBladeChannel';
+import { getSongs } from '../../store/song';
 
 import './FrontPage.css';
 
 const FrontPage = ({isLoaded}) => {
-
+  const dispatch = useDispatch();
   // const song = useSelector(state=> state.song);
   const sessionUser = useSelector(state => state.session.user);
   const song = useSelector(state => state.song);
-  const heart = useSelector(state => state.heart)
+  // const heart = useSelector(state => state.heart)
   const [songList, setSongList] = useState(song.songList);
+  const [hearted, setHearted] = useState(false);
 
   let sessionUserId = null;
   if (sessionUser) {
     sessionUserId = sessionUser.id
   }
 
+  useEffect(() => {
+    dispatch(getSongs())
+      .then((ret) => {
+        setSongList(ret)
+      })
+      console.log('get songs')
+    // dispatch(getHearts());
+  },[]);
+
+  useEffect(() => {
+    dispatch(getSongs())
+      .then((ret) => {
+        setSongList(ret)
+      })
+      console.log('hearted', hearted)
+    // dispatch(getHearts());
+  },[hearted]);
 
   // loads all songs in the store into a song list
   // const songList = useSelector(state =>{
@@ -68,7 +87,7 @@ const FrontPage = ({isLoaded}) => {
     // setUpAndComingList(randomSongList.slice(0, 8));
     setPopList(popSongList.slice(0, 8));
     setPicksList(randomSongList.slice(songList.length - 8, songList.length))
-  }, [song, songList]);
+  }, [songList]);
 
   // if(!songList.length) {
   //   setSongList(song.songList)
@@ -77,10 +96,10 @@ const FrontPage = ({isLoaded}) => {
 
   return (
     <div className='mainFrontPageContent'>
-      <SongBladeChannel title='Popular Tracks' themeList={popList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-      <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-      <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
-      <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} sessionUserId={sessionUserId} />
+      <SongBladeChannel title='Popular Tracks' themeList={popList} isLoaded={isLoaded} sessionUserId={sessionUserId} trigger={setHearted}/>
+      <SongBladeChannel title='Latest Uploads' themeList={latestList} isLoaded={isLoaded} sessionUserId={sessionUserId} trigger={setHearted}/>
+      <SongBladeChannel title='Picks For You' themeList={picksList} isLoaded={isLoaded} sessionUserId={sessionUserId} trigger={setHearted}/>
+      <SongBladeChannel title='Deep Tracks' themeList={oldestList} isLoaded={isLoaded} sessionUserId={sessionUserId} trigger={setHearted}/>
       {/* <SongBladeChannel title='Up and Coming Artists' themeList={upAndComingList} isLoaded={isLoaded} sessionUserId={sessionUserId} /> */}
     </div>
   );

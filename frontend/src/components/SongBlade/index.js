@@ -8,9 +8,9 @@ import HeartForm from '../HeartForm';
 
 import './SongBlade.css';
 
-const SongBlade = ({songPass, sessionUserId}) => {
-
-  const song = useSelector(state => state.song[songPass.id]);
+const SongBlade = ({song, sessionUserId, trigger}) => {
+  // console.log('songblade pass', songPass)
+  // const song = useSelector(state => state.song[songPass.id]);
   // const songs = useSelector(state => state.song);
 
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const SongBlade = ({songPass, sessionUserId}) => {
           </div>
             <div className='heartContainerPush'>
               <div className='heartContainerFront'>
-                {/* <HeartForm target={song.id} sessionUserId={sessionUserId}/> */}
+                <HeartForm target={song} sessionUserId={sessionUserId} trigger={trigger} />
               </div>
             </div>
         </div>

@@ -61,6 +61,7 @@ export const getSongs = () => async dispatch => {
   if (response.ok) {
     const songs = await response.json();
     dispatch(load(songs));
+    return songs;
   }
 };
 
@@ -128,6 +129,7 @@ export const getOneSong = (id) => async dispatch => {
   const response = await fetch(`/api/songs/${sendId}`)
   const song = await response.json();
     dispatch(loadOneSong(song));
+  return song;
 }
 
 // sets the current song to play in the media bar
