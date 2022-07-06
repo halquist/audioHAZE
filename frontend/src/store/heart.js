@@ -46,7 +46,7 @@ export const createHeart = (heart) => async (dispatch) => {
     },
     body: JSON.stringify({
       userId,
-      songId
+      songId: songId.id
     })
   });
   const data = await response.json();

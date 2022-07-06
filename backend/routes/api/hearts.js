@@ -26,11 +26,17 @@ router.post(
  requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     const { userId, songId } = req.body;
-    console.log('req body', req.body)
     const heart = await Heart.createHeart({ userId, songId });
     const findHeart = await Heart.findByPk(heart.id, {include: [User, Song]});
+    const findSong = await Song.findByPk(songId, {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    })
     return res.json({
-      findHeart
+      findHeart,
+      findSong
     });
   })
 );
@@ -39,13 +45,19 @@ router.delete(
   '/',
   requireAuth, restoreUser,
   asyncHandler( async (req, res, next) => {
-
     const { id } = req.body;
     const findHeart = await Heart.findByPk(id.id, {include: [User, Song]});
+    const findSong = await Song.findByPk(findHeart.songId, {
+      include: [
+        { model: User },
+        { model: Heart }
+      ]
+    });
     if (findHeart.User.id === req.user.id) {
       const heart = await Heart.deleteHeart({ id });
       return res.json({
-        heart
+        heart,
+        findSong
       });
     } else {
       res.errors = new Error('Unauthorized');

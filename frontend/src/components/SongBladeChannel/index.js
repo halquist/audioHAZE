@@ -8,7 +8,7 @@ import './SongBladeChannel.css';
 
 // front page display for a category of songs
 
-const SongBladeChannel = ({ title, themeList, isLoaded, sessionUserId }) => {
+const SongBladeChannel = ({ title, themeList, isLoaded, sessionUserId, trigger }) => {
   const dispatch = useDispatch();
 
   // const songs = useSelector(state => state.song);
@@ -27,7 +27,7 @@ const SongBladeChannel = ({ title, themeList, isLoaded, sessionUserId }) => {
           {isLoaded &&
           themeList.map((song) => {
               return (
-                <SongBlade songPass={song} sessionUserId={sessionUserId} key={song.title} />
+                <SongBlade song={song} sessionUserId={sessionUserId} key={song.title} trigger={trigger}/>
               );
             })
           }
