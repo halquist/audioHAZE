@@ -52,8 +52,15 @@ const SongDetail = (isLoaded) => {
 
     },[currentSong])
 
-
-    console.log(currentSong)
+    useEffect(() => {
+      dispatch(getOneSong(songId))
+      .then((ret) => {
+        setCurrentSong(ret)
+      })
+      .then(() => {
+        setLoaded(true)
+      })
+    }, [hearted])
 
 
     // for (let i = 0; i < heartsList.length; i++) {

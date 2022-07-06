@@ -31,6 +31,14 @@ const FrontPage = ({isLoaded}) => {
       .then(setLoaded(true))
   },[]);
 
+  useEffect(() => {
+    dispatch(getSongs())
+      .then((ret) => {
+        setSongList(ret)
+      })
+      .then(setLoaded(true))
+  },[hearted]);
+
   // useEffect(() => {
   //   dispatch(getSongs())
   //     .then((ret) => {
