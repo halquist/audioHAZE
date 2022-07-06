@@ -23,38 +23,6 @@ const FrontPage = ({isLoaded}) => {
     sessionUserId = sessionUser.id
   }
 
-  useEffect(() => {
-    dispatch(getSongs())
-      .then((ret) => {
-        setSongList(ret)
-      })
-      .then(setLoaded(true))
-  },[]);
-
-  useEffect(() => {
-    dispatch(getSongs())
-      .then((ret) => {
-        setSongList(ret)
-      })
-      .then(setLoaded(true))
-  },[hearted]);
-
-  // useEffect(() => {
-  //   dispatch(getSongs())
-  //     .then((ret) => {
-  //       setSongList(ret)
-  //     })
-  //     console.log('hearted', hearted)
-  //   // dispatch(getHearts());
-  // },[hearted]);
-
-  // loads all songs in the store into a song list
-  // const songList = useSelector(state =>{
-  //   return state.song.songList.map(song => song)
-  // });
-
-  // const [songList, setsongList] = useState(songList);
-
   // shuffles the songlist to return some random songs
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -69,14 +37,42 @@ const FrontPage = ({isLoaded}) => {
       // And swap it with the current element.
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
+      }
+
+      return array;
     }
 
-    return array;
-  }
+    const [randomSongList, setRandomSongList] = useState(shuffle(songList.map(song => song)));
+    // let randomSongList = songList.map(song => song);
 
-  // creates a random songlist to give variety to home page lists
-  let randomSongList = songList.map(song => song);
-  randomSongList = shuffle(randomSongList);
+  useEffect(() => {
+    dispatch(getSongs())
+      .then((ret) => {
+        setSongList(ret)
+        return ret;
+      })
+      .then((ret) => {
+          // creates a random songlist to give variety to home page lists
+          const randSongList = shuffle(ret)
+        setRandomSongList(randSongList)
+        // setPicksList(randSongList.slice(songList.length - 8, songList.length))
+      })
+      .then((randSongList) => {
+      })
+      .then(setLoaded(true))
+  },[]);
+
+  useEffect(() => {
+    dispatch(getSongs())
+      .then((ret) => {
+        setSongList(ret)
+      })
+      .then(setLoaded(true))
+  },[hearted]);
+
+
+
+
 
   let popSongList = songList.map(song => song).sort((songA, songB) => songB.Hearts.length - songA.Hearts.length);
 
@@ -92,14 +88,11 @@ const FrontPage = ({isLoaded}) => {
     setSongList(song.songList);
     setLatestList(songList.slice(0, 8));
     setOldestList(songList.slice(songList.length - 8, songList.length));
-    // setUpAndComingList(randomSongList.slice(0, 8));
     setPopList(popSongList.slice(0, 8));
     setPicksList(randomSongList.slice(songList.length - 8, songList.length))
   }, [songList]);
 
-  // if(!songList.length) {
-  //   setSongList(song.songList)
-  // }
+
 
   if (!loaded) {
     return (
