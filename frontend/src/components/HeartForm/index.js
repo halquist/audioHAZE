@@ -160,7 +160,6 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
       setLoaded(false);
       dispatch(deleteHeart(heart))
         .then((ret) => {
-          console.log(ret)
           // setCurrentSongHearts(ret.findSong.Hearts)
           setNumHearts(ret.findSong.Hearts.length)
           setHearted(false);
