@@ -39,22 +39,6 @@ const FrontPage = ({isLoaded}) => {
       .then(setLoaded(true))
   },[hearted]);
 
-  // useEffect(() => {
-  //   dispatch(getSongs())
-  //     .then((ret) => {
-  //       setSongList(ret)
-  //     })
-  //     console.log('hearted', hearted)
-  //   // dispatch(getHearts());
-  // },[hearted]);
-
-  // loads all songs in the store into a song list
-  // const songList = useSelector(state =>{
-  //   return state.song.songList.map(song => song)
-  // });
-
-  // const [songList, setsongList] = useState(songList);
-
   // shuffles the songlist to return some random songs
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -92,14 +76,11 @@ const FrontPage = ({isLoaded}) => {
     setSongList(song.songList);
     setLatestList(songList.slice(0, 8));
     setOldestList(songList.slice(songList.length - 8, songList.length));
-    // setUpAndComingList(randomSongList.slice(0, 8));
     setPopList(popSongList.slice(0, 8));
     setPicksList(randomSongList.slice(songList.length - 8, songList.length))
   }, [songList]);
 
-  // if(!songList.length) {
-  //   setSongList(song.songList)
-  // }
+
 
   if (!loaded) {
     return (
