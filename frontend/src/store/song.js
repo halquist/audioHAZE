@@ -71,7 +71,7 @@ export const createSong = (song) => async (dispatch) => {
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     },
     body: JSON.stringify({
       title,

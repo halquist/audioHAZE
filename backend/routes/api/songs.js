@@ -5,6 +5,7 @@ const { restoreUser, requireAuth } = require('../../utils/auth');
 const { Song, User, Heart } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { singlePublicFileUpload, singleMulterUpload, multipleMulterUpload } = require('../../awsS3')
 
 
 const router = express.Router();
@@ -55,10 +56,13 @@ const validateSong = [
 // create new song
 router.post(
   '/',
+  multipleMulterUpload('image', 'audio'),
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     const { title, url, userId, imageUrl } = req.body;
-    const song = await Song.createSong({ title, url, userId, imageUrl });
+    const s3SongUrl = await singlePublicFileUpload(url);
+    const s3ImageUrl = await singlePublicFileUpload(imageUrl);
+    const song = await Song.createSong({ title, url: s3SongUrl, userId, imageUrl: s3ImageUrl });
     const findSong = await Song.findByPk(song.id, {
       include: [
         { model: User },

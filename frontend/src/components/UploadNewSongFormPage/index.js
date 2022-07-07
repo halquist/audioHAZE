@@ -36,6 +36,16 @@ const NewSongFormPage = () => {
         }
   };
 
+  const updateSong = (e) => {
+    const file = e.target.files[0];
+    if (file) setUrl(file);
+  };
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    if (file) setImageUrl(file);
+  };
+
   return (
     <div id='newSongFormContainer'>
       <div className='formDiv'>
@@ -57,18 +67,18 @@ const NewSongFormPage = () => {
             Song URL
           </label>
             <input
-              type='text'
+              type='file'
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={updateSong}
               required
             />
           <label>
             Image URL
           </label>
             <input
-              type='text'
+              type='file'
               value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              onChange={updateImage}
             />
           <button type='submit'>Upload</button>
         </form>
