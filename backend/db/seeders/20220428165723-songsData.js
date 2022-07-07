@@ -6,8 +6,8 @@ module.exports = {
     {
       title: "10,000 People Chanting, I'm an Individual",
       userId: 1,
-      url: 'https://drive.google.com/file/d/1NuOQ6xkbQM80A-sv9rsJ2PwNEaOL9z0d/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1E9h4SLAsrvQ5nxE_rOdIkc09tAvGt2eo/view?usp=sharing',
+      url: "https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/10%2C000%2BPeople%2BChanting%2C%2B-I'm%2Ban%2BIndividual-.mp3",
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/50109154523_606c3f5f71_b.jpg',
       createdAt: '2022-05-04 18:11:23.873-05',
       updatedAt: '2022-05-04 18:11:23.873-05'
     },

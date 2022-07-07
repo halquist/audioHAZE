@@ -47,19 +47,23 @@ const validateSong = [
   check('url')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a URL link to your song file'),
-  check('url')
-    .isURL({ checkFalsy: true })
-    .withMessage('Please provide a valid URL link to your song file'),
+  // check('url')
+    // .isURL({ checkFalsy: true })
+    // .withMessage('Please provide a valid URL link to your song file'),
   handleValidationErrors
 ]
 
 // create new song
 router.post(
   '/',
-  multipleMulterUpload('image', 'audio'),
+  multipleMulterUpload([
+    {name: 'url', maxCount: 1},
+    {name: 'imageUrl', maxCount: 1}
+  ]),
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     const { title, url, userId, imageUrl } = req.body;
+    console.log('%%%%%%%%%%%%%%%%%%%%%', title, url, imageUrl)
     const s3SongUrl = await singlePublicFileUpload(url);
     const s3ImageUrl = await singlePublicFileUpload(imageUrl);
     const song = await Song.createSong({ title, url: s3SongUrl, userId, imageUrl: s3ImageUrl });

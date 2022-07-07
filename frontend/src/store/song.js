@@ -60,29 +60,30 @@ export const getSongs = () => async dispatch => {
 
   if (response.ok) {
     const songs = await response.json();
-    dispatch(load(songs));
+    await dispatch(load(songs));
     return songs;
   }
 };
 
 // create a new song reference with title, userId, and a URL that links to the song
 export const createSong = (song) => async (dispatch) => {
+  const formData = new FormData();
   const { title, url, id, imageUrl } = song;
+  console.log(song);
+  formData.append('title', title);
+  formData.append('url', url);
+  formData.append('userId', id);
+  formData.append('imageUrl', imageUrl);
+  console.log('formData', formData)
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {
       'Content-Type': 'multipart/form-data'
     },
-    body: JSON.stringify({
-      title,
-      url,
-      userId: id,
-      imageUrl
-    })
+    body: formData
   });
   const data = await response.json();
-  dispatch(addSong(data.findSong));
-
+  await dispatch(addSong(data.findSong));
   return data;
 }
 
@@ -118,7 +119,7 @@ export const deleteSong = (id) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  dispatch(remove(id));
+  await dispatch(remove(id));
 
   return data;
 }
@@ -128,7 +129,7 @@ export const getOneSong = (id) => async dispatch => {
   const sendId = parseInt(id, 10);
   const response = await fetch(`/api/songs/${sendId}`)
   const song = await response.json();
-    dispatch(loadOneSong(song));
+    await dispatch(loadOneSong(song));
   return song;
 }
 
@@ -137,7 +138,7 @@ export const selectCurrentSong = (id) => async dispatch => {
   const songId = parseInt(id, 10);
   const response = await fetch(`/api/songs/${songId}`)
   const song = await response.json();
-  dispatch(currentSong(song));
+  await dispatch(currentSong(song));
 }
 
 // returns an array of songs ordered by created date, descending

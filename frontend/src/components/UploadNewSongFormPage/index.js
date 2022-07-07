@@ -68,7 +68,9 @@ const NewSongFormPage = () => {
           </label>
             <input
               type='file'
-              value={url}
+              name='url'
+              // value={url}
+              accept='audio/*'
               onChange={updateSong}
               required
             />
@@ -77,7 +79,9 @@ const NewSongFormPage = () => {
           </label>
             <input
               type='file'
-              value={imageUrl}
+              name='imageUrl'
+              accept="image/*"
+              // value={imageUrl}
               onChange={updateImage}
             />
           <button type='submit'>Upload</button>
