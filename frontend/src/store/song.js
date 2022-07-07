@@ -67,14 +67,12 @@ export const getSongs = () => async dispatch => {
 
 // create a new song reference with title, userId, and a URL that links to the song
 export const createSong = (song) => async (dispatch) => {
-  const formData = new FormData();
   const { title, url, id, imageUrl } = song;
-  console.log(song);
+  const formData = new FormData();
   formData.append('title', title);
   formData.append('url', url);
   formData.append('userId', id);
-  formData.append('imageUrl', imageUrl);
-  console.log('formData', formData)
+  if (imageUrl) formData.append('imageUrl', imageUrl);
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {

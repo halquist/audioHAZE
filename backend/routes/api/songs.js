@@ -44,9 +44,9 @@ const validateSong = [
   check('title')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a title for your song'),
-  check('url')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide a URL link to your song file'),
+  // check('url')
+    // .exists({ checkFalsy: true })
+    // .withMessage('Please provide a URL link to your song file'),
   // check('url')
     // .isURL({ checkFalsy: true })
     // .withMessage('Please provide a valid URL link to your song file'),
@@ -62,6 +62,7 @@ router.post(
   ]),
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
+    console.log('req body &&&&&&&&&', req.body)
     const { title, url, userId, imageUrl } = req.body;
     console.log('%%%%%%%%%%%%%%%%%%%%%', title, url, imageUrl)
     const s3SongUrl = await singlePublicFileUpload(url);
