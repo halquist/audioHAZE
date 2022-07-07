@@ -63,10 +63,10 @@ router.post(
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     console.log('req body &&&&&&&&&', req.body)
-    const { title, url, userId, imageUrl } = req.body;
-    console.log('%%%%%%%%%%%%%%%%%%%%%', title, url, imageUrl)
-    const s3SongUrl = await singlePublicFileUpload(url);
-    const s3ImageUrl = await singlePublicFileUpload(imageUrl);
+    const { title, userId } = req.body;
+    // console.log('%%%%%%%%%%%%%%%%%%%%%', title, url, imageUrl)
+    const s3SongUrl = await singlePublicFileUpload(req.url);
+    const s3ImageUrl = await singlePublicFileUpload(req.imageUrl);
     const song = await Song.createSong({ title, url: s3SongUrl, userId, imageUrl: s3ImageUrl });
     const findSong = await Song.findByPk(song.id, {
       include: [

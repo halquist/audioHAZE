@@ -73,6 +73,11 @@ export const createSong = (song) => async (dispatch) => {
   formData.append('url', url);
   formData.append('userId', id);
   if (imageUrl) formData.append('imageUrl', imageUrl);
+  // console.log('values here')
+  // for (const value of formData.keys()) {
+  //   console.log(value)
+  // }
+
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {

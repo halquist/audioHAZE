@@ -26,7 +26,12 @@ const NewSongFormPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
+      // let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
+      //   .catch(async (res) => {
+      //     const data = await res.json();
+      //     if (data && data.errors) setErrors(data.errors);
+      //   });
+      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl}))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
