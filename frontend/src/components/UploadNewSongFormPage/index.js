@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect } from "react-router-dom";
 import * as songActions from "../../store/song";
+import Uploading from "./Uploading";
 
 import './NewSongForm.css';
 
@@ -16,6 +17,7 @@ const NewSongFormPage = () => {
   const [url, setUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [errors, setErrors] = useState([]);
+  const [uploading, setUploading] = useState(false);
 
 
 
@@ -25,6 +27,7 @@ const NewSongFormPage = () => {
   // submits new song to database - if they don't specify an image a default one is used
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUploading(true);
     setErrors([]);
       // let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
       //   .catch(async (res) => {
@@ -33,10 +36,12 @@ const NewSongFormPage = () => {
       //   });
       let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl}))
         .catch(async (res) => {
+          setUploading(false);
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
         if (newSong) {
+          setUploading(false);
           history.push(`/songs/${newSong.findSong.id}`);
         }
   };
@@ -89,7 +94,10 @@ const NewSongFormPage = () => {
               // value={imageUrl}
               onChange={updateImage}
             />
-          <button type='submit'>Upload</button>
+            {!uploading ?
+              <button type='submit'>Upload</button> :
+              <Uploading />
+            }
         </form>
       </div>
     </div>

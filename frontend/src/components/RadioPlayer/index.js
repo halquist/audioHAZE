@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { getOneSong } from '../../store/song';
@@ -19,7 +19,7 @@ const RadioPlayer = () => {
     }
   }, []);
 
-  let songLink = song.url;
+  // let songLink = song?.url;
 
   // converts google drive links to work with audio player
   // if (song && song.url.startsWith('https://drive.google.com')) {
@@ -52,7 +52,7 @@ const RadioPlayer = () => {
         </div>
       <AudioPlayer
         autoPlay
-        src={songLink}
+        src={song?.url}
         onPlay={e => console.log("onPlay")}
         // other props here
       />

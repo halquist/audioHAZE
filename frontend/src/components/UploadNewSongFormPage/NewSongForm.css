@@ -9,3 +9,70 @@
   align-items: center;
   margin-top: 60px;
 }
+
+#uploading {
+  /* margin-top: 10px; */
+  margin-bottom: -5px;
+  user-select: none;
+}
+
+#uText {
+  animation: blur_load 3s 0s ease-in-out infinite;
+  transform-origin: center;
+}
+#pText {
+  animation: blur_load 3s .2s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#lText {
+  animation: blur_load 3s .4s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#oText {
+  animation: blur_load 3s .6s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#aText {
+  animation: blur_load 3s .8s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#dText {
+  animation: blur_load 3s 1s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#iText {
+  animation: blur_load 3s 1.2s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#nText {
+  animation: blur_load 3s 1.4s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#gText {
+  animation: blur_load 3s 1.6s ease-in-out infinite;
+  transform-origin: center;
+
+}
+
+@keyframes blur_load {
+  0%{
+    filter: blur(0px);
+    /* opacity: 1; */
+    transform: scale(1);
+  } 50% {
+    filter: blur(3px);
+    /* opacity: .5; */
+    transform: scale(.9);
+  } 100% {
+    filter: blur(0px);
+    /* opacity: 1; */
+    transform: scale(1);
+  }
+}
