@@ -93,18 +93,18 @@ export const createSong = (song) => async (dispatch) => {
 // updates a song in the database and store when authorized user submits song update form
 export const updateSong = (song) => async (dispatch) => {
   const { songId, title, url, imageUrl, userId } = song;
+  const formData = new FormData();
+  formData.append('songId', songId);
+  formData.append('title', title);
+  formData.append('url', url);
+  formData.append('userId', userId);
+  if (imageUrl){formData.append('imageUrl', imageUrl)};
   const response = await csrfFetch('/api/songs', {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     },
-    body: JSON.stringify({
-      songId,
-      title,
-      url,
-      imageUrl,
-      userId
-    })
+    body: formData
   });
   const data = await response.json();
   await dispatch(update(data.findSong));

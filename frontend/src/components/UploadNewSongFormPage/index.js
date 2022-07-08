@@ -74,7 +74,7 @@ const NewSongFormPage = () => {
               required
             />
           <label>
-            Song URL
+            Song
           </label>
             <input
               type='file'
@@ -85,7 +85,7 @@ const NewSongFormPage = () => {
               required
             />
           <label>
-            Image URL
+            Artwork (optional)
           </label>
             <input
               type='file'

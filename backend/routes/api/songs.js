@@ -90,9 +90,22 @@ router.post(
 // edit song
 router.put(
   '/',
+  multipleMulterUpload([
+    {name: 'url', maxCount: 1},
+    {name: 'imageUrl', maxCount: 1}
+  ]),
   validateSong, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    const { songId, title, url, imageUrl, userId } = req.body;
+    const { songId, title, userId } = req.body;
+    let s3Url;
+    if (req.files.url) {
+      s3Url = await singlePublicFileUpload(req.files.url);
+    }
+    let s3ImageUrl;
+    if (req.files.imageUrl) {
+      s3ImageUrl = await singlePublicFileUpload(req.files.imageUrl);
+    }
+
     const updateSong = await Song.findByPk(songId, {
       include: [
         { model: User },
@@ -101,7 +114,7 @@ router.put(
     });
 
     if (updateSong.User.id === req.user.id) {
-    const song = await Song.updateSong({songId, title, url, imageUrl, userId});
+    const song = await Song.updateSong({songId, title, url: s3Url, imageUrl: s3ImageUrl, userId});
     const findSong = await Song.findByPk(song.id, {
       include: [
         { model: User },
