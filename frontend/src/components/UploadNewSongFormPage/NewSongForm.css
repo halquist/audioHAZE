@@ -9,3 +9,127 @@
   align-items: center;
   margin-top: 60px;
 }
+
+#uploading {
+  position: fixed;
+  width: 100%;
+  /* left: 50vw; */
+  /* right: 50vw; */
+  top: 60px;
+  /* margin-top: 10px; */
+  margin-bottom: -5px;
+  user-select: none;
+}
+
+#uploadingMessage {
+  position: fixed;
+  width: 100%;
+  top: 60px;
+  margin-top: 5px;
+  color: #ff0062;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#doneUploading {
+  /* position: fixed; */
+  /* width: 100%; */
+  /* top: 60px; */
+  margin-top: 5px;
+  color: #ff0062;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#doneUploading:hover {
+  filter:drop-shadow(0px 0px 4px #ff0062)
+}
+
+#messageExit {
+  font-size: .6em;
+  cursor: pointer;
+  transition: .2s;
+  /* border: 1px solid #ff0062; */
+  border-radius: 50%;
+  padding: 0px 4px 1px 4px;
+  bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 16px;
+}
+
+#messageExit:hover {
+  transform: scale(1.2);
+}
+
+#removeMessage {
+  display: none;
+}
+
+#uText {
+  animation: blur_load 3s 0s ease-in-out infinite;
+  transform-origin: center;
+}
+#pText {
+  animation: blur_load 3s .2s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#lText {
+  animation: blur_load 3s .4s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#oText {
+  animation: blur_load 3s .6s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#aText {
+  animation: blur_load 3s .8s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#dText {
+  animation: blur_load 3s 1s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#iText {
+  animation: blur_load 3s 1.2s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#nText {
+  animation: blur_load 3s 1.4s ease-in-out infinite;
+  transform-origin: center;
+
+}
+#gText {
+  animation: blur_load 3s 1.6s ease-in-out infinite;
+  transform-origin: center;
+
+}
+
+@keyframes blur_load {
+  0%{
+    filter: blur(0px);
+    /* opacity: 1; */
+    transform: scale(1);
+  } 50% {
+    filter: blur(3px);
+    /* opacity: .5; */
+    transform: scale(.9);
+  } 100% {
+    filter: blur(0px);
+    /* opacity: 1; */
+    transform: scale(1);
+  }
+}

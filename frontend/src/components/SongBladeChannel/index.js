@@ -27,7 +27,7 @@ const SongBladeChannel = ({ title, themeList, isLoaded, sessionUserId, trigger }
           {isLoaded &&
           themeList.map((song) => {
               return (
-                <SongBlade className='songBlade' song={song} sessionUserId={sessionUserId} key={song.title} trigger={trigger}/>
+                <SongBlade className='songBlade' song={song} sessionUserId={sessionUserId} key={`${song.title}` + `${song.id}`} trigger={trigger}/>
               );
             })
           }

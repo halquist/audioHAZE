@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect } from "react-router-dom";
 import * as songActions from "../../store/song";
+import Uploading from "./Uploading";
 
 import './NewSongForm.css';
 
 // page for adding new songs
-const NewSongFormPage = () => {
+const NewSongFormPage = ({ setUploading, uploading, display, setType }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -16,8 +17,7 @@ const NewSongFormPage = () => {
   const [url, setUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [errors, setErrors] = useState([]);
-
-
+  // const [uploading, setUploading] = useState(false);
 
   // if the user is not logged in, redirect to the signup page
   if (!sessionUser) return <Redirect to='/login' />;
@@ -25,15 +25,36 @@ const NewSongFormPage = () => {
   // submits new song to database - if they don't specify an image a default one is used
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUploading(true);
+    setType('new');
     setErrors([]);
-      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
+      // let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
+      //   .catch(async (res) => {
+      //     const data = await res.json();
+      //     if (data && data.errors) setErrors(data.errors);
+      //   });
+      history.push(`/`);
+      let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl}))
         .catch(async (res) => {
+          setUploading(false);
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
         if (newSong) {
-          history.push(`/songs/${newSong.findSong.id}`);
+          // uploading(false);
+          setUploading(false);
+          display(`/songs/${newSong.findSong.id}`)
         }
+  };
+
+  const updateSong = (e) => {
+    const file = e.target.files[0];
+    if (file) setUrl(file);
+  };
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    if (file) setImageUrl(file);
   };
 
   return (
@@ -54,23 +75,30 @@ const NewSongFormPage = () => {
               required
             />
           <label>
-            Song URL
+            Song
           </label>
             <input
-              type='text'
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              type='file'
+              name='url'
+              // value={url}
+              accept='audio/*'
+              onChange={updateSong}
               required
             />
           <label>
-            Image URL
+            Artwork (optional)
           </label>
             <input
-              type='text'
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              type='file'
+              name='imageUrl'
+              accept="image/*"
+              // value={imageUrl}
+              onChange={updateImage}
             />
-          <button type='submit'>Upload</button>
+            {!uploading ?
+              <button type='submit'>Upload</button> :
+              <div>Please wait for current song to upload</div>
+            }
         </form>
       </div>
     </div>

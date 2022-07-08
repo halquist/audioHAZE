@@ -60,7 +60,7 @@ export const getSongs = () => async dispatch => {
 
   if (response.ok) {
     const songs = await response.json();
-    dispatch(load(songs));
+    await dispatch(load(songs));
     return songs;
   }
 };
@@ -68,39 +68,43 @@ export const getSongs = () => async dispatch => {
 // create a new song reference with title, userId, and a URL that links to the song
 export const createSong = (song) => async (dispatch) => {
   const { title, url, id, imageUrl } = song;
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('url', url);
+  formData.append('userId', id);
+  if (imageUrl){formData.append('imageUrl', imageUrl)};
+  // console.log('values here')
+  // for (const value of formData.keys()) {
+  //   console.log(value)
+  // }
+
   const response = await csrfFetch('/api/songs', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     },
-    body: JSON.stringify({
-      title,
-      url,
-      userId: id,
-      imageUrl
-    })
+    body: formData
   });
   const data = await response.json();
-  dispatch(addSong(data.findSong));
-
+  await dispatch(addSong(data.findSong));
   return data;
 }
 
 // updates a song in the database and store when authorized user submits song update form
 export const updateSong = (song) => async (dispatch) => {
   const { songId, title, url, imageUrl, userId } = song;
+  const formData = new FormData();
+  formData.append('songId', songId);
+  formData.append('title', title);
+  formData.append('url', url);
+  formData.append('userId', userId);
+  if (imageUrl){formData.append('imageUrl', imageUrl)};
   const response = await csrfFetch('/api/songs', {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     },
-    body: JSON.stringify({
-      songId,
-      title,
-      url,
-      imageUrl,
-      userId
-    })
+    body: formData
   });
   const data = await response.json();
   await dispatch(update(data.findSong));
@@ -118,7 +122,7 @@ export const deleteSong = (id) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  dispatch(remove(id));
+  await dispatch(remove(id));
 
   return data;
 }
@@ -128,7 +132,7 @@ export const getOneSong = (id) => async dispatch => {
   const sendId = parseInt(id, 10);
   const response = await fetch(`/api/songs/${sendId}`)
   const song = await response.json();
-    dispatch(loadOneSong(song));
+    await dispatch(loadOneSong(song));
   return song;
 }
 
@@ -137,7 +141,7 @@ export const selectCurrentSong = (id) => async dispatch => {
   const songId = parseInt(id, 10);
   const response = await fetch(`/api/songs/${songId}`)
   const song = await response.json();
-  dispatch(currentSong(song));
+  await dispatch(currentSong(song));
 }
 
 // returns an array of songs ordered by created date, descending
@@ -176,7 +180,7 @@ const songReducer = (state = initialState, action) => {
       case UPDATE:
         const updateOneState = { ...state,  [action.song.id]: action.song }
         const listIdx = updateOneState.songList.findIndex(el => el.id === action.song.id);
-        action.song.User = updateOneState.songList[listIdx].User // have to add the user object back to the updated song or it wont show up without refresh
+        // action.song.User = updateOneState.songList[listIdx].User // have to add the user object back to the updated song or it wont show up without refresh
         updateOneState.songList[listIdx] = action.song;
         updateOneState.songList = sortList(updateOneState.songList)
         return updateOneState;

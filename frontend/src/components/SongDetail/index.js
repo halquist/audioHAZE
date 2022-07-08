@@ -16,7 +16,7 @@ import { getHearts } from '../../store/heart';
 
 import './SongDetail.css';
 
-const SongDetail = (isLoaded) => {
+const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => {
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const { songId } = useParams();
@@ -27,6 +27,10 @@ const SongDetail = (isLoaded) => {
   const [currentSong, setCurrentSong] = useState(song);
   const [hearted, setHearted] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
+  const [rerender, setRerender] = useState(false);
+
 
 
   let sessionUserId = null;
@@ -46,7 +50,7 @@ const SongDetail = (isLoaded) => {
       .then(() => {
         setLoaded(true)
       })
-    }, [dispatch, songId, hearted]);
+    }, [dispatch, songId, hearted, rerender]);
 
     useEffect(() => {
 
@@ -77,10 +81,10 @@ const SongDetail = (isLoaded) => {
   }
 
   // converts image link to work with google drive hosting
-  let imageLink = '';
-  if (song && song.imageUrl.startsWith('https://drive.google.com')) {
-    imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
-  }
+  let imageLink = song.imageUrl;
+  // if (song && song.imageUrl.startsWith('https://drive.google.com')) {
+  //   imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
+  // }
 
   if (!loaded) {
     return (
@@ -114,10 +118,24 @@ const SongDetail = (isLoaded) => {
           </div>
         </div>
         { sessionUserId === song.userId && currentSong &&
-        <div id='editDeleteDiv'>
-          <EditSongForm currentSong={currentSong} />
-          <DeleteSong currentSong={currentSong} />
-        </div>
+        <>
+          <div id='editDeleteDiv'>
+            <button onClick={() => {
+              setShowEditForm(!showEditForm)
+              setShowDeleteForm(false)
+              }} id='editSongButton'>Edit Song</button>
+            <button onClick={() => {
+              setShowDeleteForm(!showDeleteForm)
+              setShowEditForm(false)
+              }} id='deleteSongButton'>Delete Song</button>
+          </div>
+            {showEditForm &&
+            <EditSongForm currentSong={currentSong} trigger={setShowEditForm} rerender={setRerender} setUploading={setUploading} uploading={uploading} display={display} setType={setType} />
+            }
+            {showDeleteForm &&
+            <DeleteSong currentSong={currentSong} trigger={setShowDeleteForm}/>
+            }
+        </>
         }
         {sessionUser ?
         <CommentForm currentSong={currentSong}/> :

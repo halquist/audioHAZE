@@ -32,8 +32,12 @@ module.exports = (sequelize, DataTypes) => {
     const song = await Song.findByPk(songId)
 
     song.title = title;
-    song.url = url;
-    song.imageUrl = imageUrl;
+    if (url) {
+      song.url = url;
+    }
+    if (imageUrl) {
+      song.imageUrl = imageUrl;
+    }
     await song.save();
     return song;
   };
