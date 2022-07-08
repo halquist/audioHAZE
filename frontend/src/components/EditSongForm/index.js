@@ -18,6 +18,7 @@ const EditSongForm = ({ currentSong, trigger, rerender, setUploading, uploading,
     e.preventDefault();
     setUploading(true);
     setType('updated');
+    trigger(false);
     setErrors([]);
       const songId = currentSong.id;
       let updateSong = await dispatch(songActions.updateSong({ songId, title, url, imageUrl }))
