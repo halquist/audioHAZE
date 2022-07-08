@@ -14,264 +14,264 @@ module.exports = {
     {
       title: "A Melody for Those Who Seek Truth",
       userId: 2,
-      url: 'https://drive.google.com/file/d/1kGkHpXZuOtXSRJerCfnwl9kAV4AvSfIA/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1MbXB_vgtMiEgOBckuY9UNcETkv25ghYC/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/A%2BMelody%2Bfor%2BThose%2BWho%2BSeek%2BTruth.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/80s-background.svg',
       createdAt: '2021-05-04 18:11:23.873-05',
       updatedAt: '2021-05-04 18:11:23.873-05'
     },
     {
       title: "A Sense of Purpose",
       userId: 3,
-      url: 'https://drive.google.com/file/d/18Hq9wYFdkzdSx3HfdmajK27RUZLgOxp5/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/A%2BSense%2Bof%2BPurpose.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/8machine-_-_1QVCj7Bd5s-unsplash.jpg',
       createdAt: '2021-09-14 18:11:23.873-05',
       updatedAt: '2021-09-14 18:11:23.873-05'
     },
     {
       title: "Absolute Terror",
       userId: 4,
-      url: 'https://drive.google.com/file/d/1Tcq9YRvLejkTOtCQfmJnoR974M_cPhNz/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1I32jCk7swjL8K69LSSD9MnrwHWFl2ROB/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Absolute%2BTerror.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/agnis-leznins-DXa7-nmPKSk-unsplash.jpg',
       createdAt: '2021-09-25 18:11:23.873-05',
       updatedAt: '2021-09-25 18:11:23.873-05'
     },
     {
       title: "Artifice",
       userId: 5,
-      url: 'https://drive.google.com/file/d/1nGnZrbI75kbKTf1RSgBWajku8eRadH-U/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1Tb2zzgElld8QLXlXxoHYfIEagimqNuJk/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Artifice.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/alek-kalinowski-Sj_3Jdr19L4-unsplash.jpg',
       createdAt: '2020-09-22 18:11:23.873-05',
       updatedAt: '2020-09-22 18:11:23.873-05'
     },
     {
       title: "At the Time of Encounter, Two Hands Joining Together",
       userId: 6,
-      url: 'https://drive.google.com/file/d/1Y4h2JekNij3lctN6UxbLVkf2fF99EpYj/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1OlZt1rr-q-eqlZXeXDuYhH5JU8JLtTIc/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/At%2Bthe%2BTime%2Bof%2BEncounter%2C%2BTwo%2BHands%2BJoining%2BTogether.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/antoine-j-r3XvSBEQQLo-unsplash.jpg',
       createdAt: '2022-02-03 18:11:23.873-05',
       updatedAt: '2022-02-03 18:11:23.873-05'
     },
     {
       title: "Bush Week",
       userId: 7,
-      url: 'https://drive.google.com/file/d/1jXoitnv-PoKZ6JzjqGAy3jNU2zF-QNpC/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1NE6BGYZLi1A8-uEYWK-qXJKyoMmnisiQ/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Bush%2BWeek.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/cash-IKEQNt9wYb4-unsplash.jpg',
       createdAt: '2022-03-06 18:11:23.873-05',
       updatedAt: '2022-03-06 18:11:23.873-05'
     },
     {
       title: "Dasein",
       userId: 8,
-      url: 'https://drive.google.com/file/d/1jXoitnv-PoKZ6JzjqGAy3jNU2zF-QNpC/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1cYOJp1-8ejoO2tEeyw-0sSUQwDjrICcJ/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Dasein.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/city-5848267_1280.jpg',
       createdAt: '2022-04-16 18:11:23.873-05',
       updatedAt: '2022-04-16 18:11:23.873-05'
     },
     {
       title: "Disconnected",
       userId: 9,
-      url: 'https://drive.google.com/file/d/1vfdkwTGzClF3amPJlQx3nX7MqRZi-l9U/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1pqBUJt-KTXu-OHloMnDOdoOKSMtU5DRc/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Disconnected.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/david-arrowsmith-Dbg-_oA5Q1s-unsplash.jpg',
       createdAt: '2022-03-11 18:11:23.873-05',
       updatedAt: '2022-03-11 18:11:23.873-05'
     },
     {
       title: "Dream Sunlight",
       userId: 10,
-      url: 'https://drive.google.com/file/d/1GPS--K56hRauaJpXupMGz2n715PZHXNV/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1GP5AOEXJ58qWDMw0Xg8BcxYE_EsYCkvA/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Dream%2BSunlight.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/DJ_podium_med_palmer_og_diskokugle.jpg',
       createdAt: '2022-01-12 18:11:23.873-05',
       updatedAt: '2022-01-12 18:11:23.873-05'
     },
     {
       title: "Endless Blue",
       userId: 11,
-      url: 'https://drive.google.com/file/d/1FGGF8L59gXR-BIorYNEFZlVvd0vBMPx_/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1A2vN7O-UWzERYw1-Ju4Vw_TgClq_5f7E/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Endless%2BBlue.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/eduardo-pastor-gH3hDhmkdFo-unsplash.jpg',
       createdAt: '2022-01-25 18:11:23.873-05',
       updatedAt: '2022-01-25 18:11:23.873-05'
     },
     {
       title: "Glimmer",
       userId: 12,
-      url: 'https://drive.google.com/file/d/137E-W5OhmWbRJkD8eHKpsT33qfznpS_1/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/15WWvVLBl6PqYbadR1HZktIu3GQ_cTmJY/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Glimmer.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/glass-scifi-violet-ultraviolet.jpg',
       createdAt: '2021-01-21 18:11:23.873-05',
       updatedAt: '2021-01-21 18:11:23.873-05'
     },
     {
       title: "Hedgehog's Dilemma",
       userId: 1,
-      url: 'https://drive.google.com/file/d/1JFbfmDH7yCvB9qaWebhzZ8bXB2eHMd7o/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/17MkkOWi22f9_wq5MCcdM-mYmo0Lu5G1i/view?usp=sharing',
+      url: "https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Hedgehog's%2BDilemma%2B(Instrumental%2BVersion).mp3",
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/krzysztof-hepner-ymx8g15pxD4-unsplash.jpg',
       createdAt: '2022-04-29 18:11:23.873-05',
       updatedAt: '2022-04-29 18:11:23.873-05'
     },
     {
       title: "Imposter",
       userId: 2,
-      url: 'https://drive.google.com/file/d/1NslY8Ur1PIaRA2P2dG_I7v_AQWV7RvBk/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1hpOVSNX1Q-9P9RwLtcC6-fd8wn5dp68i/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Imposter.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/landscape-vector-6204101_1280.jpg',
       createdAt: '2022-02-21 18:11:23.873-05',
       updatedAt: '2022-02-21 18:11:23.873-05'
     },
     {
       title: "In the Belly of the Whale",
       userId: 3,
-      url: 'https://drive.google.com/file/d/1b1-OT7UDDX-l3TsFbsWcHuE3XR30isNa/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1oHhmIsYCqec0KKfi-0DMSq1eS2Hf9GTd/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/In%2Bthe%2BBelly%2Bof%2Bthe%2BWhale.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/Layout-16-scaled.webp',
       createdAt: '2022-03-21 18:11:23.873-05',
       updatedAt: '2022-03-21 18:11:23.873-05'
     },
     {
       title: "Laconic",
       userId: 4,
-      url: 'https://drive.google.com/file/d/1JHkbLVDyDkzRpXMC97n21qS2UOQqJq6y/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1bfM_QyQDg9oNG45tdhDRJ-6sLHjOzlOr/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Laconic.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/lorenzo-herrera-p0j-mE6mGo4-unsplash.jpg',
       createdAt: '2020-02-20 18:11:23.873-05',
       updatedAt: '2020-02-20 18:11:23.873-05'
     },
     {
       title: "Moonlit Skyline",
       userId: 5,
-      url: 'https://drive.google.com/file/d/1S8pLVyYPfg178fvdWVsRBeMAoQYZrt-Z/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1m23q7xuZGW-VH9RoaY6dROSU6W0BEutB/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Moonlit%2BSkyline.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/lorenzo-herrera-VFiQvZPlm2k-unsplash.jpg',
       createdAt: '2021-01-20 18:11:23.873-05',
       updatedAt: '2021-01-20 18:11:23.873-05'
     },
     {
       title: "Morning Bell",
       userId: 6,
-      url: 'https://drive.google.com/file/d/1sJ-fhFpId55D_Uj8hmILIWNfZfkL0C2D/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1JN_dYzVjv9nUteMvyFlX3Ypm63LFQ_ql/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Morning%2BBell.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/maxim-berg-9XunOfueKKI-unsplash.jpg',
       createdAt: '2021-06-20 18:11:23.873-05',
       updatedAt: '2021-06-20 18:11:23.873-05'
     },
     {
       title: "Motion Blur",
       userId: 7,
-      url: 'https://drive.google.com/file/d/1BA51wIVljmRotwrU1v5bLDO77cAPl9Rt/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/18MIFnkNz0nM7BU_4FlVRm2INE95tBrbH/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Motion%2BBlur.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/maxim-berg-kE8-rUKjtQU-unsplash.jpg',
       createdAt: '2021-03-13 18:11:23.873-05',
       updatedAt: '2021-03-13 18:11:23.873-05'
     },
     {
       title: "Noctivagant",
       userId: 8,
-      url: 'https://drive.google.com/file/d/1QXP2PV3uOiaxiA87kPb6huWX217eW9an/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1FCH1S9sgzOcEuJmisky698dXW6V0jtgN/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Noctivagant.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/maxim-berg-PiFzbqDClGk-unsplash.jpg',
       createdAt: '2021-11-12 18:11:23.873-05',
       updatedAt: '2021-11-12 18:11:23.873-05'
     },
     {
       title: "Oblivious",
       userId: 9,
-      url: 'https://drive.google.com/file/d/184jqxYQeFS8wx58G921wthqiGnjUyJ4X/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1pCneU5RvyFnPFP0lh_fe35hfN7NoUPqb/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Oblivious.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/maxim-berg-ZePAAZDt4XU-unsplash.jpg',
       createdAt: '2021-12-12 18:11:23.873-05',
       updatedAt: '2021-12-12 18:11:23.873-05'
     },
     {
       title: "Our Ships Line The Ocean Floor",
       userId: 10,
-      url: 'https://drive.google.com/file/d/1cxYE7EWFgqjWDa6GfKjE1lasuOfM49_Z/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/18M5ktI8Wi0qLkuXtoFg0JaC8bveM5rK8/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Our%2BShips%2BLine%2BThe%2BOcean%2BFloor.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/neon-light-street-silhouette-vaporwave-aesthetic.jpg',
       createdAt: '2021-10-16 18:11:23.873-05',
       updatedAt: '2021-10-16 18:11:23.873-05'
     },
     {
       title: "Panthalassa",
       userId: 11,
-      url: 'https://drive.google.com/file/d/1CP-f4PxEDAijLZKS4ha795437iIfRocD/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1TpejxZwQr_hEdgPvbhK7yJnPg99A-tUj/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Panthalassa.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/pandhuya-niking-WdrJ0eBflsE-unsplash.jpg',
       createdAt: '2021-05-16 18:11:23.873-05',
       updatedAt: '2021-05-16 18:11:23.873-05'
     },
     {
       title: "Reaching out My Hand I'm Running, Chasing your Shadow",
       userId: 12,
-      url: 'https://drive.google.com/file/d/1Td1xo4piOI79ihrRz__MJykpOHFQ5f_X/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1k4LDhPuhjPPpyeAp-rgmw9yytiJT-YiX/view?usp=sharing',
+      url: "https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Reaching%2Bout%2BMy%2BHand%2BI'm%2BRunning%2C%2BChasing%2Byour%2BShadow.mp3",
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/pattern-3288824_1280.webp',
       createdAt: '2021-05-24 18:11:23.873-05',
       updatedAt: '2021-05-24 18:11:23.873-05'
     },
     {
       title: "Reawakening Memories Closed Up in His Chest",
       userId: 1,
-      url: 'https://drive.google.com/file/d/1VAnUNKPO7kqbpcBi6G7wJQcJo0kX8c_x/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1OhwoQAARbmmm_ifnjZPdglgPK8MU5b2m/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Reawakening%2BMemories%2BClosed%2BUp%2Bin%2BHis%2BChest%2B-%2Bless20mb.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/perturbator-a-lausanne-2019-low-04.jpg',
       createdAt: '2021-07-24 18:11:23.873-05',
       updatedAt: '2021-07-24 18:11:23.873-05'
     },
     {
       title: "Samsara",
       userId: 2,
-      url: 'https://drive.google.com/file/d/1sh4BCpsWuwYrW8z7hftSk0D4j72MJXSg/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1OkC7dcLA6kxlyewsonqtIIkiFyVHlC-D/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Samsara.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/preview16.jpg',
       createdAt: '2021-07-17 18:11:23.873-05',
       updatedAt: '2021-07-17 18:11:23.873-05'
     },
     {
       title: "Sparkwood & 21",
       userId: 3,
-      url: 'https://drive.google.com/file/d/1roV4g5PrcfFV__VbPeoZDq5RLcnPl4Ob/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1djEj0WaIS7lvniBaHfyVL5G10RylgP1h/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Sparkwood%2B%26%2B21.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/street-sign-neon-light.jpg',
       createdAt: '2021-12-17 18:11:23.873-05',
       updatedAt: '2021-12-17 18:11:23.873-05'
     },
     {
       title: "Terminant",
       userId: 4,
-      url: 'https://drive.google.com/file/d/10fBsdtGWNaAIs_AWMLkg9odRFp4ZAGFw/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1Hk6Ir8_UFmxIt_utFcccCft87A9vP4P1/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Terminant.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/sun-5682667_1280.webp',
       createdAt: '2021-12-02 18:11:23.873-05',
       updatedAt: '2021-12-02 18:11:23.873-05'
     },
     {
       title: "The Absurd",
       userId: 5,
-      url: 'https://drive.google.com/file/d/1xZs5IgWPiau056Z6vKBCIWMVzJjc6eTt/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1z2AgnU08qbQ9glDwT4XbSOqxUuvSs6BK/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/The%2BAbsurd.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/synthwave-3941721_1280.jpg',
       createdAt: '2021-09-02 18:11:23.873-05',
       updatedAt: '2021-09-02 18:11:23.873-05'
     },
     {
       title: "The Author Never Dies (instrumental)",
       userId: 6,
-      url: 'https://drive.google.com/file/d/1oj26slwUaWvPqhmzD4qsHnreFa5sQdpk/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1d3dXoRVEf3PfBNiyG3YY_5EXKeZf8NnW/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/The%2BAuthor%2BNever%2BDies%2B(instrumental).mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/Synthwave.jpg',
       createdAt: '2021-09-18 18:11:23.873-05',
       updatedAt: '2021-09-18 18:11:23.873-05'
     },
     {
       title: "The Bright Lights of Summer",
       userId: 7,
-      url: 'https://drive.google.com/file/d/1r1C91PkChk2ytJlJLlu0oWT-dtLCJSpn/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1OiFGB5b8UQt9uJ9jmxo8ZKQVnoMTnylO/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/The%2BBright%2BLights%2Bof%2BSummer.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/vaporwave.svg',
       createdAt: '2021-03-25 18:11:23.873-05',
       updatedAt: '2021-03-25 18:11:23.873-05'
     },
     {
       title: "The Melody That Flutters Before the Shining Stars and the Sunset",
       userId: 8,
-      url: 'https://drive.google.com/file/d/1sj6nGZegpZhRyqpNPNihiV8EA4990kI4/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1odiDAKmUPEtwYv-8kyiwUH8N1_y1yjXK/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/The%2BMelody%2BThat%2BFlutters%2BBefore%2Bthe%2BShining%2BStars%2Band%2Bthe%2BSunset.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/yasmin-dangor-DlnuMGrvJWE-unsplash.jpg',
       createdAt: '2021-03-14 18:11:23.873-05',
       updatedAt: '2021-03-14 18:11:23.873-05'
     },
     {
       title: "Where There Is No Darkness",
       userId: 9,
-      url: 'https://drive.google.com/file/d/1I6vlZkumRYPB6Yom7U4JEO1TkeX29hVa/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1ijOzMgDTj8qTvlfxTKzkCE7-Q3RrXRyC/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Where%2BThere%2BIs%2BNo%2BDarkness.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/yasmin-dangor-tkQiexmKwj0-unsplash.jpg',
       createdAt: '2020-03-21 18:11:23.873-05',
       updatedAt: '2020-03-21 18:11:23.873-05'
     },
     {
       title: "Woven Hands",
       userId: 10,
-      url: 'https://drive.google.com/file/d/1J7_BUabivfUkWRfkHlwIu1xGJgr2UHrZ/view?usp=sharing',
-      imageUrl: 'https://drive.google.com/file/d/1rNSB7pRiV4VzNRi4cxHixMr3_79F5L_G/view?usp=sharing',
+      url: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedSongs/Woven%2BHands.mp3',
+      imageUrl: 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/yasmin-dangor-xgK2rnc4YF4-unsplash.jpg',
       createdAt: '2020-10-21 18:11:23.873-05',
       updatedAt: '2020-10-21 18:11:23.873-05'
     },

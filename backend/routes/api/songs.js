@@ -43,10 +43,12 @@ router.get(
 const validateSong = [
   check('title')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a title for your song'),
+    .withMessage('Please provide a title for your song')
+    .isLength({min:0, max:100})
+    .withMessage('Title must be 100 characters or less'),
   // check('url')
-    // .exists({ checkFalsy: true })
-    // .withMessage('Please provide a URL link to your song file'),
+  //   .exists({ checkFalsy: true })
+  //   .withMessage('Please provide a song file'),
   // check('url')
     // .isURL({ checkFalsy: true })
     // .withMessage('Please provide a valid URL link to your song file'),
@@ -66,7 +68,12 @@ router.post(
     const { title, userId } = req.body;
     // console.log('%%%%%%%%%%%%%%%%%%%%%', title, url, imageUrl)
     const s3Url = await singlePublicFileUpload(req.files.url);
-    const s3ImageUrl = await singlePublicFileUpload(req.files.imageUrl);
+    let s3ImageUrl;
+    if (req.files.imageUrl) {
+      s3ImageUrl = await singlePublicFileUpload(req.files.imageUrl);
+    } else {
+      s3ImageUrl = 'https://neoeononebucket.s3.us-east-2.amazonaws.com/audiohazeSeedImages/city-5848267_1280.jpg'
+    }
     const song = await Song.createSong({ title, url: s3Url, userId, imageUrl: s3ImageUrl });
     const findSong = await Song.findByPk(song.id, {
       include: [
