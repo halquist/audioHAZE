@@ -179,7 +179,6 @@ const songReducer = (state = initialState, action) => {
         return loadOneState;
       case UPDATE:
         const updateOneState = { ...state,  [action.song.id]: action.song }
-        console.log(updateOneState)
         const listIdx = updateOneState.songList.findIndex(el => el.id === action.song.id);
         // action.song.User = updateOneState.songList[listIdx].User // have to add the user object back to the updated song or it wont show up without refresh
         updateOneState.songList[listIdx] = action.song;

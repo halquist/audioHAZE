@@ -11,6 +11,7 @@ import SongDetail from './components/SongDetail';
 import LazerGrid from './components/LazerGrid';
 import AudioBar from './components/AudioBar';
 import Uploading from './components/UploadNewSongFormPage/Uploading';
+import DoneUploading from './components/UploadNewSongFormPage/DoneUploading';
 import HomeLoad from './components/HomeLoad';
 
 import * as sessionActions from './store/session';
@@ -21,6 +22,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [display, setDisplay] = useState('');
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -29,9 +31,12 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {/* {uploading && */}
-        <Uploading />
-      {/* } */}
+      {uploading &&
+        <Uploading display={display} trigger={setDisplay} uploading={setUploading} />
+      }
+      {display &&
+        <DoneUploading display={display} trigger={setDisplay} uploading={setUploading} />
+      }
       {/* <HomeLoad /> */}
       {isLoaded && (
         <Switch>
@@ -45,7 +50,7 @@ function App() {
           <LoginFormPage />
         </Route>
         <Route path='/newSong'>
-          <NewSongFormPage uploading={setUploading}/>
+          <NewSongFormPage setUploading={setUploading} uploading={uploading} display={setDisplay}/>
         </Route>
         <Route path='/songs/:songId'>
           <SongDetail isLoaded={isLoaded} />

@@ -7,7 +7,7 @@ import Uploading from "./Uploading";
 import './NewSongForm.css';
 
 // page for adding new songs
-const NewSongFormPage = ({ uploading }) => {
+const NewSongFormPage = ({ setUploading, uploading, display }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -19,30 +19,30 @@ const NewSongFormPage = ({ uploading }) => {
   const [errors, setErrors] = useState([]);
   // const [uploading, setUploading] = useState(false);
 
-
-
   // if the user is not logged in, redirect to the signup page
   if (!sessionUser) return <Redirect to='/login' />;
 
   // submits new song to database - if they don't specify an image a default one is used
   const handleSubmit = async (e) => {
     e.preventDefault();
-    uploading(true);
+    setUploading(true);
     setErrors([]);
       // let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
       //   .catch(async (res) => {
       //     const data = await res.json();
       //     if (data && data.errors) setErrors(data.errors);
       //   });
+      history.push(`/`);
       let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl}))
         .catch(async (res) => {
-          uploading(false);
+          setUploading(false);
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
         if (newSong) {
-          uploading(false);
-          history.push(`/songs/${newSong.findSong.id}`);
+          // uploading(false);
+          setUploading(false);
+          display(`/songs/${newSong.findSong.id}`)
         }
   };
 
@@ -94,7 +94,10 @@ const NewSongFormPage = ({ uploading }) => {
               // value={imageUrl}
               onChange={updateImage}
             />
-            <button type='submit'>Upload</button>
+            {!uploading ?
+              <button type='submit'>Upload</button> :
+              <div>Please wait for current song to upload</div>
+            }
         </form>
       </div>
     </div>
