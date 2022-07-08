@@ -77,10 +77,10 @@ const SongDetail = (isLoaded) => {
   }
 
   // converts image link to work with google drive hosting
-  let imageLink = '';
-  if (song && song.imageUrl.startsWith('https://drive.google.com')) {
-    imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
-  }
+  let imageLink = song.imageUrl;
+  // if (song && song.imageUrl.startsWith('https://drive.google.com')) {
+  //   imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
+  // }
 
   if (!loaded) {
     return (

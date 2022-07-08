@@ -1,5 +1,5 @@
 import { NavLink, Route, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSongs } from '../../store/song';
 
@@ -12,21 +12,23 @@ const SongBlade = ({song, sessionUserId, trigger}) => {
   // console.log('songblade pass', songPass)
   // const song = useSelector(state => state.song[songPass.id]);
   // const songs = useSelector(state => state.song);
+  const [image, setImage] = useState(song.imageUrl)
+  const [songUrl, setSongUrl] = useState(song.url)
 
   const dispatch = useDispatch();
 
   // converts google drive links to work for direct access
-  let imageLink = '';
-  if (song && song.imageUrl.startsWith('https://drive.google.com')) {
-    imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
-  }
+  // let imageLink = '';
+  // if (song && song.imageUrl.startsWith('https://drive.google.com')) {
+  //   imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
+  // }
 
 
   return (
     <div className='songBlade'>
       <div className='bladeContent'>
         <div className='imagePlay' style={{
-          backgroundImage: `url(${imageLink})`,
+          backgroundImage: `url(${image})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'

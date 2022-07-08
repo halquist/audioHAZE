@@ -19,12 +19,12 @@ const RadioPlayer = () => {
     }
   }, []);
 
-  let songLink = '';
+  let songLink = song.url;
 
   // converts google drive links to work with audio player
-  if (song && song.url.startsWith('https://drive.google.com')) {
-    songLink = 'https://drive.google.com/uc?export=download&id=' + song.url.split('/')[5];
-  }
+  // if (song && song.url.startsWith('https://drive.google.com')) {
+  //   songLink = 'https://drive.google.com/uc?export=download&id=' + song.url.split('/')[5];
+  // }
 
   let songData;
   if (song) {
