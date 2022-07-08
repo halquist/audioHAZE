@@ -16,7 +16,7 @@ import { getHearts } from '../../store/heart';
 
 import './SongDetail.css';
 
-const SongDetail = (isLoaded) => {
+const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => {
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const { songId } = useParams();
@@ -130,7 +130,7 @@ const SongDetail = (isLoaded) => {
               }} id='deleteSongButton'>Delete Song</button>
           </div>
             {showEditForm &&
-            <EditSongForm currentSong={currentSong} trigger={setShowEditForm} rerender={setRerender} />
+            <EditSongForm currentSong={currentSong} trigger={setShowEditForm} rerender={setRerender} setUploading={setUploading} uploading={uploading} display={display} setType={setType} />
             }
             {showDeleteForm &&
             <DeleteSong currentSong={currentSong} trigger={setShowDeleteForm}/>

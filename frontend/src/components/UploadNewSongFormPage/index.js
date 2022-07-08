@@ -7,7 +7,7 @@ import Uploading from "./Uploading";
 import './NewSongForm.css';
 
 // page for adding new songs
-const NewSongFormPage = ({ setUploading, uploading, display }) => {
+const NewSongFormPage = ({ setUploading, uploading, display, setType }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -26,6 +26,7 @@ const NewSongFormPage = ({ setUploading, uploading, display }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploading(true);
+    setType('new');
     setErrors([]);
       // let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
       //   .catch(async (res) => {

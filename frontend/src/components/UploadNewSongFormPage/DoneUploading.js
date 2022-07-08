@@ -3,18 +3,25 @@ import { Link } from 'react-router-dom';
 
 import './NewSongForm.css';
 
-const DoneUploading = ({ display, trigger, uploading}) => {
+const DoneUploading = ({ display, trigger, uploading, type}) => {
 
   const handleClick = () => {
     trigger('');
     uploading(false);
-    // setMessageId('removeMessage')
   }
+
+  const handleExit = () => {
+    trigger('');
+    uploading(false);
+  }
+
+
 
   return (
     <div id='uploadingMessage' >
-        <Link id='doneUploading' exact to={display} className='uploadNotify' onClick={handleClick}>Check out your new song!</Link>
-      </div>
+        <Link id='doneUploading' exact='true' to={display} className='uploadNotify' onClick={handleClick}>Check out your {type} song!</Link>
+        <div id='messageExit' onClick={handleExit}>x</div>
+    </div>
   )
 }
 

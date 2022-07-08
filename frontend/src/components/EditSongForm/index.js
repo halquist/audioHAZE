@@ -5,18 +5,19 @@ import Uploading from "../UploadNewSongFormPage/Uploading";
 
 import './EditSongForm.css';
 
-const EditSongForm = ({ currentSong, trigger, rerender }) => {
+const EditSongForm = ({ currentSong, trigger, rerender, setUploading, uploading, display, setType }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState(currentSong.title);
   const [url, setUrl] = useState(currentSong.url);
   const [imageUrl, setImageUrl] = useState(currentSong.imageUrl);
   const [errors, setErrors] = useState([]);
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploading(true);
+    setType('updated');
     setErrors([]);
       const songId = currentSong.id;
       let updateSong = await dispatch(songActions.updateSong({ songId, title, url, imageUrl }))
@@ -29,6 +30,7 @@ const EditSongForm = ({ currentSong, trigger, rerender }) => {
           rerender((prev) => !prev)
           setUploading(false);
           trigger(false);
+          display(`/songs/${updateSong.findSong.id}`)
         }
   };
 
@@ -94,9 +96,9 @@ const EditSongForm = ({ currentSong, trigger, rerender }) => {
                     <button type='submit'>Submit Edit</button>
               </div>
                 }
-              {uploading &&
+              {/* {uploading &&
                 <Uploading />
-              }
+              } */}
           </form>
         </div>
       </div>

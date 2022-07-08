@@ -23,6 +23,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [display, setDisplay] = useState('');
+  const [type, setType] = useState('new');
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -35,12 +36,12 @@ function App() {
         <Uploading display={display} trigger={setDisplay} uploading={setUploading} />
       }
       {display &&
-        <DoneUploading display={display} trigger={setDisplay} uploading={setUploading} />
+        <DoneUploading display={display} trigger={setDisplay} uploading={setUploading} type={type} />
       }
       {/* <HomeLoad /> */}
       {isLoaded && (
         <Switch>
-        <Route path='/' exact>
+        <Route path='/' exact={true}>
           <FrontPage isLoaded={isLoaded} />
         </Route>
         <Route path='/signup'>
@@ -50,10 +51,10 @@ function App() {
           <LoginFormPage />
         </Route>
         <Route path='/newSong'>
-          <NewSongFormPage setUploading={setUploading} uploading={uploading} display={setDisplay}/>
+          <NewSongFormPage setUploading={setUploading} uploading={uploading} display={setDisplay} setType={setType} />
         </Route>
         <Route path='/songs/:songId'>
-          <SongDetail isLoaded={isLoaded} />
+          <SongDetail isLoaded={isLoaded} setUploading={setUploading} uploading={uploading} display={setDisplay} setType={setType} />
         </Route>
         <Route path='/pyramid'>
           <LazerGrid />
