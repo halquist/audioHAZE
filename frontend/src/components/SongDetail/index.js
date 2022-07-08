@@ -27,6 +27,10 @@ const SongDetail = (isLoaded) => {
   const [currentSong, setCurrentSong] = useState(song);
   const [hearted, setHearted] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
+  const [rerender, setRerender] = useState(false);
+
 
 
   let sessionUserId = null;
@@ -46,7 +50,7 @@ const SongDetail = (isLoaded) => {
       .then(() => {
         setLoaded(true)
       })
-    }, [dispatch, songId, hearted]);
+    }, [dispatch, songId, hearted, rerender]);
 
     useEffect(() => {
 
@@ -114,10 +118,24 @@ const SongDetail = (isLoaded) => {
           </div>
         </div>
         { sessionUserId === song.userId && currentSong &&
-        <div id='editDeleteDiv'>
-          <EditSongForm currentSong={currentSong} />
-          <DeleteSong currentSong={currentSong} />
-        </div>
+        <>
+          <div id='editDeleteDiv'>
+            <button onClick={() => {
+              setShowEditForm(!showEditForm)
+              setShowDeleteForm(false)
+              }} id='editSongButton'>Edit Song</button>
+            <button onClick={() => {
+              setShowDeleteForm(!showDeleteForm)
+              setShowEditForm(false)
+              }} id='deleteSongButton'>Delete Song</button>
+          </div>
+            {showEditForm &&
+            <EditSongForm currentSong={currentSong} trigger={setShowEditForm} rerender={setRerender} />
+            }
+            {showDeleteForm &&
+            <DeleteSong currentSong={currentSong} trigger={setShowDeleteForm}/>
+            }
+        </>
         }
         {sessionUser ?
         <CommentForm currentSong={currentSong}/> :

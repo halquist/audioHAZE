@@ -7,7 +7,7 @@ import Uploading from "./Uploading";
 import './NewSongForm.css';
 
 // page for adding new songs
-const NewSongFormPage = () => {
+const NewSongFormPage = ({ uploading }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -17,7 +17,7 @@ const NewSongFormPage = () => {
   const [url, setUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [errors, setErrors] = useState([]);
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
 
 
 
@@ -27,7 +27,7 @@ const NewSongFormPage = () => {
   // submits new song to database - if they don't specify an image a default one is used
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setUploading(true);
+    uploading(true);
     setErrors([]);
       // let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl: imageUrl || 'https://drive.google.com/file/d/1gOrGbOPr3Cngbytpi25ngUhrPOxoHj60/view?usp=sharing' }))
       //   .catch(async (res) => {
@@ -36,12 +36,12 @@ const NewSongFormPage = () => {
       //   });
       let newSong = await dispatch(songActions.createSong({ title, url, id: sessionUser.id, imageUrl}))
         .catch(async (res) => {
-          setUploading(false);
+          uploading(false);
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
         if (newSong) {
-          setUploading(false);
+          uploading(false);
           history.push(`/songs/${newSong.findSong.id}`);
         }
   };
@@ -94,10 +94,7 @@ const NewSongFormPage = () => {
               // value={imageUrl}
               onChange={updateImage}
             />
-            {!uploading ?
-              <button type='submit'>Upload</button> :
-              <Uploading />
-            }
+            <button type='submit'>Upload</button>
         </form>
       </div>
     </div>

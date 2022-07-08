@@ -11,6 +11,10 @@
 }
 
 #uploading {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 60px;
   /* margin-top: 10px; */
   margin-bottom: -5px;
   user-select: none;

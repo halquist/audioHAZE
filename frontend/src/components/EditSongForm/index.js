@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch} from "react-redux";
 import * as songActions from "../../store/song";
+import Uploading from "../UploadNewSongFormPage/Uploading";
 
 import './EditSongForm.css';
 
-const EditSongForm = ({ currentSong }) => {
+const EditSongForm = ({ currentSong, trigger, rerender }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState(currentSong.title);
   const [url, setUrl] = useState(currentSong.url);
   const [imageUrl, setImageUrl] = useState(currentSong.imageUrl);
   const [errors, setErrors] = useState([]);
-  const [showEditForm, setShowEditForm] = useState(false);
   const [uploading, setUploading] = useState(false);
 
 
@@ -26,16 +26,17 @@ const EditSongForm = ({ currentSong }) => {
           if (data && data.errors) setErrors(data.errors);
         });
         if (updateSong) {
+          rerender((prev) => !prev)
           setUploading(false);
-          setShowEditForm(false);;
+          trigger(false);
         }
   };
 
   const handleCancelClick = (e) => {
-    setShowEditForm(false);
+    trigger(false);
     setTitle(currentSong.title);
-    setUrl(currentSong.url);
-    setImageUrl(currentSong.imageUrl);
+    // setUrl(currentSong.url);
+    // setImageUrl(currentSong.imageUrl);
   };
 
   const updateSong = (e) => {
@@ -50,8 +51,6 @@ const EditSongForm = ({ currentSong }) => {
 
   return(
     <>
-      <button onClick={() => setShowEditForm(!showEditForm)} id='editSongButton'>Edit Song</button>
-      {showEditForm &&
       <div id='editSongFormContainer'>
         <div id='editFormDiv'>
           <form onSubmit={handleSubmit} id='editForm'>
@@ -89,13 +88,18 @@ const EditSongForm = ({ currentSong }) => {
               // value={imageUrl}
               onChange={updateImage}
             />
+              {!uploading &&
               <div id='cancelSubmitDiv'>
-                <button type="button" onClick={() => handleCancelClick()}>Cancel</button>
-                <button type='submit'>Submit Edit</button>
+                    <button type="button" onClick={() => handleCancelClick()}>Cancel</button>
+                    <button type='submit'>Submit Edit</button>
               </div>
+                }
+              {uploading &&
+                <Uploading />
+              }
           </form>
         </div>
-      </div>}
+      </div>
     </>
   );
 }
