@@ -53,7 +53,7 @@ const RadioPlayer = () => {
       <AudioPlayer
         autoPlay
         src={song?.url}
-        onPlay={e => console.log("onPlay")}
+        // onPlay={e => console.log("onPlay")}
         // other props here
       />
       </div>

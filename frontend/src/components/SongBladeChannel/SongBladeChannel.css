@@ -24,8 +24,8 @@
   display: flex;
   align-items: center;
   overflow: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding: 0 10px;
+  /* scroll-snap-type: x mandatory; */
+  /* scroll-padding: 0 10px; */
   /* width: 600px; */
   height: fit-content;
   gap: 20px;
@@ -35,5 +35,5 @@
 
 .songBlade {
   flex-shrink: 0;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
 }
