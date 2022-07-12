@@ -8,7 +8,7 @@ return (
   <div className='audioBarContainer'>
     <RadioPlayer />
     <div className='audioBar'>
-      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+      <svg version="1.1" id="audioBar" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         width="1920px" height="110px" viewBox="0 0 1920 110" enableBackground="new 0 0 1920 110">
         <path fill="#4C4644" d="M1262.298,50c-4.219,0-8.21-1.934-10.86-5.263L1235.709,25l-15.744-19.737
           C1217.313,1.934,1213.322,0,1209.104,0h-121.207H960H832.104H710.896c-4.218,0-8.209,1.934-10.861,5.263L684.292,25l-15.729,19.737
