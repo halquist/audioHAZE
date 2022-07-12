@@ -74,27 +74,27 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
   const handleUnheart = (e) => {
     e.preventDefault();
     if (sessionUser) {
-    trigger((prev) => !prev);
+    setLoaded(false);
 
-      const thisHeartHere = target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id)[0].id
-      const heart = {
-        songId: target,
-        userId: sessionUserId,
-        id: thisHeartHere
-      }
-      setLoaded(false);
-      dispatch(deleteHeart(heart))
-        .then((ret) => {
-          // setNumHearts(ret.findSong.Hearts.length)
-          // setHearted(false);
-        })
-        .then(() => {
+    const thisHeartHere = target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id)[0].id
+    const heart = {
+      songId: target,
+      userId: sessionUserId,
+      id: thisHeartHere
+    }
+    dispatch(deleteHeart(heart))
+    .then((ret) => {
+      // setNumHearts(ret.findSong.Hearts.length)
+      // setHearted(false);
+    })
+    .then(() => {
+          trigger((prev) => !prev);
+          setLocalTrigger((prev) => !prev)
           // setNumHearts((prev) => prev - 1);
           setHearted(false);
           }
         )
         .then(() => setLoaded(true))
-        setLocalTrigger((prev) => !prev)
     }
   };
 

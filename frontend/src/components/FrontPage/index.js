@@ -65,7 +65,6 @@ const FrontPage = ({isLoaded}) => {
   useEffect(() => {
     dispatch(getSongs())
       .then((ret) => {
-        console.log('ret', ret)
         setSongList(ret)
       })
       .then(setLoaded(true))
