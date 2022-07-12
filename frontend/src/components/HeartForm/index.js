@@ -36,6 +36,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
   useEffect(() => {
     setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
     setNumHearts(target.Hearts.length);
+    // console.log('target', numHearts)
   }, [target])
 
 
@@ -54,10 +55,14 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
       setLoaded(false)
       dispatch(createHeart(heart))
         .then((ret) => {
-          setNumHearts(ret.findSong.Hearts.length)
-          setHearted(true);
+          // setNumHearts(ret.findSong.Hearts.length)
+          // setHearted(true);
         })
-        .then()
+        .then(() => {
+          setNumHearts((prev) => prev + 1);
+          setHearted(true);
+          }
+        )
         .then(() => setLoaded(true))
       trigger((prev) => !prev)
       setLocalTrigger((prev) => !prev)
@@ -79,9 +84,14 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
       setLoaded(false);
       dispatch(deleteHeart(heart))
         .then((ret) => {
-          setNumHearts(ret.findSong.Hearts.length)
-          setHearted(false);
+          // setNumHearts(ret.findSong.Hearts.length)
+          // setHearted(false);
         })
+        .then(() => {
+          setNumHearts((prev) => prev - 1);
+          setHearted(false);
+          }
+        )
         .then(() => setLoaded(true))
         setLocalTrigger((prev) => !prev)
     }
