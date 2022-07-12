@@ -23,6 +23,8 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
 
   const [loaded, setLoaded] = useState(false);
 
+  const [localTrigger, setLocalTrigger] = useState(false);
+
 
   useEffect(() => {
     setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
@@ -37,6 +39,9 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
   }, [target])
 
 
+  useEffect(() => {
+
+  }, [localTrigger])
 
   const handleSubmit = (e) => {
 
@@ -55,6 +60,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
         .then()
         .then(() => setLoaded(true))
       trigger((prev) => !prev)
+      setLocalTrigger((prev) => !prev)
     }
   };
 
@@ -77,6 +83,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
           setHearted(false);
         })
         .then(() => setLoaded(true))
+        setLocalTrigger((prev) => !prev)
     }
   };
 
