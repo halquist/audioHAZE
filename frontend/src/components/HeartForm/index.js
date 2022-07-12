@@ -55,11 +55,12 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
       setLoaded(false)
       dispatch(createHeart(heart))
         .then((ret) => {
+          dispatch(getOneSong(target.id))
           // setNumHearts(ret.findSong.Hearts.length)
           // setHearted(true);
         })
         .then(() => {
-          setNumHearts((prev) => prev + 1);
+          // setNumHearts((prev) => prev + 1);
           setHearted(true);
           }
         )
@@ -88,7 +89,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
           // setHearted(false);
         })
         .then(() => {
-          setNumHearts((prev) => prev - 1);
+          // setNumHearts((prev) => prev - 1);
           setHearted(false);
           }
         )
