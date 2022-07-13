@@ -1,3 +1,3 @@
-import PlaylistForm from "./PlaylistForm"
+import PlaylistContainer from "./PlaylistContainer"
 
-export default PlaylistForm
+export default PlaylistContainer

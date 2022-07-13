@@ -12,7 +12,7 @@ const router = express.Router();
 // get all playlists for a user
 router.get(
   '/user/:id(\\d+)',
-  asyncHandler( async (_req, res) => {
+  asyncHandler( async (req, res) => {
     const userId = req.params.id;
     const playlists = await Playlist.findAll({
       where: {
@@ -57,7 +57,6 @@ router.put(
   asyncHandler( async (req, res) => {
     const { userId, playlistId, songId } = req.body;
     const addPlaylist = await Playlist.findByPk(playlistId);
-
     if (addPlaylist.userId === userId) {
       const updatePlaylist = await Playlist.add( playlistId, songId );
       return res.json(updatePlaylist)

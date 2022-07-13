@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     return await Playlist.findByPk(playlist.id);
   }
 
-  Playlist.delete = async function ({ id }) {
+  Playlist.delete = async function ( id ) {
     const playlistFind = await Playlist.findByPk(id)
     await playlistFind.destroy();
     return {
@@ -39,12 +39,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  Playlist.add = async function ({ playlistId, songId }) {
-    const playlistFind = await Playlist.findByPk(playlistId);
+  Playlist.add = async function ( playlistId, songId ) {
+    // console.log('id id id', playlistId, songId)
+    const playlist = await Playlist.findByPk(playlistId);
     // const playlistArr = playlistFind.playlist;
-    playlistFind.playlist.push(songId);
-    await playlistFind.save();
-    return playlistFind;
+    playlist.playlist = [...playlist.playlist, songId];
+    // playlist.playlist.push(songId);
+    await playlist.save();
+    return playlist;
   }
 
   Playlist.remove = async function ({ playlistId, songId }) {

@@ -9,7 +9,7 @@ import CommentForm from '../CommentForm';
 import LoginFormModalButton from '../LoginFormModal';
 import CommentDisplay from '../CommentDisplay';
 import HeartForm from '../HeartForm';
-import PlaylistForm from '../Playlist';
+import PlaylistContainer from '../Playlist';
 
 import { getComments } from "../../store/comment";
 import { getOneSong } from '../../store/song';
@@ -31,6 +31,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
   const [showEditForm, setShowEditForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [rerender, setRerender] = useState(false);
+  const [trigger, setTrigger] = useState(false);
 
 
 
@@ -103,7 +104,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
             backgroundRepeat: 'no-repeat'
           }}></div>
           <div id='heartedContainer'>
-            <PlaylistForm />
+            <PlaylistContainer songId={currentSong.id} trigger={trigger} setTrigger={setTrigger} />
             <HeartForm target={currentSong} sessionUserId={sessionUserId} trigger ={setHearted}/>
           </div>
           <div id='titleArtistPlay'>
