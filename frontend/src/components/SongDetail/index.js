@@ -9,6 +9,7 @@ import CommentForm from '../CommentForm';
 import LoginFormModalButton from '../LoginFormModal';
 import CommentDisplay from '../CommentDisplay';
 import HeartForm from '../HeartForm';
+import PlaylistForm from '../Playlist';
 
 import { getComments } from "../../store/comment";
 import { getOneSong } from '../../store/song';
@@ -102,6 +103,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
             backgroundRepeat: 'no-repeat'
           }}></div>
           <div id='heartedContainer'>
+            <PlaylistForm />
             <HeartForm target={currentSong} sessionUserId={sessionUserId} trigger ={setHearted}/>
           </div>
           <div id='titleArtistPlay'>

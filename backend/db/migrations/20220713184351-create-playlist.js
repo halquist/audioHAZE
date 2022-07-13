@@ -18,7 +18,13 @@ module.exports = {
         type: Sequelize.STRING(100)
       },
       playlist: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.ARRAY({
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'Songs',
+            key: 'songId'
+        }
+        }),
       },
       createdAt: {
         allowNull: false,

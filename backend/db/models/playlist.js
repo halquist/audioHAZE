@@ -10,13 +10,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(100),
     },
     playlist: {
-      type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY({
+        type: DataTypes.INTEGER,
+        references: {
+          model: sequelize.models.Song,
+          key: 'songId'
+        }
+      }),
       defaultValue: [],
     },
 
   }, {});
 
-  Playlist.create = async function ({ userId, title }) {
+  Playlist.createOne = async function ({ userId, title }) {
+    // console.log(title, '&&&&&&&&&&&&&&&&&&&&&&&')
     const playlist = await Playlist.create({
       userId,
       title
@@ -52,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
   Playlist.associate = function(models) {
     // associations can be defined here
     Playlist.belongsTo(models.User, { foreignKey: 'userId'})
+    Playlist.belongsTo(models.Song, { foreignKey: 'playlist'})
   };
   return Playlist;
 };
