@@ -34,9 +34,8 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
 
 
   useEffect(() => {
-    // setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
-    // setNumHearts(target.Hearts.length);
-    // console.log('target', numHearts)
+    setHearted(target.Hearts.filter(heart => heart.userId === sessionUserId && heart.songId === target.id).length ? true : false)
+    setNumHearts(target.Hearts.length);
   }, [target])
 
 
@@ -44,7 +43,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
 
   }, [localTrigger])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
     if (sessionUser) {
@@ -53,25 +52,31 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
         userId: sessionUserId
       }
       setLoaded(false)
-      dispatch(createHeart(heart))
-        .then((ret) => {
+      let newHeart = await dispatch(createHeart(heart))
+        if (newHeart) {
           dispatch(getOneSong(target.id))
-          // setNumHearts(ret.findSong.Hearts.length)
-          // setHearted(true);
-        })
-        .then(() => {
           setNumHearts((prev) => prev + 1);
           setHearted(true);
-          }
-        )
-        .then(() => setLoaded(true))
+          setLoaded(true)
+        }
+        // .then((ret) => {
+        //   dispatch(getOneSong(target.id))
+        //   // setNumHearts(ret.findSong.Hearts.length)
+        //   // setHearted(true);
+        // })
+        // .then(() => {
+        //   setNumHearts((prev) => prev + 1);
+        //   setHearted(true);
+        //   }
+        // )
+        // .then(() => setLoaded(true))
       trigger((prev) => !prev)
       setLocalTrigger((prev) => !prev)
     }
   };
 
 
-  const handleUnheart = (e) => {
+  const handleUnheart = async (e) => {
     e.preventDefault();
     if (sessionUser) {
     setLoaded(false);
@@ -82,24 +87,31 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
       userId: sessionUserId,
       id: thisHeartHere
     }
-    dispatch(deleteHeart(heart))
-    .then((ret) => {
-      // setNumHearts(ret.findSong.Hearts.length)
-      // setHearted(false);
-    })
-    .then(() => {
-          trigger((prev) => !prev);
+    let killHeart = await dispatch(deleteHeart(heart))
+      if (killHeart) {
+        trigger((prev) => !prev);
           setLocalTrigger((prev) => !prev)
           setNumHearts((prev) => prev - 1);
           setHearted(false);
-          }
-        )
-        .then(() => setLoaded(true))
+          setLoaded(true);
+      }
+    // .then((ret) => {
+    //   // setNumHearts(ret.findSong.Hearts.length)
+    //   // setHearted(false);
+    // })
+    // .then(() => {
+    //       trigger((prev) => !prev);
+    //       setLocalTrigger((prev) => !prev)
+    //       setNumHearts((prev) => prev - 1);
+    //       setHearted(false);
+    //       }
+    //     )
+    //     .then(() => setLoaded(true))
     }
   };
 
   if (!loaded) {
-    console.log('notloaded')
+    // console.log('notloaded')
     return (
       <>
         <div>{numHearts}</div>
