@@ -99,6 +99,7 @@ const HeartForm = ({ target, sessionUserId, trigger }) => {
   };
 
   if (!loaded) {
+    console.log('notloaded')
     return (
       <>
         <div>{numHearts}</div>
