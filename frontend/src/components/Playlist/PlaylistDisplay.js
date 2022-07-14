@@ -57,7 +57,7 @@ const PlaylistDisplay = ({ startPlaylist }) => {
       <div className='playlistDisplayText'>{selectedPlaylist ? selectedPlaylist : 'Playlist'}</div>
       <img className='playlistPlayIcon' src={play} height='10'></img>
       <div className='playlistMenu' id={showPlaylistId} >
-        <div className='playlistMenuItemBlue'>Add Playlist</div>
+        <div className='playlistMenuItemBlue'>Create New Playlist</div>
         {playlistArr.map((playlist) => {
           return (
             <div className='playlistMenuItem'  key={Math.random()}>
