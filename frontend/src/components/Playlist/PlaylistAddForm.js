@@ -80,7 +80,6 @@ const PlaylistAddForm = ({ songId, trigger }) => {
             type="text"
             value={playlistIdForm}
             onChange={(e) => {
-              console.log('selected', e.target.value)
               setPlaylistIdForm(e.target.value)
             }}
             required

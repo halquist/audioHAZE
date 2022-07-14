@@ -7,10 +7,10 @@ import * as playlistActions from '../../store/playlist'
 
 import play from '../../images/play.svg'
 
-const PlaylistDisplay = () => {
+const PlaylistDisplay = ({ startPlaylist }) => {
   const dispatch = useDispatch();
 
-  const playlist = useSelector(state => state.playlist);
+  const playlist = useSelector(state => state.playlist?.currentPlaylist);
   const userId = useSelector((state) => state.session.user?.id);
 
   const [showPlaylistId, setShowPlaylistId] = useState('');
@@ -29,14 +29,20 @@ const PlaylistDisplay = () => {
       })
   },[])
 
+
+
   const showPlaylistIdFunc = () => {
-    console.log(showPlaylistId)
     if (showPlaylistId === '') {
       setShowPlaylistId('showPlaylist')
     } else {
       setShowPlaylistId('')
     }
   }
+
+  // const setCurrentPlaylist = async (e) => {
+  //   setSelectedPlaylist(playlist.title)
+  //   dispatch(playlistActions.selectCurrentPlaylist(playlist))
+  // }
 
   if (!loaded) {
     return (
@@ -51,10 +57,17 @@ const PlaylistDisplay = () => {
       <div className='playlistDisplayText'>{selectedPlaylist ? selectedPlaylist : 'Playlist'}</div>
       <img className='playlistPlayIcon' src={play} height='10'></img>
       <div className='playlistMenu' id={showPlaylistId} >
+        <div className='playlistMenuItemBlue'>Add Playlist</div>
         {playlistArr.map((playlist) => {
           return (
             <div className='playlistMenuItem'  key={Math.random()}>
-              <div className='playlistMenuText' onClick={(e) => setSelectedPlaylist(playlist.title)}>{playlist.title}</div>
+              <div className='playlistMenuText' onClick={async (e ) => {
+                setSelectedPlaylist(playlist.title)
+                dispatch(playlistActions.selectCurrentPlaylist(playlist))
+                startPlaylist()
+                }
+              }
+              >{playlist.title}</div>
             </div>
           )
         })}

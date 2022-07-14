@@ -1,24 +1,56 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
-import { getOneSong } from '../../store/song';
+import { getOneSong, selectCurrentSong } from '../../store/song';
 
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import './RadioPlayer.css';
 import { PlaylistDisplay } from '../Playlist';
 
-const RadioPlayer = () => {
+const RadioPlayer = ({  }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song.currentSong);
+  const playlistGet = useSelector(state => state.playlist.currentPlaylist)
 
+  const [playlist, setPlaylist] = useState(playlistGet?.playlist || null);
+  const [playlistIndex, setPlaylistIndex] = useState(0);
+  const [playlistMaxIndex, setPlaylistMaxIndex] = useState(0);
 
   useEffect(()=> {
     if(song) {
       dispatch(getOneSong(song.id));
     }
   }, []);
+
+  useEffect(() => {
+    if (playlistGet) {
+      setPlaylist(playlistGet?.playlist)
+
+    }
+  },[playlistGet])
+
+  const startPlaylist = () => {
+    if (playlist) {
+      console.log('starting playlist')
+      dispatch(selectCurrentSong(playlist[0]))
+      setPlaylistIndex((prev) => prev += 1)
+      setPlaylistMaxIndex(playlist.length)
+    }
+  }
+
+  const loadNextSong = () => {
+    if (playlistIndex < playlistMaxIndex) {
+      dispatch(selectCurrentSong(playlist[playlistIndex]))
+      setPlaylistIndex((prev) => prev += 1)
+    } else {
+      setPlaylistIndex(0)
+      dispatch(selectCurrentSong(playlist[0]))
+    }
+  }
+
+
 
   // let songLink = song?.url;
 
@@ -47,7 +79,7 @@ const RadioPlayer = () => {
 
   return (
       <div id='audioPlayerWrapper'>
-        <PlaylistDisplay />
+        <PlaylistDisplay playlist={playlist} setPlaylist={setPlaylist} startPlaylist={startPlaylist} />
         <div className='songDetails'>
           {song && songData}
           {!song && fillerData}
@@ -55,6 +87,7 @@ const RadioPlayer = () => {
       <AudioPlayer
         autoPlay
         src={song?.url}
+        onEnded={loadNextSong}
         // onPlay={e => console.log("onPlay")}
         // other props here
       />

@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD = 'playlist/LOAD'
 const ADD = 'playlist/ADD'
 const ADD_SONG = 'playlist/ADDSONG'
+const SET_CURRENT = 'playlist/SET_CURRENT'
 
 const load = (playlists) => {
   return {
@@ -22,6 +23,13 @@ const addSong = (data, songId) => {
   return {
     type: ADD_SONG,
     payload: {data, songId}
+  }
+}
+
+const currentPlaylist = (playlist) => {
+  return {
+    type: SET_CURRENT,
+    playlist
   }
 }
 
@@ -54,7 +62,6 @@ export const createPlaylist = (userId, title) => async (dispatch) => {
 
 // add song to a playlist
 export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) => {
-  console.log('store', playlistId)
   const response = await csrfFetch('/api/playlists/add', {
     method: 'PUT',
     headers: {
@@ -70,6 +77,14 @@ export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) =>
   const data = await response.json();
   await dispatch(addSong(data, songId));
   return data;
+}
+
+// set current playlist
+export const selectCurrentPlaylist = (playlist) => async dispatch => {
+  // const songId = parseInt(id, 10);
+  // const response = await fetch(`/api/songs/${songId}`)
+  // const song = await response.json();
+  await dispatch(currentPlaylist(playlist));
 }
 
 const initialState = {};
@@ -90,8 +105,12 @@ const playlistsReducer = (state = initialState, action) => {
     case ADD_SONG:
       newState = {...state}
       // console.log(newState)
-      console.log('action', action)
       newState[action.payload.data.id].playlist.push(action.payload.songId)
+      return newState;
+    case SET_CURRENT:
+      newState = {...state}
+      newState.currentPlaylist = action.playlist
+      return newState
     default:
       return state;
   }
