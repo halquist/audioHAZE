@@ -16,6 +16,7 @@ const PlaylistDisplay = () => {
   const [showPlaylistId, setShowPlaylistId] = useState('');
   const [playlistArr, setPlaylistArr] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [selectedPlaylist, setSelectedPlaylist] = useState('');
 
 
   useEffect(() => {
@@ -29,8 +30,9 @@ const PlaylistDisplay = () => {
   },[])
 
   const showPlaylistIdFunc = () => {
-    if (!showPlaylistId) {
-      setShowPlaylistId('showPlayList')
+    console.log(showPlaylistId)
+    if (showPlaylistId === '') {
+      setShowPlaylistId('showPlaylist')
     } else {
       setShowPlaylistId('')
     }
@@ -45,14 +47,14 @@ const PlaylistDisplay = () => {
   }
 
   return (
-    <div className='playlistDisplayContainer' onClick={() => showPlaylistIdFunc}>
-      <div className='playlistDisplayText'>Playlist</div>
+    <div className='playlistDisplayContainer' onClick={showPlaylistIdFunc}>
+      <div className='playlistDisplayText'>{selectedPlaylist ? selectedPlaylist : 'Playlist'}</div>
       <img className='playlistPlayIcon' src={play} height='10'></img>
-      <div className='playlistMenu'>
+      <div className='playlistMenu' id={showPlaylistId} >
         {playlistArr.map((playlist) => {
           return (
-            <div className='playlistMenuIcon' id={showPlaylistId}>
-              {/* {playlist.title} */}
+            <div className='playlistMenuItem'  key={Math.random()}>
+              <div className='playlistMenuText' onClick={(e) => setSelectedPlaylist(playlist.title)}>{playlist.title}</div>
             </div>
           )
         })}
