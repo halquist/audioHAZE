@@ -6,6 +6,7 @@ import { getOneSong } from '../../store/song';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import './RadioPlayer.css';
+import { PlaylistDisplay } from '../Playlist';
 
 const RadioPlayer = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const RadioPlayer = () => {
 
   return (
       <div id='audioPlayerWrapper'>
+        <PlaylistDisplay />
         <div className='songDetails'>
           {song && songData}
           {!song && fillerData}

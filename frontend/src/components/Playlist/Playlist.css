@@ -1,0 +1,41 @@
+.playlistDisplayContainer {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  color: #ffc400;
+  filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+
+}
+
+.playlistDisplayText {
+  /* cursor: pointer; */
+}
+
+.playlistPlayIcon {
+  margin-left: 4px;
+  /* filter: drop-shadow(0px 0px 5px rgb(255, 0, 0)); */
+  /* fill: #00ff77; */
+}
+
+.playlistDisplayText:hover {
+  /* color: #d9a700; */
+  filter: drop-shadow(0px 0px 3px rgb(255, 0, 0));
+}
+
+.playlistMenu {
+
+}
+
+.playlistMenuItem {
+
+}
+
+#showPlaylist {
+  
+}
