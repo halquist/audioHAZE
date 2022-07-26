@@ -8,7 +8,7 @@ import * as playlistActions from '../../store/playlist'
 const PlaylistAddForm = ({ songId, trigger }) => {
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.session.user.id);
+  const userId = useSelector((state) => state.session?.user?.id);
   const playlists = useSelector((state) => state.playlist);
 
   const [playlist, setPlaylist] = useState('');
@@ -67,30 +67,29 @@ const PlaylistAddForm = ({ songId, trigger }) => {
 
   return (
     <div className='playlistFormContainer'>
-      <form onSubmit={handleSubmit}>
+      <form className='playlistAddToForm' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
-          Playlist
-        </label>
-          <select
-            className='playlistSelect'
-            name='playlist'
-            type="text"
-            value={playlistIdForm}
-            onChange={(e) => {
-              setPlaylistIdForm(e.target.value)
-            }}
-            required
-          >
-            <option value='default' disabled={true}>Pick Playlist</option>
-            {playlistArr.map(playlist => (
-                <option key={playlist.id} value={playlist.id}>
-                  {playlist.title}
-                </option>
-            ))}
-          </select>
+          <div className='customSelect'>
+            <select
+              className='playlistSelect'
+              name='playlist'
+              type="text"
+              value={playlistIdForm}
+              onChange={(e) => {
+                setPlaylistIdForm(e.target.value)
+              }}
+              required
+            >
+              <option value='default' disabled={true}>Pick Playlist</option>
+              {playlistArr.map(playlist => (
+                  <option key={playlist.id} value={playlist.id}>
+                    {playlist.title}
+                  </option>
+              ))}
+            </select>
+          </div>
           {playlistIdForm !== 'default' ?
           <button type='submit'>Add To Playlist</button> :
           <button type='submit' disabled>Add To Playlist</button>

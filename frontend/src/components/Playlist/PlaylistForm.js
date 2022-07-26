@@ -8,7 +8,7 @@ import * as playlistActions from '../../store/playlist'
 const PlaylistForm = ({ setTrigger }) => {
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.session.user.id);
+  const userId = useSelector((state) => state.session?.user?.id);
 
 
   const [title, setTitle] = useState('');

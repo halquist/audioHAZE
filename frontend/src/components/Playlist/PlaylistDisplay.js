@@ -20,13 +20,15 @@ const PlaylistDisplay = ({ startPlaylist }) => {
 
 
   useEffect(() => {
-    dispatch(playlistActions.getPlaylists(userId))
-      .then((res) => {
-        setPlaylistArr(res)
-      })
-      .then((res) => {
-        setLoaded(true)
-      })
+    if(userId) {
+      dispatch(playlistActions.getPlaylists(userId))
+        .then((res) => {
+          setPlaylistArr(res)
+        })
+        .then((res) => {
+          setLoaded(true)
+        })
+    }
   },[])
 
 
@@ -46,9 +48,7 @@ const PlaylistDisplay = ({ startPlaylist }) => {
 
   if (!loaded) {
     return (
-      <div>
-        Loading
-      </div>
+      null
     )
   }
 
