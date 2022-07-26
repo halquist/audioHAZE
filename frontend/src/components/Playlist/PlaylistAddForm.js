@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as playlistActions from '../../store/playlist'
 
-const PlaylistAddForm = ({ songId, trigger }) => {
+const PlaylistAddForm = ({ songId, trigger, hideTrigger }) => {
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.session?.user?.id);
@@ -45,7 +45,8 @@ const PlaylistAddForm = ({ songId, trigger }) => {
     e.preventDefault()
     setErrors([])
     // console.log('user', userId, 'playlist', playlistId, 'song', songId)
-    const playlistId = parseInt(playlistIdForm, 10);
+    const playlistId = parseInt(e.target.value, 10);
+    console.log('playlistId', playlistId)
     let updatePlaylist = await dispatch(playlistActions.addToPlaylist(userId, playlistId , songId))
       .catch(async (res) => {
         console.log('errors', res)
@@ -53,33 +54,30 @@ const PlaylistAddForm = ({ songId, trigger }) => {
         if (data && data.errors) setErrors(data.errors);
       })
       if (updatePlaylist) {
-        console.log('success')
+        hideTrigger(updatePlaylist.title)
+        // console.log('success')
       }
   }
 
   if (!loaded) {
     return (
-      <div>
-        Loading
-      </div>
+      null
     )
   }
 
   return (
     <div className='playlistFormContainer'>
       <form className='playlistAddToForm' onSubmit={handleSubmit}>
-        <ul>
+        {errors.length > 0 && <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-          <div className='customSelect'>
+        </ul>}
+          {/* <div className='customSelect'> */}
             <select
               className='playlistSelect'
               name='playlist'
               type="text"
               value={playlistIdForm}
-              onChange={(e) => {
-                setPlaylistIdForm(e.target.value)
-              }}
+              onChange={(e) => handleSubmit(e)}
               required
             >
               <option value='default' disabled={true}>Pick Playlist</option>
@@ -89,11 +87,11 @@ const PlaylistAddForm = ({ songId, trigger }) => {
                   </option>
               ))}
             </select>
-          </div>
-          {playlistIdForm !== 'default' ?
-          <button type='submit'>Add To Playlist</button> :
-          <button type='submit' disabled>Add To Playlist</button>
-          }
+          {/* </div> */}
+          {/* {playlistIdForm !== 'default' ? */}
+          {/* <button type='submit'>Select Playlist</button>  */}
+          {/* <button type='submit' disabled>Add To Playlist</button> */}
+          {/* } */}
       </form>
     </div>
   )
