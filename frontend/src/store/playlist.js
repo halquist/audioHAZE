@@ -62,6 +62,7 @@ export const createPlaylist = (userId, title) => async (dispatch) => {
 
 // add song to a playlist
 export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) => {
+  // console.log('store song id', songId)
   const response = await csrfFetch('/api/playlists/add', {
     method: 'PUT',
     headers: {
@@ -84,7 +85,8 @@ export const selectCurrentPlaylist = (playlist) => async dispatch => {
   // const songId = parseInt(id, 10);
   // const response = await fetch(`/api/songs/${songId}`)
   // const song = await response.json();
-  await dispatch(currentPlaylist(playlist));
+  const current = await dispatch(currentPlaylist(playlist));
+  return current
 }
 
 const initialState = {};

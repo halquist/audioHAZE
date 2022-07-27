@@ -50,10 +50,27 @@ router.post(
   })
 );
 
+// add song validation
+const validatePlaylistAdd = [
+  check('songId')
+    .isInt()
+    .withMessage('Error please try again')
+    .bail(),
+  check('userId')
+    .exists({ checkFalsy: true })
+    .withMessage('Error please try again')
+    .bail(),
+  check('playlistId')
+    .exists({ checkFalsy: true })
+    .withMessage('Error please try again')
+    .bail(),
+  handleValidationErrors
+]
+
 // add song to playlist
 router.put(
   '/add',
-  requireAuth, restoreUser,
+  validatePlaylistAdd, requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
     const { userId, playlistId, songId } = req.body;
     const addPlaylist = await Playlist.findByPk(playlistId);

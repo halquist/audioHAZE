@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { getOneSong, selectCurrentSong } from '../../store/song';
+import * as playlistActions from '../../store/playlist'
 
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -27,34 +28,62 @@ const RadioPlayer = ({  }) => {
   useEffect(() => {
     if (playlistGet) {
       setPlaylist(playlistGet?.playlist)
-
     }
   },[playlistGet])
 
-  const startPlaylist = () => {
-    if (playlist) {
-      console.log('starting playlist')
-      dispatch(selectCurrentSong(playlist[0]))
-      setPlaylistIndex((prev) => prev += 1)
-      setPlaylistMaxIndex(playlist.length)
-    }
+  const startPlaylist = async (playlist) => {
+    console.log('starting playlist outer')
+    await dispatch(playlistActions.selectCurrentPlaylist(playlist))
+      .then((ret) => {
+        console.log('playlist return', ret.playlist.playlist)
+        setPlaylist(ret.playlist.playlist)
+        return ret.playlist.playlist
+      })
+      .then((ret) => {
+        dispatch(selectCurrentSong(ret[0]))
+        setPlaylistIndex((prev) => prev += 1)
+      })
+
+    await setPlaylist(playlistGet.playlist)
+    console.log(playlist)
+        console.log('starting playlist inner')
+    // if (playlist) {
+    // }
   }
 
   const loadNextSong = () => {
+    // console.log('next song')
+    if (playlist.length < 2) {
+      return
+    }
     if (playlistIndex < playlistMaxIndex) {
       dispatch(selectCurrentSong(playlist[playlistIndex]))
       setPlaylistIndex((prev) => prev += 1)
     } else {
-      setPlaylistIndex(0)
+      setPlaylistIndex(1)
       dispatch(selectCurrentSong(playlist[0]))
     }
   }
 
-
+  const loadPrevSong = () => {
+    // console.log('prev song')
+    if (playlist.length < 2) {
+      return
+    }
+    if (playlistIndex !== 1) {
+      // setPlaylistIndex((prev) => prev -= 1)
+      dispatch(selectCurrentSong(playlist[playlistIndex - 2]))
+      setPlaylistIndex((prev) => prev -= 1)
+    } else {
+      setPlaylistIndex(playlistMaxIndex)
+      dispatch(selectCurrentSong(playlist[playlistMaxIndex - 1]))
+      // setPlaylistIndex((prev) => prev += 1)
+    }
+  }
 
   // let songLink = song?.url;
 
-  // converts google drive links to work with audio player
+  // converts google drive links to work with audio player (not needed anymore with AWS set up now)
   // if (song && song.url.startsWith('https://drive.google.com')) {
   //   songLink = 'https://drive.google.com/uc?export=download&id=' + song.url.split('/')[5];
   // }
@@ -88,6 +117,9 @@ const RadioPlayer = ({  }) => {
         autoPlay
         src={song?.url}
         onEnded={loadNextSong}
+        showSkipControls={true}
+        onClickPrevious={loadPrevSong}
+        onClickNext={loadNextSong}
         // onPlay={e => console.log("onPlay")}
         // other props here
       />

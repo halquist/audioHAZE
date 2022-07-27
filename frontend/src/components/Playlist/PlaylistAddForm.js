@@ -45,10 +45,10 @@ const PlaylistAddForm = ({ songId, trigger, hideTrigger }) => {
     setErrors([])
     // console.log('user', userId, 'playlist', playlistId, 'song', songId)
     const playlistId = parseInt(e.target.value, 10);
-    console.log('playlistId', playlistId)
+    console.log('songid', songId)
     let updatePlaylist = await dispatch(playlistActions.addToPlaylist(userId, playlistId, songId))
       .catch(async (res) => {
-        console.log('errors', res)
+        // console.log('errors', res)
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       })

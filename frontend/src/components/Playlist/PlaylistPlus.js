@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import * as playlistActions from '../../store/playlist'
 import PlaylistAddForm from './PlaylistAddForm'
 
-const PlaylistPlus = () => {
+const PlaylistPlus = ({ songId }) => {
 
   const [showMenu, setShowMenu] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -39,7 +39,7 @@ const PlaylistPlus = () => {
       }
       {showMenu && !success &&
       <div className='addToPlaylistContainer'>
-        <PlaylistAddForm hideTrigger={handleAdd}/>
+        <PlaylistAddForm hideTrigger={handleAdd} songId={songId} />
       </div>
       }
       {success &&

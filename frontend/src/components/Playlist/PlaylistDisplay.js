@@ -37,7 +37,6 @@ const PlaylistDisplay = ({ startPlaylist }) => {
     e.stopPropagation()
     e.preventDefault()
     setShowCreatePlaylist(true)
-    console.log('showcreate', showCreatePlaylist)
   }
 
 
@@ -77,10 +76,19 @@ const PlaylistDisplay = ({ startPlaylist }) => {
           {playlistArr.map((playlist) => {
             return (
               <div className='playlistMenuItem'  key={Math.random()}>
-                <div className='playlistMenuText' onClick={async (e ) => {
-                  setSelectedPlaylist(playlist.title)
-                  dispatch(playlistActions.selectCurrentPlaylist(playlist))
-                  startPlaylist()
+                <div className='playlistMenuText' onClick={async (e) => {
+                  // console.log('playlist', playlist)
+                  if (playlist.playlist.length) {
+                    setSelectedPlaylist(playlist.title)
+                    // dispatch(playlistActions.selectCurrentPlaylist(playlist))
+                    startPlaylist(playlist)
+                  } else {
+                    setSelectedPlaylist('Playlist Empty')
+                    const messageTimeout = setTimeout(() => {
+                      setSelectedPlaylist(playlist.title)
+                      clearTimeout(messageTimeout)
+                    }, 2000)
+                  }
                   }
                 }
                 >{playlist.title}</div>

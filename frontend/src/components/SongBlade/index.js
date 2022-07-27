@@ -41,7 +41,7 @@ const SongBlade = ({song, sessionUserId, trigger}) => {
             <PlayButton target={song.id}/>
           </div>
             <div className='heartContainerPush'>
-              <PlaylistPlus />
+              <PlaylistPlus songId={song.id} />
               <div className='heartContainerFront'>
                 <HeartForm target={song} sessionUserId={sessionUserId} trigger={trigger} />
               </div>
