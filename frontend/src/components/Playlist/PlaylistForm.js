@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as playlistActions from '../../store/playlist'
 
-const PlaylistForm = ({ setTrigger }) => {
+const PlaylistForm = ({ trigger }) => {
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.session?.user?.id);
@@ -23,27 +23,45 @@ const PlaylistForm = ({ setTrigger }) => {
         if (data && data.errors) setErrors(data.errors);
       })
       if (newPlaylist) {
-        setTitle('');
-        setTrigger((prev) => !prev)
+        setTitle('')
+        // setTrigger((prev) => !prev)
+        trigger('')
       }
   }
 
+  const preventClose = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
   return (
-    <div className='playlistFormContainer'>
-      <form onSubmit={handleSubmit}>
-          <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>
+    <div className='playlistFormContainer2'
+      onClick={(e) => preventClose(e)}
+    >
+      <form className='playlistCreateForm' onSubmit={handleSubmit}>
+          {errors.length > 0 &&
+            <ul>
+              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+          }
           <label>
             Playlist Title
           </label>
             <input
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setTitle(e.target.value)
+              }}
               required
             />
-            <button type='submit'>Create Playlist</button>
+            <button type='submit'
+              onClick={handleSubmit}
+            >
+              Create Playlist
+            </button>
         </form>
     </div>
   )

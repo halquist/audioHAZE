@@ -104,7 +104,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
             backgroundRepeat: 'no-repeat'
           }}></div>
           <div id='heartedContainer'>
-            <PlaylistContainer songId={currentSong.id} trigger={trigger} setTrigger={setTrigger} />
+            {/* <PlaylistContainer songId={currentSong.id} trigger={trigger} setTrigger={setTrigger} /> */}
             <HeartForm target={currentSong} sessionUserId={sessionUserId} trigger ={setHearted}/>
           </div>
           <div id='titleArtistPlay'>

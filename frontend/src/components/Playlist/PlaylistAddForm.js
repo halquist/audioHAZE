@@ -28,7 +28,6 @@ const PlaylistAddForm = ({ songId, trigger, hideTrigger }) => {
   },[])
 
   useEffect(() => {
-     console.log('running')
     dispatch(playlistActions.getPlaylists(userId))
       .then((res) => {
         setPlaylistArr(res)
@@ -47,7 +46,7 @@ const PlaylistAddForm = ({ songId, trigger, hideTrigger }) => {
     // console.log('user', userId, 'playlist', playlistId, 'song', songId)
     const playlistId = parseInt(e.target.value, 10);
     console.log('playlistId', playlistId)
-    let updatePlaylist = await dispatch(playlistActions.addToPlaylist(userId, playlistId , songId))
+    let updatePlaylist = await dispatch(playlistActions.addToPlaylist(userId, playlistId, songId))
       .catch(async (res) => {
         console.log('errors', res)
         const data = await res.json();

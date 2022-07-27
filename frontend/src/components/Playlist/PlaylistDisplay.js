@@ -1,7 +1,9 @@
 import './Playlist.css'
 
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+
+import PlaylistForm from './PlaylistForm'
 
 import * as playlistActions from '../../store/playlist'
 
@@ -9,14 +11,14 @@ import play from '../../images/play.svg'
 
 const PlaylistDisplay = ({ startPlaylist }) => {
   const dispatch = useDispatch();
+  const playlist = useSelector(state => state?.playlist);
+  const userId = useSelector((state) => state.session.user?.id)
 
-  const playlist = useSelector(state => state.playlist?.currentPlaylist);
-  const userId = useSelector((state) => state.session.user?.id);
-
-  const [showPlaylistId, setShowPlaylistId] = useState('');
-  const [playlistArr, setPlaylistArr] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  const [selectedPlaylist, setSelectedPlaylist] = useState('');
+  const [showPlaylistId, setShowPlaylistId] = useState('')
+  const [playlistArr, setPlaylistArr] = useState([])
+  const [loaded, setLoaded] = useState(false)
+  const [selectedPlaylist, setSelectedPlaylist] = useState('')
+  const [showCreatePlaylist, setShowCreatePlaylist] = useState(false)
 
 
   useEffect(() => {
@@ -31,11 +33,20 @@ const PlaylistDisplay = ({ startPlaylist }) => {
     }
   },[])
 
+  const createPlaylist = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    setShowCreatePlaylist(true)
+    console.log('showcreate', showCreatePlaylist)
+  }
 
 
-  const showPlaylistIdFunc = () => {
+  const showPlaylistIdFunc = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
     if (showPlaylistId === '') {
       setShowPlaylistId('showPlaylist')
+      setShowCreatePlaylist(false)
     } else {
       setShowPlaylistId('')
     }
@@ -53,25 +64,36 @@ const PlaylistDisplay = ({ startPlaylist }) => {
   }
 
   return (
-    <div className='playlistDisplayContainer' onClick={showPlaylistIdFunc}>
+    <div className='playlistDisplayContainer' onClick={(e) => showPlaylistIdFunc(e)}>
       <div className='playlistDisplayText'>{selectedPlaylist ? selectedPlaylist : 'Playlist'}</div>
       <img className='playlistPlayIcon' src={play} height='10'></img>
-      <div className='playlistMenu' id={showPlaylistId} >
-        <div className='playlistMenuItemBlue'>Create New Playlist</div>
-        {playlistArr.map((playlist) => {
-          return (
-            <div className='playlistMenuItem'  key={Math.random()}>
-              <div className='playlistMenuText' onClick={async (e ) => {
-                setSelectedPlaylist(playlist.title)
-                dispatch(playlistActions.selectCurrentPlaylist(playlist))
-                startPlaylist()
+      {!showCreatePlaylist &&
+        <div className='playlistMenu' id={showPlaylistId} >
+          <div className='playlistMenuItemBlue'
+            onClick={(e) => createPlaylist(e)}
+          >
+            Create New Playlist
+          </div>
+          {playlistArr.map((playlist) => {
+            return (
+              <div className='playlistMenuItem'  key={Math.random()}>
+                <div className='playlistMenuText' onClick={async (e ) => {
+                  setSelectedPlaylist(playlist.title)
+                  dispatch(playlistActions.selectCurrentPlaylist(playlist))
+                  startPlaylist()
+                  }
                 }
-              }
-              >{playlist.title}</div>
-            </div>
-          )
-        })}
-      </div>
+                >{playlist.title}</div>
+              </div>
+            )
+          })}
+        </div>
+      }
+      {showCreatePlaylist &&
+        <div className='playlistMenu' id={showPlaylistId}>
+          <PlaylistForm trigger={setShowPlaylistId} />
+        </div>
+      }
     </div>
 
   )
