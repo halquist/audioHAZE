@@ -2,6 +2,8 @@ import './Playlist.css'
 
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { NavLink } from 'react-router-dom';
+
 
 import * as playlistActions from '../../store/playlist'
 
@@ -24,25 +26,37 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
         })
   },[])
 
+  const removeSong = async () => {
+
+  }
+
   const songArrFunc = () => {
+    if (songArr !== 'empty'){
     let num = 0
     return songArr.map((song) => {
       num ++
       return (
         <div className='playlistMenuItem'  key={Math.random()}>
-          <div className='playlistMenuText'
-          // onClick={}
-          >
-            {num}. {song.title}
-          </div>
+            <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText'>{num}. {song.title}</NavLink>
+            <div className='xRemove'
+              onClick={removeSong}
+            >
+              x
+            </div>
         </div>
       )
-    })
+    })} else {
+      return (
+        <div className='playlistMenuItem'  key={Math.random()}>
+          Please Add Songs
+        </div>
+      )
+    }
   }
 
   if (!loaded) {
     return (
-      null
+      <div>Loading</div>
     )
   }
 
@@ -53,6 +67,7 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
       e.stopPropagation()
     }}
     >
+    <div className='topBarEdit'>
       <div
       className='backButton'
       onClick={(e) => {
@@ -63,6 +78,7 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
       >
         back
       </div>
+    </div>
       <div className='editPlaylistTitle'>
         Editing {playlist.title}
       </div>

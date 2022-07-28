@@ -12,7 +12,7 @@ import HeartForm from '../HeartForm';
 import PlaylistContainer from '../Playlist';
 
 import { getComments } from "../../store/comment";
-import { getOneSong } from '../../store/song';
+import { getOneSong, getSongs } from '../../store/song';
 import { getHearts } from '../../store/heart';
 
 import './SongDetail.css';
@@ -42,8 +42,24 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
 
 
   useEffect(()=> {
+    dispatch(getSongs())
     dispatch(getOneSong(songId))
       .then((ret) => {
+        console.log('return', ret)
+        setCurrentSong(ret)
+      })
+      .then(() => {
+        dispatch(getComments(songId));
+      })
+      .then(() => {
+        setLoaded(true)
+      })
+    }, []);
+
+  useEffect(()=> {
+    dispatch(getOneSong(songId))
+      .then((ret) => {
+        console.log('return', ret)
         setCurrentSong(ret)
       })
       .then(() => {

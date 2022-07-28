@@ -29,6 +29,7 @@ router.get(
   '/:id',
   asyncHandler( async (req, res) => {
     const songId = req.params.id;
+    console.log('%%%%%%%%%%%%%%', songId)
     const song = await Song.findByPk(songId, {
       include: [
         { model: User },
