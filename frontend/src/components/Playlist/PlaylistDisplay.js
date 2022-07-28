@@ -8,6 +8,7 @@ import PlaylistForm from './PlaylistForm'
 import * as playlistActions from '../../store/playlist'
 
 import play from '../../images/play.svg'
+import gear_icon from '../../images/gear_icon.svg'
 
 const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   const dispatch = useDispatch();
@@ -102,7 +103,10 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   return (
     <>
     <div className='playlistDisplayContainer' onClick={(e) => showPlaylistIdFunc(e)}>
-      <div className='playlistDisplayText'>{selectedPlaylist ? selectedPlaylist : 'Playlists'}</div>
+      <div className='playlistDisplayText'>
+        {selectedPlaylist ? selectedPlaylist : 'Playlists'}
+        <div className='playlistHighlight'></div>
+      </div>
       <img className='playlistPlayIcon' src={play} height='10'></img>
       {!showCreatePlaylist &&
         <div className='playlistMenu' id={showPlaylistId} >
@@ -129,7 +133,10 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
                   }
                   }
                 }
-                >{playlist.title}</div>
+                >
+                  {playlist.title}
+                </div>
+                  <img className='playlistGearIcon' src={gear_icon} height='13'></img>
               </div>
             )
           })}
