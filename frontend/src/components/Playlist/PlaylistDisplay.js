@@ -52,13 +52,12 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   }, [trigger])
 
   useEffect(() => {
-    console.log('running running')
     setLoaded(false)
     if(userId && playlist) {
       setPlaylistArr(playlist.playlistList)
     }
     setLoaded(true)
-  }, [trigger, playlist, playlist.playlistList])
+  }, [trigger, playlist])
 
 
 

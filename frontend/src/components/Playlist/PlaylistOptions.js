@@ -31,6 +31,7 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
 
   useEffect(() => {
     // if(trigger) {
+      console.log(playlist)
       dispatch(playlistActions.getPlaylistSongs(playlist))
         .then((res) => {
           // console.log(res)
@@ -41,7 +42,8 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
           setLoaded(true)
         })
       // }
-  },[trigger])
+      console.log('run forest run')
+  },[trigger, playlistState])
 
   // useEffect(() => {
   //  setCheckPlaylist(playlistState)
