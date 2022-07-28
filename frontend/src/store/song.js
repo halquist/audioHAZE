@@ -146,7 +146,6 @@ export const getOneSong = (id) => async dispatch => {
 // sets the current song to play in the media bar
 export const selectCurrentSong = (id) => async dispatch => {
   const songId = parseInt(id, 10);
-  console.log('&&&&&&&&&&&&&&& songId', songId)
   const response = await fetch(`/api/songs/${songId}`)
   const song = await response.json();
   await dispatch(currentSong(song));

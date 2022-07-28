@@ -9,10 +9,13 @@ import * as playlistActions from '../../store/playlist'
 
 const PlaylistOptions = ({ playlist, showTrigger }) => {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
+  const playlistState = useSelector(state => state.playlist);
+
 
   const [loaded, setLoaded] = useState(false)
   const [songArr, setSongArr] = useState([])
-  const [num, setNum] = useState(0)
+  const [trigger, setTrigger] = useState(false)
 
 
   useEffect(() => {
@@ -26,7 +29,33 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
         })
   },[])
 
-  const removeSong = async () => {
+  useEffect(() => {
+    // if(trigger) {
+      dispatch(playlistActions.getPlaylistSongs(playlist))
+        .then((res) => {
+          // console.log(res)
+          setSongArr(res)
+          return res
+        })
+        .then((res) => {
+          setLoaded(true)
+        })
+      // }
+  },[trigger])
+
+  // useEffect(() => {
+  //  setCheckPlaylist(playlistState)
+  //  console.log('wooooooooo')
+  // },[playlistState])
+
+  const removeSong = async (songId) => {
+    const index = playlist.playlist.indexOf(songId)
+    await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id))
+      .then((ret) => {
+        if (ret) {
+          setTrigger((prev) => !prev)
+        }
+      })
 
   }
 
@@ -39,7 +68,7 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
         <div className='playlistMenuItem'  key={Math.random()}>
             <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText'>{num}. {song.title}</NavLink>
             <div className='xRemove'
-              onClick={removeSong}
+              onClick={(e) => removeSong(song.id)}
             >
               x
             </div>

@@ -105,4 +105,25 @@ router.put(
   })
 )
 
+// remove song from playlist
+router.put(
+  '/remove',
+  requireAuth, restoreUser,
+  asyncHandler( async (req, res) => {
+    const { userId, index, playlistId } = req.body;
+    console.log('$$$$$$$', userId, index, playlistId)
+    const removePlaylist = await Playlist.findByPk(playlistId);
+    if (removePlaylist.userId === userId) {
+      const updatePlaylist = await Playlist.remove( playlistId, index );
+      return res.json(updatePlaylist)
+    } else {
+      res.errors = new Error('Unauthorized');
+      err.errors = errors;
+      err.status = 403;
+      err.title = 'Unauthorized';
+      next(err);
+    }
+  })
+)
+
 module.exports = router;

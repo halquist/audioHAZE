@@ -49,11 +49,11 @@ module.exports = (sequelize, DataTypes) => {
     return playlist;
   }
 
-  Playlist.remove = async function ({ playlistId, songId }) {
+  Playlist.remove = async function ( playlistId, index ) {
     const playlistFind = await Playlist.findByPk(playlistId);
-    // const playlistArr = playlistFind.playlist;
-    const removeIdx = playlistFind.playlist.indexOf(songId);
-    playlistFind.playlist.splice(removeIdx, 1);
+    playlistFind.playlist.splice(index, 1);
+    const newPlaylist = playlistFind.playlist
+    playlistFind.playlist = newPlaylist
     await playlistFind.save();
     return playlistFind;
   }

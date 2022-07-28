@@ -45,7 +45,6 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
     dispatch(getSongs())
     dispatch(getOneSong(songId))
       .then((ret) => {
-        console.log('return', ret)
         setCurrentSong(ret)
       })
       .then(() => {
@@ -59,7 +58,6 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
   useEffect(()=> {
     dispatch(getOneSong(songId))
       .then((ret) => {
-        console.log('return', ret)
         setCurrentSong(ret)
       })
       .then(() => {

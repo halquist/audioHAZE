@@ -76,11 +76,9 @@ const RadioPlayer = ({  }) => {
     }
     if (playlistIndex !== 1) {
       // setPlaylistIndex((prev) => prev -= 1)
-      console.log('not one', playlist[playlistIndex - 2])
       dispatch(selectCurrentSong(playlist[playlistIndex - 2]))
       setPlaylistIndex((prev) => prev -= 1)
     } else {
-      console.log('one', playlist[playlistMaxIndex - 1])
       setPlaylistIndex(playlistMaxIndex)
       dispatch(selectCurrentSong(playlist[playlistMaxIndex - 1]))
       // setPlaylistIndex((prev) => prev += 1)

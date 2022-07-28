@@ -6,6 +6,7 @@ const ADD = 'playlist/ADD'
 const ADD_SONG = 'playlist/ADDSONG'
 const SET_CURRENT = 'playlist/SET_CURRENT'
 const GET_SONGS = 'playlist/GET_SONGS'
+const REMOVE_SONG = 'playlist/REMOVE_SONG'
 
 const load = (playlists) => {
   return {
@@ -35,6 +36,13 @@ const addSong = (data, songId) => {
   }
 }
 
+const removeSong = (index, playlistId) => {
+  return {
+    type: REMOVE_SONG,
+    payload: {index, playlistId}
+  }
+}
+
 const currentPlaylist = (playlist) => {
   return {
     type: SET_CURRENT,
@@ -48,6 +56,8 @@ const getSongs = (playlist) => {
     playlist
   }
 }
+
+
 
 // load playlists for a specific user
 export const getPlaylists = (userId) => async (dispatch) => {
@@ -105,6 +115,24 @@ export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) =>
   return data;
 }
 
+export const removeFromPlaylist = (userId, index, playlistId) => async (dispatch) => {
+  const response = await csrfFetch('/api/playlists/remove', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId,
+      index,
+      playlistId
+    })
+  })
+
+  const data = await response.json();
+  await dispatch(removeSong(index, playlistId));
+  return data;
+}
+
 // set current playlist
 export const selectCurrentPlaylist = (playlist) => async dispatch => {
   // const songId = parseInt(id, 10);
@@ -155,6 +183,9 @@ const playlistsReducer = (state = initialState, action) => {
       // console.log(newState)
       newState[action.payload.data.id].playlist.push(action.payload.songId)
       return newState;
+    case REMOVE_SONG:
+      newState = {...state}
+      newState[action.payload.playlistId].playlist.splice(action.payload.index, 1)
     case SET_CURRENT:
       newState = {...state}
       newState.currentPlaylist = action.playlist

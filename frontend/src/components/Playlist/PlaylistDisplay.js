@@ -52,12 +52,15 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   }, [trigger])
 
   useEffect(() => {
+    console.log('running running')
     setLoaded(false)
     if(userId && playlist) {
       setPlaylistArr(playlist.playlistList)
     }
     setLoaded(true)
-  }, [trigger, playlist])
+  }, [trigger, playlist, playlist.playlistList])
+
+
 
   // useEffect(() => {
   //   if(userId) {
@@ -92,12 +95,14 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
     }
   }
 
+
   // const setCurrentPlaylist = async (e) => {
   //   setSelectedPlaylist(playlist.title)
   //   dispatch(playlistActions.selectCurrentPlaylist(playlist))
   // }
 
   if (!loaded) {
+    console.log('not loaded')
     return (
       null
     )
