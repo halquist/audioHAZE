@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import PlaylistForm from './PlaylistForm'
+import PlaylistOptions from './PlaylistOptions'
 
 import * as playlistActions from '../../store/playlist'
 
@@ -20,6 +21,8 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   const [loaded, setLoaded] = useState(false)
   const [selectedPlaylist, setSelectedPlaylist] = useState('')
   const [showCreatePlaylist, setShowCreatePlaylist] = useState(false)
+  const [showPlaylistOptions, setShowPlaylistOptions] = useState(false)
+  const [editPlaylist, setEditPlaylist] = useState(null)
   const [trigger, setTrigger] = useState(false)
 
 
@@ -108,7 +111,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
         <div className='playlistHighlight'></div>
       </div>
       <img className='playlistPlayIcon' src={play} height='10'></img>
-      {!showCreatePlaylist &&
+      {!showCreatePlaylist && !showPlaylistOptions &&
         <div className='playlistMenu' id={showPlaylistId} >
           <div className='playlistMenuItemBlue'
             onClick={(e) => createPlaylist(e)}
@@ -136,7 +139,17 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
                 >
                   {playlist.title}
                 </div>
-                  <img className='playlistGearIcon' src={gear_icon} height='13'></img>
+                  <img
+                  className='playlistGearIcon'
+                  src={gear_icon}
+                  height='13'
+                  onClick={async (e) => {
+                    e.stopPropagation()
+                    e.preventDefault()
+                    await setEditPlaylist(playlist)
+                    setShowPlaylistOptions(true)
+                  }}
+                  ></img>
               </div>
             )
           })}
@@ -146,6 +159,11 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
         <div className='playlistMenu' id={showPlaylistId}>
           <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} />
           {/* <PlaylistForm trigger={setShowPlaylistId} /> */}
+        </div>
+      }
+      {showPlaylistOptions &&
+        <div className='playlistMenu' id={showPlaylistId}>
+           <PlaylistOptions playlist={editPlaylist} showTrigger={setShowPlaylistOptions} />
         </div>
       }
     </div>

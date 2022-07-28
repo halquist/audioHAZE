@@ -5,6 +5,7 @@ const LOAD_ONE = 'playlist/LOAD_ONE'
 const ADD = 'playlist/ADD'
 const ADD_SONG = 'playlist/ADDSONG'
 const SET_CURRENT = 'playlist/SET_CURRENT'
+const GET_SONGS = 'playlist/GET_SONGS'
 
 const load = (playlists) => {
   return {
@@ -37,6 +38,13 @@ const addSong = (data, songId) => {
 const currentPlaylist = (playlist) => {
   return {
     type: SET_CURRENT,
+    playlist
+  }
+}
+
+const getSongs = (playlist) => {
+  return {
+    type: GET_SONGS,
     playlist
   }
 }
@@ -104,6 +112,25 @@ export const selectCurrentPlaylist = (playlist) => async dispatch => {
   // const song = await response.json();
   const current = await dispatch(currentPlaylist(playlist));
   return current
+}
+
+// get the songs from the current playlist
+export const getPlaylistSongs = (playlist) => async dispatch => {
+  if (playlist.playlist.length) {
+    const playlistArr = playlist.playlist
+    const songArr = []
+    for (let i = 0; i < playlistArr.length; i++) {
+      const sendId = parseInt(playlistArr[i], 10);
+      const response = await fetch(`/api/songs/${sendId}`)
+      if (response) {
+        const data = await response.json();
+        songArr.push(data)
+      }
+    }
+    return songArr;
+  } else {
+    return 'empty'
+  }
 }
 
 const initialState = {playlistList: [], currentPlaylist: {}};
