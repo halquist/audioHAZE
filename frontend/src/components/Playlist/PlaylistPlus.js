@@ -7,8 +7,12 @@ import PlaylistAddForm from './PlaylistAddForm'
 
 const PlaylistPlus = ({ songId }) => {
 
+  const sessionUser = useSelector(state => state.session.user);
+
+
   const [showMenu, setShowMenu] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [createSuccess, setCreateSuccess] = useState(false)
   const [title, setTitle] = useState('')
 
   const handleClick = (e) => {
@@ -27,6 +31,21 @@ const PlaylistPlus = ({ songId }) => {
     }, 3000)
   }
 
+  const handleCreate = (title) => {
+    setTitle(title)
+    setCreateSuccess(true)
+    const successTimeout = setTimeout(() => {
+      setCreateSuccess(false)
+      setTitle('')
+      setShowMenu(false)
+      clearTimeout(successTimeout)
+    }, 3000)
+  }
+
+  if (!sessionUser) {
+    return <div></div>
+  }
+
   return (
     <div className='playlistPlusContainer'>
       <div className='playlistPlus'
@@ -34,12 +53,12 @@ const PlaylistPlus = ({ songId }) => {
       >
         +
       </div>
-      {!showMenu && !success &&
+      {!showMenu && !success && !createSuccess &&
       <span className='toolTipText'>Add to playlist</span>
       }
-      {showMenu && !success &&
+      {showMenu && !success && !createSuccess &&
       <div className='addToPlaylistContainer'>
-        <PlaylistAddForm hideTrigger={handleAdd} songId={songId} />
+        <PlaylistAddForm hideTrigger={handleAdd} trigger={handleCreate} songId={songId} />
       </div>
       }
       {success &&
@@ -48,6 +67,13 @@ const PlaylistPlus = ({ songId }) => {
           Song added to {title}
         </div>
       </div>
+      }
+      {createSuccess &&
+        <div className='successMessage'>
+          <div className='successMessageText'>
+            Playlist {title} Created
+          </div>
+        </div>
       }
     </div>
   )

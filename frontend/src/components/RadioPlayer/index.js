@@ -13,11 +13,13 @@ const RadioPlayer = ({  }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song.currentSong);
+  const sessionUser = useSelector(state => state.session.user);
   const playlistGet = useSelector(state => state.playlist.currentPlaylist)
 
   const [playlist, setPlaylist] = useState(playlistGet?.playlist || null);
   const [playlistIndex, setPlaylistIndex] = useState(0);
   const [playlistMaxIndex, setPlaylistMaxIndex] = useState(0);
+
 
   useEffect(()=> {
     if(song) {
@@ -32,23 +34,26 @@ const RadioPlayer = ({  }) => {
   },[playlistGet])
 
   const startPlaylist = async (playlist) => {
-    console.log('starting playlist outer')
+    // console.log('starting playlist outer')
     await dispatch(playlistActions.selectCurrentPlaylist(playlist))
-      .then((ret) => {
-        console.log('playlist return', ret.playlist.playlist)
+    .then((ret) => {
+        setPlaylistIndex(0)
         setPlaylist(ret.playlist.playlist)
+        setPlaylistMaxIndex(ret.playlist.playlist.length)
         return ret.playlist.playlist
       })
       .then((ret) => {
         dispatch(selectCurrentSong(ret[0]))
         setPlaylistIndex((prev) => prev += 1)
       })
+  }
 
-    await setPlaylist(playlistGet.playlist)
-    console.log(playlist)
-        console.log('starting playlist inner')
-    // if (playlist) {
-    // }
+  const updatePlaylist = async (playlist) => {
+    await dispatch(playlistActions.selectCurrentPlaylist(playlist))
+    .then((ret) => {
+        setPlaylist(ret.playlist.playlist)
+        setPlaylistMaxIndex(ret.playlist.playlist.length)
+    })
   }
 
   const loadNextSong = () => {
@@ -93,7 +98,7 @@ const RadioPlayer = ({  }) => {
     songData = (
       <>
         <NavLink exact to={`/songs/${song.id}`} className='songTitle truncate'>{song.title}</NavLink>
-        <div className='songArtist truncate'>{song.User.username}</div>
+        <div className='songArtist truncate'>{song.User?.username}</div>
       </>
     );
   }
@@ -108,7 +113,9 @@ const RadioPlayer = ({  }) => {
 
   return (
       <div id='audioPlayerWrapper'>
-        <PlaylistDisplay playlist={playlist} setPlaylist={setPlaylist} startPlaylist={startPlaylist} />
+        {sessionUser &&
+            <PlaylistDisplay playlist={playlist} setPlaylist={setPlaylist} startPlaylist={startPlaylist} updatePlaylist={updatePlaylist} />
+        }
         <div className='songDetails'>
           {song && songData}
           {!song && fillerData}

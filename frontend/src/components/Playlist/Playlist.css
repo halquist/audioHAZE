@@ -1,7 +1,7 @@
 .playlistDisplayContainer {
   position: absolute;
-  right: 10px;
-  top: 0px;
+  left: 550px;
+  top: 50px;
   color: #ffc400;
   /* filter: drop-shadow(0px 0px 5px rgb(255, 0, 0)); */
   font-size: 1.2em;
@@ -11,6 +11,9 @@
   cursor: pointer;
   z-index: 1;
   user-select: none;
+  background-color: rgb(0, 0, 0);
+  padding: 4px 10px;
+  border-radius: 6px;
 }
 
 .playlistDisplayText {
@@ -19,8 +22,9 @@
   /* cursor: pointer; */
   filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
   width: fit-content;
-  max-width: 160px;
+  /* max-width: 120px; */
   overflow: hidden;
+  white-space: nowrap;
   text-align: left;
   text-overflow: ellipsis;
 }
@@ -36,7 +40,7 @@
   filter: drop-shadow(0px 0px 10px rgb(255, 0, 0));
 }
 
-.playlistMenu {
+/* .playlistMenu {
   position: absolute;
   right: 0px;
   bottom: 20px;
@@ -47,6 +51,24 @@
   border: 1px solid rgba(255, 0, 98, 0.705);
   box-shadow: inset 0px 0px 10px rgb(255, 0, 98);
   width: 250px;
+  height: fit-content;
+  padding: 10px 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  transition: height 0.2s ease-out;
+} */
+
+.playlistMenu {
+  position: absolute;
+  right: 143px;
+  bottom: 106px;
+  display: none;
+  flex-direction: column;
+  background-color: rgba(81, 191, 255, .9);
+  border-radius: 3px;
+  border: 3px solid rgb(81, 223, 255);
+  box-shadow: inset 0px 0px 20px rgb(81, 223, 255);
+  width: 250px;
   /* max-height: 0; */
   height: fit-content;
   /* transition: max-height 0.2s ease-out; */
@@ -56,6 +78,31 @@
   overflow-y: scroll;
   overflow-x: hidden;
   transition: height 0.2s ease-out;
+  filter: drop-shadow(0px 0px 6px rgb(81, 223, 255));
+  animation: pulse_glow_blue 1s alternate ease-in-out infinite;
+}
+
+
+.playlistMenuBottom {
+  content: " ";
+  display: none;
+  position: absolute;
+  top: -34%; /* At the bottom of the tooltip */
+  left: 48%;
+  /* margin-left: -15px; */
+  border-width: 20px;
+  border-style: solid;
+  border-color: rgba(81, 223, 255, .8) transparent transparent transparent;
+  filter: drop-shadow(0px 0px 6px rgb(81, 223, 255));
+  animation: pulse_glow_blue 1s alternate ease-in-out infinite;
+}
+
+@keyframes pulse_glow_blue {
+  0% {
+  filter: drop-shadow(0px 0px 3px rgb(81, 223, 255));
+  } 100% {
+  filter: drop-shadow(0px 0px 6px rgb(81, 223, 255));
+  }
 }
 
 .playlistMenuItem {
@@ -71,7 +118,8 @@
 }
 
 .playlistMenuItemBlue {
-  color: rgb(81, 223, 255);
+  /* color: rgb(81, 223, 255); */
+  color: rgb(255, 200, 200);
   font-size: 1.1em;
 }
 
@@ -85,19 +133,21 @@
   height: fit-content;
   max-height: 300px;
   display: flex;
+  /* justify-content: center; */
   /* overflow-y: scroll; */
   transition: height 0.2s ease-out;
 }
 
 .playlistMenuText {
-  color: #d9a700;
+  /* color: #d9a700; */
+  color: #ffffff;
   /* filter: drop-shadow(0px 0px 5px rgb(255, 0, 0)); */
   cursor: pointer;
   font-size: 1.1em;
 }
 
 .playlistMenuText:hover {
-  filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
+  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
 }
 
 .playlistPlusContainer {
@@ -214,7 +264,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin: 0px;
 }
 
 .toolTipText::after {
@@ -284,4 +334,10 @@
   font-size: 2em;
   padding: 2px 10px;
   outline: none;
+}
+
+.createListBlade {
+  font-size: 2em;
+  color: white;
+  margin: 0px;
 }

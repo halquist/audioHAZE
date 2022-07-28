@@ -9,9 +9,9 @@ import * as playlistActions from '../../store/playlist'
 
 import play from '../../images/play.svg'
 
-const PlaylistDisplay = ({ startPlaylist }) => {
+const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   const dispatch = useDispatch();
-  const playlist = useSelector(state => state?.playlist);
+  const playlist = useSelector(state => state.playlist);
   const userId = useSelector((state) => state.session.user?.id)
 
   const [showPlaylistId, setShowPlaylistId] = useState('')
@@ -19,6 +19,7 @@ const PlaylistDisplay = ({ startPlaylist }) => {
   const [loaded, setLoaded] = useState(false)
   const [selectedPlaylist, setSelectedPlaylist] = useState('')
   const [showCreatePlaylist, setShowCreatePlaylist] = useState(false)
+  const [trigger, setTrigger] = useState(false)
 
 
   useEffect(() => {
@@ -32,6 +33,42 @@ const PlaylistDisplay = ({ startPlaylist }) => {
         })
     }
   },[])
+
+  useEffect(() => {
+    if(userId) {
+      setLoaded(false)
+      dispatch(playlistActions.getPlaylists(userId))
+        .then((res) => {
+          setPlaylistArr(res)
+        })
+        .then((res) => {
+          setLoaded(true)
+        })
+    }
+  }, [trigger])
+
+  useEffect(() => {
+    setLoaded(false)
+    if(userId && playlist) {
+      setPlaylistArr(playlist.playlistList)
+    }
+    setLoaded(true)
+  }, [trigger, playlist])
+
+  // useEffect(() => {
+  //   if(userId) {
+  //     setLoaded(false)
+  //     dispatch(playlistActions.getPlaylists(userId))
+  //       .then((res) => {
+  //         setPlaylistArr(res)
+  //       })
+  //       .then((res) => {
+  //         setLoaded(true)
+  //       })
+  //   }
+  // }, [trigger])
+
+
 
   const createPlaylist = (e) => {
     e.stopPropagation()
@@ -63,8 +100,9 @@ const PlaylistDisplay = ({ startPlaylist }) => {
   }
 
   return (
+    <>
     <div className='playlistDisplayContainer' onClick={(e) => showPlaylistIdFunc(e)}>
-      <div className='playlistDisplayText'>{selectedPlaylist ? selectedPlaylist : 'Playlist'}</div>
+      <div className='playlistDisplayText'>{selectedPlaylist ? selectedPlaylist : 'Playlists'}</div>
       <img className='playlistPlayIcon' src={play} height='10'></img>
       {!showCreatePlaylist &&
         <div className='playlistMenu' id={showPlaylistId} >
@@ -99,11 +137,13 @@ const PlaylistDisplay = ({ startPlaylist }) => {
       }
       {showCreatePlaylist &&
         <div className='playlistMenu' id={showPlaylistId}>
-          <PlaylistForm trigger={setShowPlaylistId} />
+          <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} />
+          {/* <PlaylistForm trigger={setShowPlaylistId} /> */}
         </div>
       }
     </div>
-
+    <div className='playlistMenuBottom' id={showPlaylistId}></div>
+    </>
   )
 }
 

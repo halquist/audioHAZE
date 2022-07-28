@@ -27,6 +27,24 @@ router.get(
   })
 );
 
+// get one playlist by id
+router.get(
+  '/:id(\\d+)',
+  asyncHandler( async (req, res) => {
+    const userId = req.params.id;
+    const playlists = await Playlist.findAll({
+      where: {
+        userId: userId
+      },
+      include: [
+        { model: User }
+      ],
+      order: [['createdAt', 'DESC']],
+    });
+    return res.json(playlists);
+  })
+);
+
 // new song validation
 const validatePlaylist = [
   check('title')

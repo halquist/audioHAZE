@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const LOAD = 'playlist/LOAD'
+const LOAD_ONE = 'playlist/LOAD_ONE'
 const ADD = 'playlist/ADD'
 const ADD_SONG = 'playlist/ADDSONG'
 const SET_CURRENT = 'playlist/SET_CURRENT'
@@ -9,6 +10,13 @@ const load = (playlists) => {
   return {
     type: LOAD,
     playlists
+  }
+}
+
+const loadOne = (playlist) => {
+  return {
+    type: LOAD_ONE,
+    playlist
   }
 }
 
@@ -37,6 +45,15 @@ const currentPlaylist = (playlist) => {
 export const getPlaylists = (userId) => async (dispatch) => {
   const id = parseInt(userId, 10);
   const response = await csrfFetch(`/api/playlists/user/${id}`)
+  const playlists = await response.json()
+  await dispatch(load(playlists))
+  return playlists
+}
+
+// load specific playlist
+export const getOnePlaylist = (playlist) => async (dispatch) => {
+  const id = parseInt(playlist.id, 10);
+  const response = await csrfFetch(`/api/playlists/${id}`)
   const playlists = await response.json()
   await dispatch(load(playlists))
   return playlists
@@ -89,16 +106,18 @@ export const selectCurrentPlaylist = (playlist) => async dispatch => {
   return current
 }
 
-const initialState = {};
+const initialState = {playlistList: [], currentPlaylist: {}};
 
 const playlistsReducer = (state = initialState, action) => {
   let newState;
   switch(action.type) {
     case LOAD:
-      newState = {}
+      newState = {...state}
+      // newState = {playlistList: []}
       action.playlists.forEach(playlist => {
         newState[playlist.id] = playlist
       })
+      newState.playlistList = action.playlists
       return newState;
     case ADD:
       newState = {...state}
