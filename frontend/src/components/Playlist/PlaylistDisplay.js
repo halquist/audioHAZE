@@ -162,7 +162,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
       }
       {showCreatePlaylist &&
         <div className='playlistMenu' id={showPlaylistId}>
-          <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} />
+          <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} reloadTrigger={setTrigger} />
           {/* <PlaylistForm trigger={setShowPlaylistId} /> */}
         </div>
       }
