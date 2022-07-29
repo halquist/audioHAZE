@@ -13,7 +13,8 @@ import PlaylistContainer from '../Playlist';
 
 import { getComments } from "../../store/comment";
 import { getOneSong, getSongs } from '../../store/song';
-import { getHearts } from '../../store/heart';
+import { PlaylistPlus } from '../Playlist';
+
 
 import './SongDetail.css';
 
@@ -31,6 +32,8 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
   const [showEditForm, setShowEditForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [rerender, setRerender] = useState(false);
+  const [image, setImage] = useState(song?.imageUrl)
+
   const [trigger, setTrigger] = useState(false);
 
 
@@ -46,6 +49,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
     dispatch(getOneSong(songId))
       .then((ret) => {
         setCurrentSong(ret)
+        setImage(ret.imageUrl)
       })
       .then(() => {
         dispatch(getComments(songId));
@@ -59,6 +63,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
     dispatch(getOneSong(songId))
       .then((ret) => {
         setCurrentSong(ret)
+        setImage(ret.imageUrl)
       })
       .then(() => {
         dispatch(getComments(songId));
@@ -76,6 +81,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
       dispatch(getOneSong(songId))
       .then((ret) => {
         setCurrentSong(ret)
+        setImage(ret.imageUrl)
       })
       .then(() => {
         setLoaded(true)
@@ -97,7 +103,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
   }
 
   // converts image link to work with google drive hosting
-  let imageLink = song.imageUrl;
+  // let imageLink = song.imageUrl;
   // if (song && song.imageUrl.startsWith('https://drive.google.com')) {
   //   imageLink = 'https://drive.google.com/uc?export=download&id=' + song.imageUrl.split('/')[5];
   // }
@@ -111,15 +117,22 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
   return (
     <div id='mainSongDetailContent'>
       <div id='songDetailBlade'>
-        <div className='imagePlay' style={{
-            backgroundImage: `url(${imageLink})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'
-          }}></div>
-          <div id='heartedContainer'>
-            {/* <PlaylistContainer songId={currentSong.id} trigger={trigger} setTrigger={setTrigger} /> */}
-            <HeartForm target={currentSong} sessionUserId={sessionUserId} trigger ={setHearted}/>
+      <div className='imagePlay' style={{
+          backgroundImage: `url(${image})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
+        }}>
+          <div className='spacerDiv'></div>
+          {/* <div className='mainPlayButtonDiv'>
+            <PlayButton target={song.id}/>
+          </div> */}
+            <div className='heartContainerPush'>
+              <PlaylistPlus songId={song.id} />
+              <div className='heartContainerFront'>
+              <HeartForm target={currentSong} sessionUserId={sessionUserId} trigger ={setHearted}/>
+              </div>
+            </div>
           </div>
           <div id='titleArtistPlay'>
             <PlayButton target={currentSong.id}/>

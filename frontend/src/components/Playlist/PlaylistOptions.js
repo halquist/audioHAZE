@@ -30,19 +30,14 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
   },[])
 
   useEffect(() => {
-    // if(trigger) {
-      console.log(playlist)
       dispatch(playlistActions.getPlaylistSongs(playlist))
         .then((res) => {
-          // console.log(res)
           setSongArr(res)
           return res
         })
         .then((res) => {
           setLoaded(true)
         })
-      // }
-      console.log('run forest run')
   },[trigger, playlistState])
 
   // useEffect(() => {
