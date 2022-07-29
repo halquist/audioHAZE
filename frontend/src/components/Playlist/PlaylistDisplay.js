@@ -114,7 +114,10 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
         {selectedPlaylist ? selectedPlaylist : 'Playlists'}
         <div className='playlistHighlight'></div>
       </div>
-      <img className='playlistPlayIcon' src={play} height='10'></img>
+      {showPlaylistId === '' ?
+      <img className='playlistPlayIcon' src={play} height='10'></img>:
+      <div className='playlistPlayIcon'>x</div>
+      }
       {!showCreatePlaylist && !showPlaylistOptions &&
         <div className='playlistMenu' id={showPlaylistId} >
           <div className='playlistMenuItemBlue'

@@ -31,8 +31,12 @@
 
 .playlistPlayIcon {
   margin-left: 4px;
-  filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
-  /* fill: #00ff77; */
+  filter: drop-shadow(0px 0px 4px rgb(255, 0, 0));
+}
+
+.playlistDisplayText:hover ~ .playlistPlayIcon {
+  color: #d9a700;
+  fill:#d9a700;
 }
 
 .playlistGearIcon {
