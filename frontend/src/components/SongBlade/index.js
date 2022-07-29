@@ -14,8 +14,8 @@ const SongBlade = ({song, sessionUserId, trigger}) => {
   // const song = useSelector(state => state.song[songPass.id]);
   // const songs = useSelector(state => state.song);
   const [image, setImage] = useState(song.imageUrl)
-  const [songUrl, setSongUrl] = useState(song.url)
-  const [hearted, setHearted] = useState(false);
+  // const [songUrl, setSongUrl] = useState(song.url)
+  // const [hearted, setHearted] = useState(false);
 
 
   const dispatch = useDispatch();
