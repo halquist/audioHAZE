@@ -86,9 +86,10 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   const showPlaylistIdFunc = (e) => {
     e.stopPropagation()
     e.preventDefault()
+    setShowCreatePlaylist(false)
+    setShowPlaylistOptions(false)
     if (showPlaylistId === '') {
       setShowPlaylistId('showPlaylist')
-      setShowCreatePlaylist(false)
     } else {
       setShowPlaylistId('')
     }
