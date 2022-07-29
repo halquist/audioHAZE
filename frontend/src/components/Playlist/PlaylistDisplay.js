@@ -102,13 +102,10 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   // }
 
   if (!loaded) {
-    console.log('not loaded')
     return (
       null
     )
   }
-
-  console.log(showCreatePlaylist, showPlaylistOptions)
 
   return (
     <>

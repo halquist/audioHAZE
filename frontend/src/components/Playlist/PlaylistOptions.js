@@ -88,7 +88,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
           >
             yes
           </div>
-          <div className='backButton'
+          <div className='noButton'
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
