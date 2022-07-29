@@ -149,6 +149,8 @@
   align-items: center;
   padding: 4px 0px;
   border-bottom: 1px solid rgba(81, 223, 255, 0.729);
+
+
 }
 
 .playlistMenuItemBlue {
@@ -186,6 +188,9 @@
   cursor: pointer;
   font-size: 1.1em;
   width: 100%;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
 }
 
 .playlistMenuText:hover {
@@ -387,13 +392,25 @@
 .topBarEdit {
   /* padding: 0px 0px 4px 0px; */
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   cursor: auto;
+  border-bottom: 1px solid rgba(81, 223, 255, 0.729);
+  padding: 4px 0px 0px 0px;
+
 }
 
 .backButton {
   /* text-align: right; */
   color: #ffc400;
+  font-size: 1.1em;
+  padding: 0px 0px 4px 0px;
+  cursor: pointer;
+  /* border-bottom: 1px solid rgba(81, 223, 255, 0.729); */
+}
+
+.deleteButton {
+  /* text-align: right; */
+  color: #ff9829;
   font-size: 1.1em;
   padding: 0px 0px 4px 0px;
   cursor: pointer;
@@ -406,6 +423,8 @@
 
 .editPlaylistTitle {
   color: rgb(134, 239, 255);
+  /* color: rgba(60, 151, 203, 0.8); */
+  /* background-color: rgba(81, 223, 255, 0.729); */
   user-select: none;
   cursor: default;
   font-size: 1.1em;
@@ -418,6 +437,6 @@
 }
 
 .xRemove:hover {
-  color: #ff8800;
+  color: #ff3700;
   filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
 }

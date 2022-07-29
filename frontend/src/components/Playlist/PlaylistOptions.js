@@ -62,7 +62,7 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
     return songArr.map((song) => {
       num ++
       return (
-        <div className='playlistMenuItem'  key={Math.random()}>
+        <div className='playlistMenuItem truncate'  key={Math.random()}>
             <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText'>{num}. {song.title}</NavLink>
             <div className='xRemove'
               onClick={(e) => removeSong(song.id)}
@@ -93,7 +93,20 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
       e.stopPropagation()
     }}
     >
+      <div className='editPlaylistTitle'>
+        Editing {playlist.title}
+      </div>
     <div className='topBarEdit'>
+      <div
+      className='deleteButton'
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        showTrigger(false)
+      }}
+      >
+        delete
+      </div>
       <div
       className='backButton'
       onClick={(e) => {
@@ -105,9 +118,6 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
         back
       </div>
     </div>
-      <div className='editPlaylistTitle'>
-        Editing {playlist.title}
-      </div>
       {songArrFunc()}
     </div>
   )
