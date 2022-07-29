@@ -94,6 +94,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Song, { foreignKey: 'userId' })
     User.hasMany(models.Comment, { foreignKey: 'userId' })
     User.hasMany(models.Heart, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.Playlist, { foreignKey: 'userId' })
   };
   return User;
 };

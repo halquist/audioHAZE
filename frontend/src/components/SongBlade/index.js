@@ -5,6 +5,7 @@ import { getSongs } from '../../store/song';
 
 import PlayButton from '../PlayButton';
 import HeartForm from '../HeartForm';
+import { PlaylistPlus } from '../Playlist';
 
 import './SongBlade.css';
 
@@ -40,6 +41,7 @@ const SongBlade = ({song, sessionUserId, trigger}) => {
             <PlayButton target={song.id}/>
           </div>
             <div className='heartContainerPush'>
+              <PlaylistPlus songId={song.id} />
               <div className='heartContainerFront'>
                 <HeartForm target={song} sessionUserId={sessionUserId} trigger={trigger} />
               </div>

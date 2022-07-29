@@ -1,5 +1,6 @@
 .playButtonForm {
-  width: 100px;
+  width: 100%;
+  height: 100%;
   margin-bottom: 0px;
   padding-right: 0px;
   display: flex;
@@ -10,9 +11,9 @@
 
 .playButton {
   background-color: transparent;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  /* border-radius: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;

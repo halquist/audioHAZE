@@ -61,7 +61,9 @@ function App() {
         </Route>
       </Switch>
       )}
-      <AudioBar />
+      {isLoaded &&
+        <AudioBar />
+      }
     </>
   );
 }

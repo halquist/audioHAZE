@@ -68,9 +68,9 @@ const FrontPage = ({isLoaded}) => {
         popSongList = ret.map(song => song).sort((songA, songB) => songB.Hearts.length - songA.Hearts.length);
         setPopList(popSongList);
         // create various category lists of songs for front page display
-        setLatestList(ret.slice(0, 8));
-        setOldestList(ret.slice(ret.length - 8, ret.length));
-        setPicksList(randomSongList.slice(songList.length - 8, songList.length))
+        setLatestList(ret.slice(0, 6));
+        setOldestList(ret.slice(ret.length - 6, ret.length));
+        setPicksList(randomSongList.slice(songList.length - 6, songList.length))
         // setPicksList(randSongList.slice(songList.length - 8, songList.length))
       })
       .then((randSongList) => {
@@ -90,10 +90,10 @@ const FrontPage = ({isLoaded}) => {
   useEffect(() => {
     popSongList = songList.map(song => song).sort((songA, songB) => songB.Hearts.length - songA.Hearts.length);
     setSongList(song.songList);
-    setLatestList(songList.slice(0, 8));
-    setOldestList(songList.slice(songList.length - 8, songList.length));
-    setPopList(popSongList.slice(0, 8));
-    setPicksList(randomSongList.slice(songList.length - 8, songList.length))
+    setLatestList(songList.slice(0, 6));
+    setOldestList(songList.slice(songList.length - 6, songList.length));
+    setPopList(popSongList.slice(0, 6));
+    setPicksList(randomSongList.slice(songList.length - 6, songList.length))
   }, [songList]);
 
 

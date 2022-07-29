@@ -53,6 +53,13 @@ const remove = (song) => {
   }
 };
 
+const addSongList = (song) => {
+  return {
+    type: ADD_SONG_LIST,
+    song
+  }
+};
+
 
 // load songs from database on load
 export const getSongs = () => async dispatch => {

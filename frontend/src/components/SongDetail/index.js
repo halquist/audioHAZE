@@ -9,9 +9,10 @@ import CommentForm from '../CommentForm';
 import LoginFormModalButton from '../LoginFormModal';
 import CommentDisplay from '../CommentDisplay';
 import HeartForm from '../HeartForm';
+import PlaylistContainer from '../Playlist';
 
 import { getComments } from "../../store/comment";
-import { getOneSong } from '../../store/song';
+import { getOneSong, getSongs } from '../../store/song';
 import { getHearts } from '../../store/heart';
 
 import './SongDetail.css';
@@ -30,6 +31,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
   const [showEditForm, setShowEditForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [rerender, setRerender] = useState(false);
+  const [trigger, setTrigger] = useState(false);
 
 
 
@@ -38,6 +40,20 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
     sessionUserId = sessionUser.id
   }
 
+
+  useEffect(()=> {
+    dispatch(getSongs())
+    dispatch(getOneSong(songId))
+      .then((ret) => {
+        setCurrentSong(ret)
+      })
+      .then(() => {
+        dispatch(getComments(songId));
+      })
+      .then(() => {
+        setLoaded(true)
+      })
+    }, []);
 
   useEffect(()=> {
     dispatch(getOneSong(songId))
@@ -102,6 +118,7 @@ const SongDetail = ({ isLoaded, setUploading, uploading, display, setType }) => 
             backgroundRepeat: 'no-repeat'
           }}></div>
           <div id='heartedContainer'>
+            {/* <PlaylistContainer songId={currentSong.id} trigger={trigger} setTrigger={setTrigger} /> */}
             <HeartForm target={currentSong} sessionUserId={sessionUserId} trigger ={setHearted}/>
           </div>
           <div id='titleArtistPlay'>

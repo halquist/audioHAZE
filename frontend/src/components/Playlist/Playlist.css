@@ -1,0 +1,423 @@
+.playlistDisplayContainer {
+  position: absolute;
+  left: 550px;
+  top: 50px;
+  color: #ffc400;
+  /* filter: drop-shadow(0px 0px 5px rgb(255, 0, 0)); */
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  user-select: none;
+  background-color: rgb(0, 0, 0);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.playlistDisplayText {
+  /* display: flex; */
+  /* justify-content: flex-start; */
+  /* cursor: pointer; */
+  filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
+  width: 140px;
+  /* max-width: 120px; */
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.playlistPlayIcon {
+  margin-left: 4px;
+  filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
+  /* fill: #00ff77; */
+}
+
+.playlistGearIcon {
+  /* margin-right: 6px; */
+  /* z-index: 11; */
+  /* display: none; */
+  user-select: none;
+  opacity: 0;
+  /* transition: .2s; */
+  transition-property: opacity;
+  transition-duration: .6s;
+}
+
+.playlistMenuItem:hover > .playlistGearIcon {
+  opacity: 1;
+}
+
+.playlistGearIcon:hover {
+  /* color: #d9a700; */
+  filter: drop-shadow(0px 0px 4px rgb(0, 0, 0));
+}
+
+.playlistDisplayText:hover {
+  color: #d9a700;
+  filter: drop-shadow(0px 0px 10px rgb(255, 0, 0));
+}
+
+/* .playlistMenu {
+  position: absolute;
+  right: 0px;
+  bottom: 20px;
+  display: none;
+  flex-direction: column;
+  background-color: rgb(0, 0, 0);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 0, 98, 0.705);
+  box-shadow: inset 0px 0px 10px rgb(255, 0, 98);
+  width: 250px;
+  height: fit-content;
+  padding: 10px 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  transition: height 0.2s ease-out;
+} */
+
+.playlistMenu {
+  position: absolute;
+  right: -61px;
+  bottom: 62px;
+  display: none;
+  flex-direction: column;
+  background-color: rgba(60, 151, 203, 0.8);
+  /* border-radius: 3px; */
+  border-radius: 3px 30px 3px 3px;
+  border: 3px solid rgb(81, 223, 255);
+  box-shadow: inset 0px 0px 20px rgb(81, 223, 255);
+  width: 250px;
+  /* max-height: 0; */
+  height: fit-content;
+  /* transition: max-height 0.2s ease-out; */
+  padding: 10px 10px;
+  /* overflow: hidden; */
+  /* overflow: hidden; */
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: height 0.2s ease-out;
+  filter: drop-shadow(0px 0px 6px rgb(81, 223, 255));
+  animation: pulse_glow_blue 1s alternate ease-in-out infinite;
+}
+
+
+.playlistMenuBottom {
+  content: " ";
+  display: none;
+  position: absolute;
+  top: 14%; /* At the bottom of the tooltip */
+  left: 107%;
+  /* margin-left: -15px; */
+  border-width: 20px;
+  border-style: solid;
+  border-color: rgba(81, 223, 255, .8) transparent transparent transparent;
+  filter: drop-shadow(0px 0px 6px rgb(81, 223, 255));
+  animation: pulse_glow_blue 1s alternate ease-in-out infinite;
+}
+
+.playlistHighlight {
+  position: absolute;
+}
+
+@keyframes pulse_glow_blue {
+  0% {
+  filter: drop-shadow(0px 0px 4px rgb(81, 223, 255));
+  } 100% {
+  filter: drop-shadow(0px 0px 8px rgb(81, 223, 255));
+  }
+}
+
+.playlistMenuItem {
+  /* overflow: hidden; */
+  /* transition: height 0.2s ease-out; */
+  /* display: none; */
+  /* width: 200px; */
+  /* height: 0px; */
+  /* overflow: hidden; */
+  /* transition-property: height; */
+  /* transition-duration: .2s; */
+  /* transition: max-height 0.2s ease-out; */
+  /* overflow-y: hidden; */
+  /* white-space: nowrap; */
+  /* text-align: left; */
+  /* text-overflow: ellipsis; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0px;
+  border-bottom: 1px solid rgba(81, 223, 255, 0.729);
+}
+
+.playlistMenuItemBlue {
+  /* color: rgb(81, 223, 255); */
+  /* color: rgb(255, 255, 255); */
+  color: #ffc400;
+  /* filter: drop-shadow(0px 0px 3px rgb(255, 0, 234)); */
+  font-size: 1.1em;
+  padding: 0px 0px 4px 0px;
+  border-bottom: 1px solid rgba(81, 223, 255, 0.729);
+}
+
+.playlistMenuItemBlue:hover {
+  /* font-size: 1.5em; */
+  filter: drop-shadow(0px 0px 5px rgb(0, 221, 255));
+}
+
+#showPlaylist {
+  width: 250px;
+  height: fit-content;
+  max-height: 300px;
+  display: flex;
+  /* justify-content: center; */
+  /* overflow-y: scroll; */
+  transition: height 0.2s ease-out;
+}
+
+.playlistMenuText {
+  /* color: #d9a700; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  color: #ffffff;
+  /* filter: drop-shadow(0px 0px 5px rgb(255, 0, 0)); */
+  cursor: pointer;
+  font-size: 1.1em;
+  width: 100%;
+}
+
+.playlistMenuText:hover {
+  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+}
+
+.playlistPlusContainer {
+  position: relative;
+  /* color: white; */
+  /* font-size: 2em; */
+  /* background-color: rgba(0, 0, 0, 0.499); */
+  border-radius: 50%;
+  width: 40px;
+  /* text-align: center; */
+  user-select: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.playlistPlus {
+  position: relative;
+  color: white;
+  font-size: 2em;
+  background-color: rgba(0, 0, 0, 0.499);
+  border-radius: 50%;
+  width: 40px;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  transition: .1s;
+}
+
+.playlistPlus:hover {
+  background-color: rgba(29, 29, 29, 0.499);
+}
+
+
+.playlistPlus:active {
+  transform: scale(.97);
+  /* transform: scale(.95) rotate(180deg); */
+}
+
+.toolTipText {
+  visibility: hidden;
+  width: 124px;
+  font-size: 1em;
+  color: white;
+  background-color: rgba(29, 29, 29, 0.499);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  top: -36px;
+  left: 0px;
+  z-index: 1;
+  cursor: default;
+  user-select: none;
+}
+
+.playlistPlusContainer:hover .toolTipText {
+  visibility: visible;
+}
+
+.toolTipText::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 16%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(29, 29, 29, 0.499) transparent transparent transparent;
+}
+
+.playlistFormContainer {
+  width: 230px;
+  height: fit-content;
+  font-size: .5em;
+  background-color: rgba(29, 29, 29, 0.499);
+  text-align: center;
+  border-radius: 6px;
+  padding: 15px 0px;
+  position: absolute;
+  bottom: 46px;
+  left: 0px;
+  z-index: 10;
+  cursor: default;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+}
+
+.playlistFormContainer2 {
+  /* width: 230px; */
+  /* height: fit-content; */
+  /* font-size: .5em; */
+  /* background-color: rgba(29, 29, 29, 0.499); */
+  /* text-align: center; */
+  /* border-radius: 6px; */
+  /* padding: 15px 0px; */
+  /* position: absolute; */
+  /* bottom: 46px; */
+  /* left: 0px; */
+  /* z-index: 10; */
+  /* cursor: default; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.playlistCreateForm {
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+.toolTipText::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 16%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(29, 29, 29, 0.499) transparent transparent transparent;
+}
+
+.playlistFormContainer::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 9%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(29, 29, 29, 0.499) transparent transparent transparent;
+}
+
+.playlistAddToForm {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 100%;
+  height: 100%;
+  min-width: 100px;
+  margin: 0px;
+}
+
+.successMessage {
+  width: 230px;
+  height: fit-content;
+  font-size: 1em;
+  color: white;
+  background-color: rgba(29, 29, 29, 0.499);
+  text-align: center;
+  border-radius: 6px;
+  padding: 15px 0px;
+  position: absolute;
+  bottom: 46px;
+  left: 0px;
+  z-index: 10;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: clip;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+}
+
+.playlistSelect {
+  /* -webkit-appearance: none; */
+  background-color: rgb(38, 102, 134);
+  border: 1px solid rgb(0, 255, 179);
+  border-radius: 3px;
+  box-shadow: inset 0px 0px 4px rgb(0, 255, 179);
+  color: white;
+  width: 200px;
+  font-size: 2em;
+  padding: 2px 10px;
+  outline: none;
+}
+
+.createListBlade {
+  font-size: 2em;
+  color: white;
+  margin: 0px;
+}
+
+.topBarEdit {
+  /* padding: 0px 0px 4px 0px; */
+  display: flex;
+  justify-content: flex-end;
+  cursor: auto;
+}
+
+.backButton {
+  /* text-align: right; */
+  color: #ffc400;
+  font-size: 1.1em;
+  padding: 0px 0px 4px 0px;
+  cursor: pointer;
+  /* border-bottom: 1px solid rgba(81, 223, 255, 0.729); */
+}
+
+.backButton:hover {
+  filter: drop-shadow(0px 0px 5px rgb(0, 221, 255));
+}
+
+.editPlaylistTitle {
+  color: rgb(134, 239, 255);
+  user-select: none;
+  cursor: default;
+  font-size: 1.1em;
+  border-bottom: 1px solid rgba(81, 223, 255, 0.729);
+  padding: 0px 0px 4px 0px;
+}
+
+.xRemove {
+  color: #ffc400;
+}
+
+.xRemove:hover {
+  color: #ff8800;
+  filter: drop-shadow(0px 0px 5px rgb(255, 0, 0));
+}
