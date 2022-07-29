@@ -46,7 +46,11 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
   //  console.log('wooooooooo')
   // },[playlistState])
 
-  const removeSong = async (songId) => {
+  const removeSong = async (songId, num) => {
+    const deleteId = document.getElementById(songId + '.' + num)
+    console.log(deleteId)
+    deleteId.innerHTML =
+    `<div className='playlistMenuText' >deleting...</div>`
     const index = playlist.playlist.indexOf(songId)
     await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id))
       .then((ret) => {
@@ -129,12 +133,14 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
     if (songArr !== 'empty'){
     let num = 0
     return songArr.map((song) => {
-      num ++
+      num++
       return (
-        <div className='playlistMenuItem'  key={Math.random()}>
-            <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText'>{num}. {song.title}</NavLink>
+        <div className='playlistMenuItem'  key={`${song.id}.${num}`}>
+            <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' id={`${song.id}.${num}`}>{num}. {song.title}</NavLink>
             <div className='xRemove'
-              onClick={(e) => removeSong(song.id)}
+              onClick={(e) => {
+                removeSong(song.id, num)
+              }}
             >
               x
             </div>
@@ -142,8 +148,8 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
       )
     })} else {
       return (
-        <div className='playlistMenuItem'  key={Math.random()}>
-          Please Add Songs
+        <div className='editPlaylistTitle' >
+          Playlist is Empty
         </div>
       )
     }
@@ -151,7 +157,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
 
   if (!loaded) {
     return (
-      <div>Loading</div>
+      <div>Loading...</div>
     )
   }
 

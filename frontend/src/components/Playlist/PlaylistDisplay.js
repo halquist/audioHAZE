@@ -108,6 +108,8 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
     )
   }
 
+  console.log(showCreatePlaylist, showPlaylistOptions)
+
   return (
     <>
     <div className='playlistDisplayContainer' onClick={(e) => showPlaylistIdFunc(e)}>
@@ -162,7 +164,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
       }
       {showCreatePlaylist &&
         <div className='playlistMenu' id={showPlaylistId}>
-          <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} reloadTrigger={setTrigger} />
+          <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} reloadTrigger={setShowCreatePlaylist} />
           {/* <PlaylistForm trigger={setShowPlaylistId} /> */}
         </div>
       }
