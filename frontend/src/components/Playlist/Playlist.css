@@ -149,8 +149,6 @@
   align-items: center;
   padding: 4px 0px;
   border-bottom: 1px solid rgba(81, 223, 255, 0.729);
-
-
 }
 
 .playlistMenuItemBlue {
@@ -415,6 +413,19 @@
   padding: 0px 0px 4px 0px;
   cursor: pointer;
   /* border-bottom: 1px solid rgba(81, 223, 255, 0.729); */
+}
+
+.deleteButton2 {
+  /* text-align: right; */
+  color: #ff9829;
+  font-size: 1.1em;
+  padding: 0px 0px 4px 0px;
+  cursor: default;
+  /* border-bottom: 1px solid rgba(81, 223, 255, 0.729); */
+}
+
+.deleteButton:hover {
+  filter: drop-shadow(0px 0px 3px rgb(255, 187, 0));
 }
 
 .backButton:hover {

@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 import * as playlistActions from '../../store/playlist'
 
-const PlaylistOptions = ({ playlist, showTrigger }) => {
+const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const playlistState = useSelector(state => state.playlist);
@@ -16,6 +16,7 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
   const [loaded, setLoaded] = useState(false)
   const [songArr, setSongArr] = useState([])
   const [trigger, setTrigger] = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
 
 
   useEffect(() => {
@@ -53,8 +54,76 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
           setTrigger((prev) => !prev)
         }
       })
-
   }
+
+  const deletePlaylist = async () => {
+    await dispatch(playlistActions.removePlaylist(playlist))
+    .then((ret) => {
+      if (ret.message === 'Success') {
+        setTrigger((prev) => !prev)
+        setShowDelete(false)
+        showTrigger(false)
+        reloadTrigger((prev) => !prev)
+      }
+    })
+  }
+
+  const deleteMenu = () => {
+    if (showDelete) {
+      return (
+        <>
+          <div className='deleteButton2'>
+            confirm delete:
+          </div>
+          <div className='backButton'
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            deletePlaylist()
+          }}
+          >
+            yes
+          </div>
+          <div className='backButton'
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            setShowDelete(false)
+          }}
+          >
+            no
+          </div>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <div
+          className='deleteButton'
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            setShowDelete(true)
+          }}
+          >
+            delete
+          </div>
+          <div
+          className='backButton'
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            showTrigger(false)
+          }}
+          >
+            back
+          </div>
+        </>
+      )
+    }
+  }
+
+
 
   const songArrFunc = () => {
     if (songArr !== 'empty'){
@@ -62,7 +131,7 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
     return songArr.map((song) => {
       num ++
       return (
-        <div className='playlistMenuItem truncate'  key={Math.random()}>
+        <div className='playlistMenuItem'  key={Math.random()}>
             <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText'>{num}. {song.title}</NavLink>
             <div className='xRemove'
               onClick={(e) => removeSong(song.id)}
@@ -97,26 +166,8 @@ const PlaylistOptions = ({ playlist, showTrigger }) => {
         Editing {playlist.title}
       </div>
     <div className='topBarEdit'>
-      <div
-      className='deleteButton'
-      onClick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        showTrigger(false)
-      }}
-      >
-        delete
-      </div>
-      <div
-      className='backButton'
-      onClick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        showTrigger(false)
-      }}
-      >
-        back
-      </div>
+      {deleteMenu()}
+
     </div>
       {songArrFunc()}
     </div>

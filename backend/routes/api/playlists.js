@@ -68,6 +68,28 @@ router.post(
   })
 );
 
+// create new playlist
+router.delete(
+  '/:id(\\d+)',
+  requireAuth, restoreUser,
+  asyncHandler( async (req, res) => {
+    const id = req.params.id;
+    // const { userId, title } = req.body;
+    const deletePlaylist = await Playlist.delete( id );
+    if (deletePlaylist.message === 'Success') {
+      return res.json({
+        message: 'Success'
+      })
+    } else {
+      return res.json({
+        message: 'Failed'
+      })
+    }
+  })
+);
+
+
+
 // add song validation
 const validatePlaylistAdd = [
   check('songId')

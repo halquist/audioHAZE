@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD = 'playlist/LOAD'
 const LOAD_ONE = 'playlist/LOAD_ONE'
 const ADD = 'playlist/ADD'
+const REMOVE = 'playlist/REMOVE'
 const ADD_SONG = 'playlist/ADDSONG'
 const SET_CURRENT = 'playlist/SET_CURRENT'
 const GET_SONGS = 'playlist/GET_SONGS'
@@ -25,6 +26,13 @@ const loadOne = (playlist) => {
 const add = (playlist) => {
   return {
     type: ADD,
+    playlist
+  }
+}
+
+const remove = (playlist) => {
+  return {
+    type: REMOVE,
     playlist
   }
 }
@@ -92,6 +100,23 @@ export const createPlaylist = (userId, title) => async (dispatch) => {
   })
   const data = await response.json();
   dispatch(add(data))
+  return data
+}
+
+// remove playlist
+export const removePlaylist = (playlist) => async (dispatch) => {
+  const { id } = playlist
+  const response = await csrfFetch(`/api/playlists/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id
+    })
+  })
+  const data = await response.json();
+  dispatch(remove(id))
   return data
 }
 
@@ -178,6 +203,11 @@ const playlistsReducer = (state = initialState, action) => {
       newState = {...state}
       newState[action.playlist.id] = action.playlist
       return newState;
+    case REMOVE:
+      newState = {...state}
+      console.log('store playlist', action.playlist)
+      delete newState[action.playlist.id]
+      return newState;
     case ADD_SONG:
       newState = {...state}
       // console.log(newState)
@@ -186,6 +216,7 @@ const playlistsReducer = (state = initialState, action) => {
     case REMOVE_SONG:
       newState = {...state}
       newState[action.payload.playlistId].playlist.splice(action.payload.index, 1)
+      return newState
     case SET_CURRENT:
       newState = {...state}
       newState.currentPlaylist = action.playlist
