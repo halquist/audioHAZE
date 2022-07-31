@@ -57,7 +57,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
     console.log('deleteId', deleteId)
     console.log(songId + '.' + num)
     deleteId.innerHTML =
-    "<div className='playlistMenuText' id={`${song.id}.${i}`}>deleting...</div>"
+    "<div className='playlistMenuText'}>deleting...</div>"
     const index = playlist.playlist.indexOf(songId)
     await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id))
       .then((ret) => {
@@ -140,7 +140,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
             setShowDelete(true)
           }}
           >
-            delete
+            Delete Playlist
           </div>
           <div
           className='backButton'
@@ -150,7 +150,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
             showTrigger(false)
           }}
           >
-            back
+            Back
           </div>
         </>
       )
