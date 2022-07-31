@@ -170,7 +170,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
       }
       {showPlaylistOptions &&
         <div className='playlistMenu' id={showPlaylistId}>
-           <PlaylistOptions playlist={editPlaylist} showTrigger={setShowPlaylistOptions} reloadTrigger={setTrigger} />
+           <PlaylistOptions playlist={editPlaylist} showTrigger={setShowPlaylistOptions} reloadTrigger={setTrigger} playlistSend={playlistArr} />
         </div>
       }
     </div>

@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 import * as playlistActions from '../../store/playlist'
 
-const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
+const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const playlistState = useSelector(state => state.playlist);
@@ -17,7 +17,6 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
   const [songArr, setSongArr] = useState([])
   const [trigger, setTrigger] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
-
 
   useEffect(() => {
       dispatch(playlistActions.getPlaylistSongs(playlist))
@@ -31,10 +30,20 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
   },[])
 
   useEffect(() => {
+      setLoaded(false)
       dispatch(playlistActions.getPlaylistSongs(playlist))
         .then((res) => {
-          setSongArr(res)
-          return res
+          playlistSend.forEach(element => {
+            if (element.id === playlist.id) {
+              dispatch(playlistActions.getPlaylistSongs(element))
+              .then((res) => {
+                setSongArr(res)
+              })
+              .then((res) => {
+                setLoaded(true)
+              })
+            }
+          })
         })
         .then((res) => {
           setLoaded(true)
@@ -48,14 +57,17 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
 
   const removeSong = async (songId, num) => {
     const deleteId = document.getElementById(songId + '.' + num)
-    console.log(deleteId)
+    console.log('deleteId', deleteId)
+    console.log(songId + '.' + num)
     deleteId.innerHTML =
-    `<div className='playlistMenuText' >deleting...</div>`
+    "<div className='playlistMenuText' id={`${song.id}.${i}`}>deleting...</div>"
     const index = playlist.playlist.indexOf(songId)
     await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id))
       .then((ret) => {
         if (ret) {
           setTrigger((prev) => !prev)
+          deleteId.innerHTML = null
+          deleteId.classList.remove('playlistMenuItem')
         }
       })
   }
@@ -68,6 +80,27 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
         setShowDelete(false)
         showTrigger(false)
         reloadTrigger((prev) => !prev)
+      }
+    })
+  }
+
+  const refresh = () => {
+    console.log('refresh')
+    setTrigger((prev) => !prev)
+    setShowDelete(false)
+    // showTrigger(false)
+    reloadTrigger((prev) => !prev)
+    playlistSend.forEach(element => {
+      if (element.id === playlist.id) {
+        console.log('here here')
+        dispatch(playlistActions.getPlaylistSongs(element))
+        .then((res) => {
+          // console.log(res)
+          setSongArr(res)
+        })
+        .then((res) => {
+          setLoaded(true)
+        })
       }
     })
   }
@@ -131,22 +164,22 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
 
   const songArrFunc = () => {
     if (songArr !== 'empty'){
-    let num = 0
-    return songArr.map((song) => {
-      num++
+    return songArr.map((song, i) => {
       return (
-        <div className='playlistMenuItem'  key={`${song.id}.${num}`}>
-            <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' id={`${song.id}.${num}`}>{num}. {song.title}</NavLink>
+        <div className='playlistMenuItem'  id={`${song.id}.${i}`} key={`${song.id}.${i}`}>
+            <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' >{i + 1}. {song.title}</NavLink>
             <div className='xRemove'
               onClick={(e) => {
-                removeSong(song.id, num)
+                console.log('click stuff', song.id, i)
+                removeSong(song.id, i)
               }}
-            >
+              >
               x
             </div>
         </div>
       )
-    })} else {
+    })
+  } else {
       return (
         <div className='editPlaylistTitle' >
           Playlist is Empty
@@ -168,8 +201,19 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger }) => {
       e.stopPropagation()
     }}
     >
-      <div className='editPlaylistTitle'>
-        Editing {playlist.title}
+      <div className='editTopBar'>
+        <div className='editPlaylistTitle'>
+          Editing {playlist.title}
+        </div>
+        <div className='refreshButton'
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            refresh()
+          }}
+        >
+          R
+        </div>
       </div>
     <div className='topBarEdit'>
       {deleteMenu()}
