@@ -30,7 +30,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
   },[])
 
   useEffect(() => {
-      setLoaded(false)
+      // setLoaded(false)
       dispatch(playlistActions.getPlaylistSongs(playlist))
         .then((res) => {
           playlistSend.forEach(element => {
@@ -45,10 +45,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
             }
           })
         })
-        .then((res) => {
-          setLoaded(true)
-        })
-  },[trigger, playlistState])
+  },[playlistState])
 
   // useEffect(() => {
   //  setCheckPlaylist(playlistState)
@@ -66,8 +63,8 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
       .then((ret) => {
         if (ret) {
           setTrigger((prev) => !prev)
-          deleteId.innerHTML = null
-          deleteId.classList.remove('playlistMenuItem')
+          // deleteId.innerHTML = null
+          // deleteId.classList.remove('playlistMenuItem')
         }
       })
   }
@@ -84,26 +81,26 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
     })
   }
 
-  const refresh = () => {
-    console.log('refresh')
-    setTrigger((prev) => !prev)
-    setShowDelete(false)
-    // showTrigger(false)
-    reloadTrigger((prev) => !prev)
-    playlistSend.forEach(element => {
-      if (element.id === playlist.id) {
-        console.log('here here')
-        dispatch(playlistActions.getPlaylistSongs(element))
-        .then((res) => {
-          // console.log(res)
-          setSongArr(res)
-        })
-        .then((res) => {
-          setLoaded(true)
-        })
-      }
-    })
-  }
+  // const refresh = () => {
+  //   console.log('refresh')
+  //   setTrigger((prev) => !prev)
+  //   setShowDelete(false)
+  //   // showTrigger(false)
+  //   reloadTrigger((prev) => !prev)
+  //   playlistSend.forEach(element => {
+  //     if (element.id === playlist.id) {
+  //       console.log('here here')
+  //       dispatch(playlistActions.getPlaylistSongs(element))
+  //       .then((res) => {
+  //         // console.log(res)
+  //         setSongArr(res)
+  //       })
+  //       .then((res) => {
+  //         setLoaded(true)
+  //       })
+  //     }
+  //   })
+  // }
 
   const deleteMenu = () => {
     if (showDelete) {
@@ -201,11 +198,11 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
       e.stopPropagation()
     }}
     >
-      <div className='editTopBar'>
+      {/* <div className='editTopBar'> */}
         <div className='editPlaylistTitle'>
           Editing {playlist.title}
         </div>
-        <div className='refreshButton'
+        {/* <div className='refreshButton'
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
@@ -213,8 +210,8 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
           }}
         >
           R
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     <div className='topBarEdit'>
       {deleteMenu()}
 
