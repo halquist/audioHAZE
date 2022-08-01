@@ -137,7 +137,7 @@ router.put(
     let index2 = removePlaylist.playlist.indexOf(songId)
     if (removePlaylist.userId === userId) {
       const updatePlaylist = await Playlist.remove( playlistId, index2 );
-      return res.json(index2)
+      return res.json({index2, updatePlaylist})
     } else {
       res.errors = new Error('Unauthorized');
       err.errors = errors;

@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { getOneSong, selectCurrentSong } from '../../store/song';
-import * as playlistActions from '../../store/playlist'
+import playlistsReducer, * as playlistActions from '../../store/playlist'
 
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -59,17 +59,18 @@ const RadioPlayer = ({  }) => {
 
   const updatePlaylist = async (playlist) => {
     if (playlist) {
-      await dispatch(playlistActions.selectCurrentPlaylist(playlist))
-      .then((ret) => {
-        console.log('return playlist', ret)
-          setPlaylist(ret.playlist.playlist)
-          setPlaylistMaxIndex(ret.playlist.playlist.length)
-      })
+      // await dispatch(playlistActions.selectCurrentPlaylist(playlist))
+      // .then((ret) => {
+        // console.log('return playlist', ret)
+          setPlaylist(playlist)
+          setPlaylistMaxIndex(playlistsReducer.length)
+      // })
     }
   }
 
   const loadNextSong = () => {
-    // console.log('next song')
+    setPlaylist(playlistGet?.playlist)
+    console.log('next song', playlistGet?.playlist)
     if (playlist.length < 2) {
       setSongMessage('Only One Song In Playlist')
       const messageTimeout = setTimeout(() => {
@@ -88,6 +89,7 @@ const RadioPlayer = ({  }) => {
   }
 
   const loadPrevSong = () => {
+    setPlaylist(playlistGet?.playlist)
     if (playlist.length < 2) {
       setSongMessage('Only One Song In Playlist')
       const messageTimeout = setTimeout(() => {

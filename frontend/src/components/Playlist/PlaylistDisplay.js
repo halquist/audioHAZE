@@ -86,6 +86,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
     }
   }
 
+  // console.log('currentPlaylist', currentPlaylist)
 
   // useEffect(() => {
   //   if(userId) {
@@ -158,6 +159,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
                   // console.log('playlist', playlist)
                   if (playlist.playlist.length) {
                     setSelectedPlaylist(playlist.title)
+                    setCurrentPlaylist(playlist)
                     // dispatch(playlistActions.selectCurrentPlaylist(playlist))
                     startPlaylist(playlist)
                   } else {

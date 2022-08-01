@@ -23,6 +23,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
         .then((res) => {
           // console.log(res)
           setSongArr(res)
+          // updatePlaylist(res)
         })
         .then((res) => {
           setLoaded(true)
@@ -38,6 +39,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
               dispatch(playlistActions.getPlaylistSongs(element))
               .then((res) => {
                 setSongArr(res)
+                updatePlaylist(res)
               })
               .then((res) => {
                 setLoaded(true)
@@ -60,6 +62,8 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
     await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id, songId))
       .then((ret) => {
         if (ret) {
+          console.log('removeplaylist return', ret)
+          // updatePlaylist(ret)
           setTrigger((prev) => !prev)
           reloadTrigger((prev) => !prev)
         }

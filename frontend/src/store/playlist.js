@@ -156,8 +156,8 @@ export const removeFromPlaylist = (userId, index, playlistId, songId) => async (
 
   const data = await response.json();
   console.log('store data', data)
-  await dispatch(removeSong(data, playlistId));
-  return data;
+  await dispatch(removeSong(data.index2, playlistId));
+  return data.updatePlaylist;
 }
 
 // set current playlist
