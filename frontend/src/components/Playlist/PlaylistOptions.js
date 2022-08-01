@@ -56,8 +56,8 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
     const deleteId = document.getElementById(songId + '.' + num)
     console.log('deleteId', deleteId)
     console.log(songId + '.' + num)
-    deleteId.innerHTML =
-    "<div className='playlistMenuText'}>deleting...</div>"
+    // deleteId.innerHTML =
+    // "<div className='playlistMenuText'}>deleting...</div>"
     const index = playlist.playlist.indexOf(songId)
     await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id))
       .then((ret) => {

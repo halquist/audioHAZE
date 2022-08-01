@@ -14,8 +14,10 @@ const RadioPlayer = ({  }) => {
   const dispatch = useDispatch();
   const { songId } = useParams();
   const song = useSelector(state => state.song.currentSong);
+  const userId = useSelector((state) => state.session.user?.id)
   const sessionUser = useSelector(state => state.session.user);
   const playlistGet = useSelector(state => state.playlist.currentPlaylist)
+  const playlistAdjust = useSelector(state => state.playlist)
 
   const [playlist, setPlaylist] = useState(playlistGet?.playlist || null);
   const [playlistIndex, setPlaylistIndex] = useState(0);
@@ -32,8 +34,13 @@ const RadioPlayer = ({  }) => {
   useEffect(() => {
     if (playlistGet) {
       setPlaylist(playlistGet?.playlist)
+      // console.log('playlist get', playlistGet?.playlist)
     }
-  },[playlistGet])
+  },[playlistGet, playlistAdjust])
+
+  useEffect(() => {
+
+  },[playlistGet, playlistAdjust])
 
   const startPlaylist = async (playlist) => {
     // console.log('starting playlist outer')
@@ -51,11 +58,14 @@ const RadioPlayer = ({  }) => {
   }
 
   const updatePlaylist = async (playlist) => {
-    await dispatch(playlistActions.selectCurrentPlaylist(playlist))
-    .then((ret) => {
-        setPlaylist(ret.playlist.playlist)
-        setPlaylistMaxIndex(ret.playlist.playlist.length)
-    })
+    if (playlist) {
+      await dispatch(playlistActions.selectCurrentPlaylist(playlist))
+      .then((ret) => {
+        console.log('return playlist', ret)
+          setPlaylist(ret.playlist.playlist)
+          setPlaylistMaxIndex(ret.playlist.playlist.length)
+      })
+    }
   }
 
   const loadNextSong = () => {
