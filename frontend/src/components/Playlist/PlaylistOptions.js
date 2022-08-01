@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 import * as playlistActions from '../../store/playlist'
 
-const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend }) => {
+const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, reloadOptions, updatePlaylist }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const playlistState = useSelector(state => state.playlist);
@@ -45,29 +45,72 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
             }
           })
         })
-  },[playlistState])
+  },[playlistState, playlist.playlist])
 
   // useEffect(() => {
   //  setCheckPlaylist(playlistState)
   //  console.log('wooooooooo')
   // },[playlistState])
 
-  const removeSong = async (songId, num) => {
-    const deleteId = document.getElementById(songId + '.' + num)
-    console.log('deleteId', deleteId)
-    console.log(songId + '.' + num)
-    // deleteId.innerHTML =
-    // "<div className='playlistMenuText'}>deleting...</div>"
-    const index = playlist.playlist.indexOf(songId)
-    await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id))
+  const removeSong = async (songId, num, songTitle) => {
+    let deleteId = document.getElementById(songId + '.' + num)
+    deleteId.innerHTML =
+    "<div className='playlistMenuText'}>deleting...</div>"
+    let index = playlist.playlist.indexOf(songId)
+    await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id, songId))
       .then((ret) => {
         if (ret) {
           setTrigger((prev) => !prev)
-          // deleteId.innerHTML = null
-          // deleteId.classList.remove('playlistMenuItem')
+          reloadTrigger((prev) => !prev)
         }
       })
   }
+
+
+  // const removeSong = async (songId, num, songTitle) => {
+  //   // setLoaded(false)
+  //   reloadOptions(false)
+  //   reloadOptions(true)
+  //   reloadTrigger((prev) => !prev)
+  //   let deleteId = document.getElementById(songId + '.' + num)
+  //   let nextSibling = deleteId.nextElementSibling
+  //   console.log('nextSibling', nextSibling)
+  //   let nextSiblingId
+  //   if (deleteId.nextElementSibling) {
+  //     nextSiblingId = nextSibling.id
+  //   } else {
+  //     nextSiblingId = deleteId.id
+  //   }
+  //   deleteId.id = nextSiblingId
+  //   if (nextSibling) {
+  //     deleteId.innerHTML = nextSibling.innerHTML
+  //     nextSibling.innerHTML = null
+  //   }
+  //   console.log('deleteId', deleteId)
+  //   console.log(songId + '.' + num, songTitle)
+  //   // deleteId.classList.remove()
+  //   // deleteId.innerHTML =
+  //   // "<div className='playlistMenuText'}>deleting...</div>"
+  //   let index = playlist.playlist.indexOf(songId)
+  //   // while (index === -1) {
+  //   //   setTrigger((prev) => !prev)
+  //   //   reloadTrigger((prev) => !prev)
+  //   //   index = playlist.playlist.indexOf(songId)
+  //   // }
+  //   console.log(playlist)
+  //   console.log('index', index)
+  //   await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id))
+  //     .then((ret) => {
+  //       if (ret) {
+  //         setTrigger((prev) => !prev)
+  //         // showTrigger(false)
+  //         reloadTrigger((prev) => !prev)
+  //         reloadOptions(true)
+  //         // showTrigger(true)
+  //         // setLoaded(true)
+  //       }
+  //     })
+  // }
 
   const deletePlaylist = async () => {
     await dispatch(playlistActions.removePlaylist(playlist))
@@ -168,7 +211,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend })
             <div className='xRemove'
               onClick={(e) => {
                 console.log('click stuff', song.id, i)
-                removeSong(song.id, i)
+                removeSong(song.id, i, song.title)
               }}
               >
               x

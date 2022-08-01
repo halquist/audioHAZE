@@ -140,7 +140,7 @@ export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) =>
   return data;
 }
 
-export const removeFromPlaylist = (userId, index, playlistId) => async (dispatch) => {
+export const removeFromPlaylist = (userId, index, playlistId, songId) => async (dispatch) => {
   const response = await csrfFetch('/api/playlists/remove', {
     method: 'PUT',
     headers: {
@@ -149,12 +149,14 @@ export const removeFromPlaylist = (userId, index, playlistId) => async (dispatch
     body: JSON.stringify({
       userId,
       index,
-      playlistId
+      playlistId,
+      songId
     })
   })
 
   const data = await response.json();
-  await dispatch(removeSong(index, playlistId));
+  console.log('store data', data)
+  await dispatch(removeSong(data, playlistId));
   return data;
 }
 
