@@ -18,20 +18,25 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
   const [songArr, setSongArr] = useState([])
   const [trigger, setTrigger] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
+  const [playlistOrder, setPlaylistOrder] = useState([])
+  const [elements, setElements] = useState([])
 
   // console.log('playlistState', playlistState)
 
   useEffect(() => {
       dispatch(playlistActions.getPlaylistSongs(playlist))
         .then((res) => {
-          // console.log(res)
           setSongArr(res)
+          const orderArr = res.map(el => {
+            return el.id
+          })
+          setPlaylistOrder(orderArr)
           // updatePlaylist(res)
         })
         .then((res) => {
           setLoaded(true)
         })
-  },[])
+      },[])
 
   useEffect(() => {
       // setLoaded(false)
@@ -207,34 +212,60 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
     }
   }
 
-  const onDragEnd = () => {
-
+  const handleOnDragStart = (result) => {
+    setElements(
+      songArr.map((song, i) => {
+        return (
+              <li className='playlistMenuItem'  id={`${song.id}.${i}`} >
+                  <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' style={{ fontFamily: 'DS-DIGIB', fontSize: '1.3em' }}>{i + 1}. {song.title}</NavLink>
+                  <div className='xRemove'
+                  style={{ fontFamily: 'DS-DIGIB', fontSize: '1.2em' }}
+                    onClick={(e) => {
+                      // console.log('click stuff', song.id, i)
+                      removeSong(song.id, i, song.title)
+                    }}
+                    >
+                    x
+                  </div>
+              </li>
+        )
+      })
+    )
   }
 
-  const elements = songArr.map((song, i) => {
-    return (
-          <li className='playlistMenuItem'  id={`${song.id}.${i}`} >
-              <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' style={{ fontFamily: 'DS-DIGIB', fontSize: '1.3em' }}>{i + 1}. {song.title}</NavLink>
-              <div className='xRemove'
-              style={{ fontFamily: 'DS-DIGIB', fontSize: '1.2em' }}
-                onClick={(e) => {
-                  // console.log('click stuff', song.id, i)
-                  removeSong(song.id, i, song.title)
-                }}
-                >
-                x
-              </div>
-          </li>
-    )
-  })
+  const handleOnDragEnd = (result) => {
+    const newArr = playlistOrder
+    console.log('old', newArr)
+    const [reorderedItem] = newArr.splice(result.source.index, 1);
+    newArr.splice(result.destination.index, 0, reorderedItem);
+    setPlaylistOrder(newArr)
+    dispatch(playlistActions.reorderSongs(newArr, sessionUser.id))
+    console.log('new', newArr)
+  }
 
-  console.log(elements)
+  // // used to create a clone of each song list item which is used to display while click and dragging
+  // const elements = songArr.map((song, i) => {
+  //   return (
+  //         <li className='playlistMenuItem'  id={`${song.id}.${i}`} >
+  //             <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' style={{ fontFamily: 'DS-DIGIB', fontSize: '1.3em' }}>{i + 1}. {song.title}</NavLink>
+  //             <div className='xRemove'
+  //             style={{ fontFamily: 'DS-DIGIB', fontSize: '1.2em' }}
+  //               onClick={(e) => {
+  //                 // console.log('click stuff', song.id, i)
+  //                 removeSong(song.id, i, song.title)
+  //               }}
+  //               >
+  //               x
+  //             </div>
+  //         </li>
+  //   )
+  // })
 
 
   const songArrFunc = () => {
     if (songArr !== 'empty'){
     return (
-      <DragDropContext onDragEnd={(e) => onDragEnd(e)}>
+      <DragDropContext onDragStart={handleOnDragStart} onDragEnd={handleOnDragEnd}>
         <Droppable droppableId='droppable'
         renderClone={(provided, snapshot, rubric) => (
           // console.log('snapshot', rubric.source.index)

@@ -8,6 +8,7 @@ const ADD_SONG = 'playlist/ADDSONG'
 const SET_CURRENT = 'playlist/SET_CURRENT'
 const GET_SONGS = 'playlist/GET_SONGS'
 const REMOVE_SONG = 'playlist/REMOVE_SONG'
+const ORDER_SONGS = 'playlist/ORDER_SONGS'
 
 const load = (playlists) => {
   return {
@@ -65,6 +66,12 @@ const getSongs = (playlist) => {
   }
 }
 
+const orderSongs = (playlist) => {
+  return {
+    type: ORDER_SONGS,
+    playlist
+  }
+}
 
 
 // load playlists for a specific user
@@ -187,6 +194,27 @@ export const getPlaylistSongs = (playlist) => async dispatch => {
   } else {
     return 'empty'
   }
+}
+
+//reorders the songlist
+export const reorderSongs = (playlist, userId) => async (dispatch) => {
+  // console.log('store song id', songId)
+  const response = await csrfFetch('/api/playlists/add', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId,
+      playlistId,
+      songId
+    })
+  })
+
+  const data = await response.json();
+  // console.log('add data', data)
+  await dispatch(addSong(data, songId));
+  return data;
 }
 
 const initialState = {playlistList: [], currentPlaylist: {}};
