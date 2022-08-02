@@ -192,7 +192,8 @@ export const getPlaylistSongs = (playlist) => async dispatch => {
 const initialState = {playlistList: [], currentPlaylist: {}};
 
 const playlistsReducer = (state = initialState, action) => {
-  let newState;
+  let newState
+  let index
   switch(action.type) {
     case LOAD:
       newState = {...state}
@@ -214,11 +215,20 @@ const playlistsReducer = (state = initialState, action) => {
     case ADD_SONG:
       newState = {...state}
       // console.log(newState)
-      newState[action.payload.data.id].playlist.push(action.payload.songId)
+      index = action.payload.data.id
+      newState[index].playlist.push(action.payload.songId)
+      // console.log('store', index, state.currentPlaylist.id, newState[index].playlist)
+      if (index === state.currentPlaylist.id) {
+        newState.currentPlaylist = newState[index]
+      }
       return newState;
     case REMOVE_SONG:
       newState = {...state}
+      index = action.payload.playlistId
       newState[action.payload.playlistId].playlist.splice(action.payload.index, 1)
+      if (index === state.currentPlaylist.id) {
+        newState.currentPlaylist = newState[index]
+      }
       return newState
     case SET_CURRENT:
       newState = {...state}

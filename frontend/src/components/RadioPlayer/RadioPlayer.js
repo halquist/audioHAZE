@@ -35,7 +35,7 @@ const RadioPlayer = ({  }) => {
   useEffect(() => {
     if (playlistGet) {
       setPlaylist(playlistGet?.playlist)
-      // console.log('playlist get', playlistGet?.playlist)
+      console.log('playlist get', playlistGet?.playlist)
     }
   },[playlistGet, playlistAdjust])
 
@@ -94,9 +94,16 @@ const RadioPlayer = ({  }) => {
   // }
 
   const loadNextSong = () => {
+    let usePlaylist
+    if (playlistGet.playlist) {
+      setPlaylistMaxIndex(playlistGet.playlist.length)
+      usePlaylist = playlistGet.playlist
+    } else {
+      usePlaylist = playlist
+    }
     // setPlaylist(playlistGet?.playlist)
     console.log('next song', playlistGet?.playlist)
-    if (playlist.length < 2) {
+    if (usePlaylist.length < 2) {
       setSongMessage('Only One Song In Playlist')
       const messageTimeout = setTimeout(() => {
         setSongMessage('')
@@ -105,11 +112,11 @@ const RadioPlayer = ({  }) => {
       return
     }
     if (playlistIndex < playlistMaxIndex) {
-      dispatch(selectCurrentSong(playlist[playlistIndex]))
+      dispatch(selectCurrentSong(usePlaylist[playlistIndex]))
       setPlaylistIndex((prev) => prev += 1)
     } else {
       setPlaylistIndex(1)
-      dispatch(selectCurrentSong(playlist[0]))
+      dispatch(selectCurrentSong(usePlaylist[0]))
     }
   }
 

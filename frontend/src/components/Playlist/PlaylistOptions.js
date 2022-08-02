@@ -18,7 +18,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
   const [trigger, setTrigger] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
 
-  console.log('playlistState', playlistState)
+  // console.log('playlistState', playlistState)
 
   useEffect(() => {
       dispatch(playlistActions.getPlaylistSongs(playlist))
