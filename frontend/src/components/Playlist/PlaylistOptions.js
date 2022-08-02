@@ -2,7 +2,8 @@ import './Playlist.css'
 
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 
 import * as playlistActions from '../../store/playlist'
@@ -206,25 +207,74 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
     }
   }
 
+  const onDragEnd = () => {
+
+  }
+
+  const elements = songArr.map((song, i) => {
+    return (
+          <li className='playlistMenuItem'  id={`${song.id}.${i}`} >
+              <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' style={{ fontFamily: 'DS-DIGIB', fontSize: '1.3em' }}>{i + 1}. {song.title}</NavLink>
+              <div className='xRemove'
+              style={{ fontFamily: 'DS-DIGIB', fontSize: '1.2em' }}
+                onClick={(e) => {
+                  // console.log('click stuff', song.id, i)
+                  removeSong(song.id, i, song.title)
+                }}
+                >
+                x
+              </div>
+          </li>
+    )
+  })
+
+  console.log(elements)
 
 
   const songArrFunc = () => {
     if (songArr !== 'empty'){
-    return songArr.map((song, i) => {
-      return (
-        <div className='playlistMenuItem'  id={`${song.id}.${i}`} key={`${song.id}.${i}`}>
-            <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' >{i + 1}. {song.title}</NavLink>
-            <div className='xRemove'
-              onClick={(e) => {
-                console.log('click stuff', song.id, i)
-                removeSong(song.id, i, song.title)
-              }}
-              >
-              x
-            </div>
-        </div>
-      )
-    })
+    return (
+      <DragDropContext onDragEnd={(e) => onDragEnd(e)}>
+        <Droppable droppableId='droppable'
+        renderClone={(provided, snapshot, rubric) => (
+          // console.log('snapshot', rubric.source.index)
+          // console.log(elements[rubric.source.index])
+          <div
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
+            {elements[rubric.source.index]}
+          </div>
+        )}
+        >
+          {(provided, snapshot) => (
+            <ul className='songList' {...provided.droppableProps} ref={provided.innerRef}>
+              { songArr.map((song, i) => {
+                return (
+                  <Draggable key={`${song.id}.${i}`} draggableId={`${song.id}.${i}`} index={i}>
+                    {(provided, snapshot) => (
+                      <li className='playlistMenuItem'  id={`${song.id}.${i}`} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          <NavLink exact to={`/songs/${song.id}`} className='playlistMenuText' >{i + 1}. {song.title}</NavLink>
+                          <div className='xRemove'
+                            onClick={(e) => {
+                              // console.log('click stuff', song.id, i)
+                              removeSong(song.id, i, song.title)
+                            }}
+                            >
+                            x
+                          </div>
+                      </li>
+                    )}
+                  </Draggable>
+                )
+              })}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
+    )
   } else {
       return (
         <div className='editPlaylistTitle' >
@@ -263,9 +313,8 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
       {/* </div> */}
     <div className='topBarEdit'>
       {deleteMenu()}
-
     </div>
-      {songArrFunc()}
+        {songArrFunc()}
     </div>
   )
 }
