@@ -18,6 +18,8 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
   const [trigger, setTrigger] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
 
+  console.log('playlistState', playlistState)
+
   useEffect(() => {
       dispatch(playlistActions.getPlaylistSongs(playlist))
         .then((res) => {
@@ -39,7 +41,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
               dispatch(playlistActions.getPlaylistSongs(element))
               .then((res) => {
                 setSongArr(res)
-                updatePlaylist(res)
+                // updatePlaylist(res)
               })
               .then((res) => {
                 setLoaded(true)
@@ -49,10 +51,10 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
         })
   },[playlistState, playlist.playlist])
 
-  // useEffect(() => {
+  useEffect(() => {
   //  setCheckPlaylist(playlistState)
-  //  console.log('wooooooooo')
-  // },[playlistState])
+  //  updatePlaylist(playlist)
+  },[playlistState])
 
   const removeSong = async (songId, num, songTitle) => {
     let deleteId = document.getElementById(songId + '.' + num)

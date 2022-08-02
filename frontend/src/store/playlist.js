@@ -136,7 +136,7 @@ export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) =>
   })
 
   const data = await response.json();
-  console.log('add data', data)
+  // console.log('add data', data)
   await dispatch(addSong(data, songId));
   return data;
 }
@@ -156,7 +156,7 @@ export const removeFromPlaylist = (userId, index, playlistId, songId) => async (
   })
 
   const data = await response.json();
-  console.log('store data', data)
+  // console.log('store data', data)
   await dispatch(removeSong(data.index2, playlistId));
   return data.updatePlaylist;
 }
@@ -208,7 +208,7 @@ const playlistsReducer = (state = initialState, action) => {
       return newState;
     case REMOVE:
       newState = {...state}
-      console.log('store playlist', action.playlist)
+      // console.log('store playlist', action.playlist)
       delete newState[action.playlist.id]
       return newState;
     case ADD_SONG:

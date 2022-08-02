@@ -46,6 +46,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
       dispatch(playlistActions.getPlaylists(userId))
         .then((res) => {
           setPlaylistArr(res)
+          // dispatch(playlistActions.selectCurrentPlaylist(playlist))
           // if (currentPlaylist) {
           //   setEditPlaylist(
           //     playlist.playlistList.forEach((element) => {
@@ -69,7 +70,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   useEffect((res) => {
     // setLoaded(false)
     if(userId && playlist) {
-      setPlaylistArr(playlist.playlistList)
+      // setPlaylistArr(playlist.playlistList)
       reset()
     }
     // setLoaded(true)
@@ -77,11 +78,13 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
 
   const reset = async (res)=> {
     if(userId && playlist) {
-      console.log('playlist', playlist)
+      // console.log('playlist', playlist)
       if (res) {
         setPlaylistArr(res)
+        // dispatch(playlistActions.selectCurrentPlaylist(playlist))
       } else {
         setPlaylistArr(playlist.playlistList)
+        // dispatch(playlistActions.selectCurrentPlaylist(playlist))
       }
     }
   }

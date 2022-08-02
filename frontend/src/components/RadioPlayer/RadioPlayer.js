@@ -59,24 +59,39 @@ const RadioPlayer = ({  }) => {
   }
 
   const updatePlaylist = async (playlist) => {
-    if (playlist) {
-      // await dispatch(playlistActions.selectCurrentPlaylist(playlist))
-      // .then((ret) => {
-        // console.log('return playlist', ret)
-        // setPlaylist(() => {
-        //   for (let i = 0; i < playlistList.length; i++) {
-        //     if (playlistList[i].id === playlist.id) {
-        //     setPlaylistMaxIndex(playlistList[i].length)
-        //       return playlistList[i]
-        //     }
-        //   }
-        // }
-        // )
-          // setPlaylist(playlist)
-          // setPlaylistMaxIndex(playlist.length)
-      // })
-    }
+    console.log('starting playlist outer')
+    await dispatch(playlistActions.selectCurrentPlaylist(playlist))
+    .then((ret) => {
+        // setPlaylistIndex(0)
+        setPlaylist(ret.playlist.playlist)
+        setPlaylistMaxIndex(ret.playlist.playlist.length)
+        return ret.playlist.playlist
+      })
+      .then((ret) => {
+        // dispatch(selectCurrentSong(ret[0]))
+        // setPlaylistIndex((prev) => prev += 1)
+      })
   }
+
+  // const updatePlaylist = async (playlist) => {
+  //   if (playlist) {
+  //     // await dispatch(playlistActions.selectCurrentPlaylist(playlist))
+  //     // .then((ret) => {
+  //       // console.log('return playlist', ret)
+  //       // setPlaylist(() => {
+  //       //   for (let i = 0; i < playlistList.length; i++) {
+  //       //     if (playlistList[i].id === playlist.id) {
+  //       //     setPlaylistMaxIndex(playlistList[i].length)
+  //       //       return playlistList[i]
+  //       //     }
+  //       //   }
+  //       // }
+  //       // )
+  //         // setPlaylist(playlist)
+  //         // setPlaylistMaxIndex(playlist.length)
+  //     // })
+  //   }
+  // }
 
   const loadNextSong = () => {
     // setPlaylist(playlistGet?.playlist)
