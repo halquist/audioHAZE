@@ -50,6 +50,7 @@ const RadioPlayer = ({  }) => {
         setPlaylistIndex(0)
         setPlaylist(ret.playlist.playlist)
         setPlaylistMaxIndex(ret.playlist.playlist.length)
+        dispatch(selectCurrentSong(-1))
         return ret.playlist.playlist
       })
       .then((ret) => {
