@@ -114,11 +114,17 @@ const RadioPlayer = ({  }) => {
       },2000)
       return
     }
+    if (usePlaylist[playlistIndex] === usePlaylist[playlistIndex - 1]) {
+      console.log('same same')
+        dispatch(selectCurrentSong(0))
+    }
     if (playlistIndex < maxIndex) {
-      console.log('index', usePlaylist[playlistIndex], maxIndex)
       dispatch(selectCurrentSong(usePlaylist[playlistIndex]))
       setPlaylistIndex((prev) => prev += 1)
     } else {
+      if (usePlaylist[maxIndex - 1] === usePlaylist[0]) {
+        dispatch(selectCurrentSong(0))
+      }
       setPlaylistIndex(1)
       dispatch(selectCurrentSong(usePlaylist[0]))
     }
@@ -144,11 +150,18 @@ const RadioPlayer = ({  }) => {
       },2000)
       return
     }
+    if (usePlaylist[playlistIndex] === usePlaylist[playlistIndex + 1]) {
+      console.log('same same')
+        dispatch(selectCurrentSong(0))
+    }
     if (playlistIndex !== 1) {
       // setPlaylistIndex((prev) => prev -= 1)
       dispatch(selectCurrentSong(usePlaylist[playlistIndex - 2]))
       setPlaylistIndex((prev) => prev -= 1)
     } else {
+      if (usePlaylist[0] === usePlaylist[maxIndex - 1]) {
+        dispatch(selectCurrentSong(-1))
+      }
       setPlaylistIndex(maxIndex)
       dispatch(selectCurrentSong(usePlaylist[maxIndex - 1]))
       // setPlaylistIndex((prev) => prev += 1)

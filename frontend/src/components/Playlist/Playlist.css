@@ -54,6 +54,10 @@
   opacity: 1;
 }
 
+.playlistMenuItemActive:hover > .playlistGearIcon {
+  opacity: 1;
+}
+
 .playlistGearIcon:hover {
   /* color: #d9a700; */
   filter: drop-shadow(0px 0px 4px rgb(0, 0, 0));
@@ -97,7 +101,7 @@
   /* max-height: 0; */
   height: fit-content;
   /* transition: max-height 0.2s ease-out; */
-  padding: 10px 10px;
+  /* padding: 10px 10px; */
   /* overflow: hidden; */
   /* overflow: hidden; */
   overflow-y: auto;
@@ -135,25 +139,29 @@
 }
 
 .playlistMenuItem {
-  /* overflow: hidden; */
-  /* transition: height 0.2s ease-out; */
-  /* display: none; */
-  /* width: 200px; */
-  /* height: 0px; */
-  /* overflow: hidden; */
-  /* transition-property: height; */
-  /* transition-duration: .2s; */
-  /* transition: max-height 0.2s ease-out; */
-  /* overflow-y: hidden; */
-  /* white-space: nowrap; */
-  /* text-align: left; */
-  /* text-overflow: ellipsis; */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0px;
+  padding: 4px 10px;
   border-bottom: 1px solid rgba(81, 223, 255, 0.729);
 }
+
+.playlistMenuItemActive {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px;
+  border-bottom: 1px solid rgba(81, 223, 255, 0.729);
+  background-color: rgba(81, 223, 255, 0.729);
+}
+
+.playlistMenuItemActive > .playlistMenuText {
+  color: rgb(12, 85, 127);
+}
+
+/* .playlistMenuItemActive > .playlistMenuText:hover {
+  filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+} */
 
 .playlistMenuItemBlue {
   /* color: rgb(81, 223, 255); */
@@ -161,7 +169,7 @@
   color: #ffc400;
   /* filter: drop-shadow(0px 0px 3px rgb(255, 0, 234)); */
   font-size: 1.1em;
-  padding: 0px 0px 4px 0px;
+  padding: 4px 10px 4px 10px;
   border-bottom: 1px solid rgba(81, 223, 255, 0.729);
 }
 
@@ -406,7 +414,7 @@
   justify-content: space-between;
   cursor: auto;
   border-bottom: 1px solid rgba(81, 223, 255, 0.729);
-  padding: 4px 0px 0px 0px;
+  padding: 4px 10px 0px 10px;
 
 }
 
@@ -459,12 +467,15 @@
 }
 
 .editPlaylistTitle {
-  color: rgb(134, 239, 255);
+  background-color: rgba(81, 223, 255, 0.729);
+  color: rgb(12, 85, 127);
   /* color: rgba(60, 151, 203, 0.8); */
   /* background-color: rgba(81, 223, 255, 0.729); */
   user-select: none;
   cursor: default;
   font-size: 1.1em;
+  padding: 4px 10px;
+
 }
 
 .xRemove {
