@@ -18,6 +18,10 @@ const PlaylistPlus = ({ songId }) => {
   const handleClick = (e) => {
     e.stopPropagation();
     setShowMenu((prev) => !prev)
+    // const showTimeout = setTimeout(() => {
+    //   setShowMenu(false)
+    //   clearTimeout(showTimeout)
+    // }, 15000)
   }
 
   const handleAdd = (title) => {
