@@ -136,6 +136,7 @@ export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) =>
   })
 
   const data = await response.json();
+  console.log('add data', data)
   await dispatch(addSong(data, songId));
   return data;
 }

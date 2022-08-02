@@ -17,6 +17,7 @@ const RadioPlayer = ({  }) => {
   const userId = useSelector((state) => state.session.user?.id)
   const sessionUser = useSelector(state => state.session.user);
   const playlistGet = useSelector(state => state.playlist.currentPlaylist)
+  const playlistList = useSelector(state => state.playlist.playlistList)
   const playlistAdjust = useSelector(state => state.playlist)
 
   const [playlist, setPlaylist] = useState(playlistGet?.playlist || null);
@@ -62,14 +63,23 @@ const RadioPlayer = ({  }) => {
       // await dispatch(playlistActions.selectCurrentPlaylist(playlist))
       // .then((ret) => {
         // console.log('return playlist', ret)
-          setPlaylist(playlist)
-          setPlaylistMaxIndex(playlistsReducer.length)
+        // setPlaylist(() => {
+        //   for (let i = 0; i < playlistList.length; i++) {
+        //     if (playlistList[i].id === playlist.id) {
+        //     setPlaylistMaxIndex(playlistList[i].length)
+        //       return playlistList[i]
+        //     }
+        //   }
+        // }
+        // )
+          // setPlaylist(playlist)
+          // setPlaylistMaxIndex(playlist.length)
       // })
     }
   }
 
   const loadNextSong = () => {
-    setPlaylist(playlistGet?.playlist)
+    // setPlaylist(playlistGet?.playlist)
     console.log('next song', playlistGet?.playlist)
     if (playlist.length < 2) {
       setSongMessage('Only One Song In Playlist')
@@ -89,7 +99,7 @@ const RadioPlayer = ({  }) => {
   }
 
   const loadPrevSong = () => {
-    setPlaylist(playlistGet?.playlist)
+    // setPlaylist(playlistGet?.playlist)
     if (playlist.length < 2) {
       setSongMessage('Only One Song In Playlist')
       const messageTimeout = setTimeout(() => {
