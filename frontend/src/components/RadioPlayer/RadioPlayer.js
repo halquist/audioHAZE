@@ -95,14 +95,17 @@ const RadioPlayer = ({  }) => {
 
   const loadNextSong = () => {
     let usePlaylist
+    let maxIndex
     if (playlistGet.playlist) {
-      setPlaylistMaxIndex(playlistGet.playlist.length)
+      console.log('working playlist', playlistGet.playlist)
       usePlaylist = playlistGet.playlist
+      maxIndex = playlistGet.playlist.length
     } else {
       usePlaylist = playlist
+      maxIndex = playlist.length
     }
     // setPlaylist(playlistGet?.playlist)
-    console.log('next song', playlistGet?.playlist)
+    // console.log('next song', playlistGet?.playlist)
     if (usePlaylist.length < 2) {
       setSongMessage('Only One Song In Playlist')
       const messageTimeout = setTimeout(() => {
@@ -111,7 +114,8 @@ const RadioPlayer = ({  }) => {
       },2000)
       return
     }
-    if (playlistIndex < playlistMaxIndex) {
+    if (playlistIndex < maxIndex) {
+      console.log('index', usePlaylist[playlistIndex], maxIndex)
       dispatch(selectCurrentSong(usePlaylist[playlistIndex]))
       setPlaylistIndex((prev) => prev += 1)
     } else {
@@ -121,8 +125,18 @@ const RadioPlayer = ({  }) => {
   }
 
   const loadPrevSong = () => {
+    let usePlaylist
+    let maxIndex
+    if (playlistGet.playlist) {
+      console.log('working playlist', playlistGet.playlist)
+      usePlaylist = playlistGet.playlist
+      maxIndex = playlistGet.playlist.length
+    } else {
+      usePlaylist = playlist
+      maxIndex = playlist.length
+    }
     // setPlaylist(playlistGet?.playlist)
-    if (playlist.length < 2) {
+    if (usePlaylist.length < 2) {
       setSongMessage('Only One Song In Playlist')
       const messageTimeout = setTimeout(() => {
         setSongMessage('')
@@ -132,11 +146,11 @@ const RadioPlayer = ({  }) => {
     }
     if (playlistIndex !== 1) {
       // setPlaylistIndex((prev) => prev -= 1)
-      dispatch(selectCurrentSong(playlist[playlistIndex - 2]))
+      dispatch(selectCurrentSong(usePlaylist[playlistIndex - 2]))
       setPlaylistIndex((prev) => prev -= 1)
     } else {
-      setPlaylistIndex(playlistMaxIndex)
-      dispatch(selectCurrentSong(playlist[playlistMaxIndex - 1]))
+      setPlaylistIndex(maxIndex)
+      dispatch(selectCurrentSong(usePlaylist[maxIndex - 1]))
       // setPlaylistIndex((prev) => prev += 1)
     }
   }
