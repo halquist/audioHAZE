@@ -51,7 +51,10 @@ const PlaylistPlus = ({ songId }) => {
       <div className='playlistPlus'
       onClick={handleClick}
       >
-        +
+        {showMenu ?
+        <div className='playlistPlusX'>+</div> :
+        <div className='playlistPlusNormal'>+</div>
+        }
       </div>
       {!showMenu && !success && !createSuccess &&
       <span className='toolTipText'>Add to playlist</span>

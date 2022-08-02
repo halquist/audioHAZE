@@ -32,8 +32,10 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Playlist.delete = async function ( id ) {
+    // console.log('%%%%%%%%%%%%%%%', id)
     const playlistFind = await Playlist.findByPk(id)
     await playlistFind.destroy();
+    // console.log('destroyed ^^^^^^^^^^^^^^^^^^^')
     return {
       message: 'Success'
     }

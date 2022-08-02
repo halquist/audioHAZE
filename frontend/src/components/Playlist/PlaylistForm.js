@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as playlistActions from '../../store/playlist'
 
-const PlaylistForm = ({ trigger, showTrigger }) => {
+const PlaylistForm = ({ trigger, showTrigger, reloadTrigger }) => {
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.session?.user?.id);
@@ -16,6 +16,7 @@ const PlaylistForm = ({ trigger, showTrigger }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    e.stopPropagation()
     setErrors([])
     let newPlaylist = await dispatch(playlistActions.createPlaylist(userId, title))
       .catch(async (res) => {
@@ -26,7 +27,8 @@ const PlaylistForm = ({ trigger, showTrigger }) => {
         trigger(title)
         setTitle('')
         // setTrigger((prev) => !prev)
-        showTrigger('')
+        showTrigger('showPlaylist')
+        reloadTrigger(false)
       }
   }
 

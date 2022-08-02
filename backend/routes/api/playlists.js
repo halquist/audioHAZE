@@ -68,6 +68,28 @@ router.post(
   })
 );
 
+// create new playlist
+router.delete(
+  '/:id(\\d+)',
+  requireAuth, restoreUser,
+  asyncHandler( async (req, res) => {
+    const id = req.params.id;
+    // const { userId, title } = req.body;
+    const deletePlaylist = await Playlist.delete( id );
+    if (deletePlaylist.message === 'Success') {
+      return res.json({
+        message: 'Success'
+      })
+    } else {
+      return res.json({
+        message: 'Failed'
+      })
+    }
+  })
+);
+
+
+
 // add song validation
 const validatePlaylistAdd = [
   check('songId')
@@ -110,12 +132,12 @@ router.put(
   '/remove',
   requireAuth, restoreUser,
   asyncHandler( async (req, res) => {
-    const { userId, index, playlistId } = req.body;
-    console.log('$$$$$$$', userId, index, playlistId)
+    const { userId, index, playlistId, songId } = req.body;
     const removePlaylist = await Playlist.findByPk(playlistId);
+    let index2 = removePlaylist.playlist.indexOf(songId)
     if (removePlaylist.userId === userId) {
-      const updatePlaylist = await Playlist.remove( playlistId, index );
-      return res.json(updatePlaylist)
+      const updatePlaylist = await Playlist.remove( playlistId, index2 );
+      return res.json({index2, updatePlaylist})
     } else {
       res.errors = new Error('Unauthorized');
       err.errors = errors;

@@ -24,6 +24,8 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   const [showPlaylistOptions, setShowPlaylistOptions] = useState(false)
   const [editPlaylist, setEditPlaylist] = useState(null)
   const [trigger, setTrigger] = useState(false)
+  const [currentPlaylist, setCurrentPlaylist] = useState(null)
+  const [reloadOptions, setReloadOptions] = useState(true)
 
 
   useEffect(() => {
@@ -40,26 +42,54 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
 
   useEffect(() => {
     if(userId) {
-      setLoaded(false)
+      // setLoaded(false)
       dispatch(playlistActions.getPlaylists(userId))
         .then((res) => {
           setPlaylistArr(res)
+          // dispatch(playlistActions.selectCurrentPlaylist(playlist))
+          // if (currentPlaylist) {
+          //   setEditPlaylist(
+          //     playlist.playlistList.forEach((element) => {
+          //       if(element.id === currentPlaylist.id) {
+          //         console.log('element', element)
+          //         return element
+          //       }
+          //     })
+          //     )
+          //   console.log('current playlist', currentPlaylist)
+          // }
         })
         .then((res) => {
-          setLoaded(true)
+          // reset(res)
+          // setLoaded(true)
         })
     }
   }, [trigger])
 
-  useEffect(() => {
-    setLoaded(false)
+  // reloads options menu when song is added
+  useEffect((res) => {
+    // setLoaded(false)
     if(userId && playlist) {
-      setPlaylistArr(playlist.playlistList)
+      // setPlaylistArr(playlist.playlistList)
+      reset()
     }
-    setLoaded(true)
-  }, [trigger, playlist])
+    // setLoaded(true)
+  }, [playlist])
 
+  const reset = async (res)=> {
+    if(userId && playlist) {
+      // console.log('playlist', playlist)
+      if (res) {
+        setPlaylistArr(res)
+        // dispatch(playlistActions.selectCurrentPlaylist(playlist))
+      } else {
+        setPlaylistArr(playlist.playlistList)
+        // dispatch(playlistActions.selectCurrentPlaylist(playlist))
+      }
+    }
+  }
 
+  // console.log('currentPlaylist', currentPlaylist)
 
   // useEffect(() => {
   //   if(userId) {
@@ -86,9 +116,10 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   const showPlaylistIdFunc = (e) => {
     e.stopPropagation()
     e.preventDefault()
+    setShowCreatePlaylist(false)
+    setShowPlaylistOptions(false)
     if (showPlaylistId === '') {
       setShowPlaylistId('showPlaylist')
-      setShowCreatePlaylist(false)
     } else {
       setShowPlaylistId('')
     }
@@ -101,7 +132,6 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   // }
 
   if (!loaded) {
-    console.log('not loaded')
     return (
       null
     )
@@ -114,7 +144,10 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
         {selectedPlaylist ? selectedPlaylist : 'Playlists'}
         <div className='playlistHighlight'></div>
       </div>
-      <img className='playlistPlayIcon' src={play} height='10'></img>
+      {showPlaylistId === '' ?
+      <img className='playlistPlayIcon' src={play} height='10'></img>:
+      <div className='playlistPlayIcon'>x</div>
+      }
       {!showCreatePlaylist && !showPlaylistOptions &&
         <div className='playlistMenu' id={showPlaylistId} >
           <div className='playlistMenuItemBlue'
@@ -129,6 +162,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
                   // console.log('playlist', playlist)
                   if (playlist.playlist.length) {
                     setSelectedPlaylist(playlist.title)
+                    setCurrentPlaylist(playlist)
                     // dispatch(playlistActions.selectCurrentPlaylist(playlist))
                     startPlaylist(playlist)
                   } else {
@@ -151,6 +185,7 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
                     e.stopPropagation()
                     e.preventDefault()
                     await setEditPlaylist(playlist)
+                    await setCurrentPlaylist(playlist)
                     setShowPlaylistOptions(true)
                   }}
                   ></img>
@@ -161,13 +196,13 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
       }
       {showCreatePlaylist &&
         <div className='playlistMenu' id={showPlaylistId}>
-          <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} />
+          <PlaylistForm trigger={setTrigger} showTrigger={setShowPlaylistId} reloadTrigger={setShowCreatePlaylist} />
           {/* <PlaylistForm trigger={setShowPlaylistId} /> */}
         </div>
       }
-      {showPlaylistOptions &&
+      {showPlaylistOptions && reloadOptions &&
         <div className='playlistMenu' id={showPlaylistId}>
-           <PlaylistOptions playlist={editPlaylist} showTrigger={setShowPlaylistOptions} />
+           <PlaylistOptions playlist={editPlaylist} showTrigger={setShowPlaylistOptions} reloadTrigger={setTrigger} playlistSend={playlistArr} reloadOptions={setReloadOptions} updatePlaylist={updatePlaylist} />
         </div>
       }
     </div>

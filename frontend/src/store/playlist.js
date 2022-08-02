@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD = 'playlist/LOAD'
 const LOAD_ONE = 'playlist/LOAD_ONE'
 const ADD = 'playlist/ADD'
+const REMOVE = 'playlist/REMOVE'
 const ADD_SONG = 'playlist/ADDSONG'
 const SET_CURRENT = 'playlist/SET_CURRENT'
 const GET_SONGS = 'playlist/GET_SONGS'
@@ -25,6 +26,13 @@ const loadOne = (playlist) => {
 const add = (playlist) => {
   return {
     type: ADD,
+    playlist
+  }
+}
+
+const remove = (playlist) => {
+  return {
+    type: REMOVE,
     playlist
   }
 }
@@ -95,6 +103,23 @@ export const createPlaylist = (userId, title) => async (dispatch) => {
   return data
 }
 
+// remove playlist
+export const removePlaylist = (playlist) => async (dispatch) => {
+  const { id } = playlist
+  const response = await csrfFetch(`/api/playlists/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id
+    })
+  })
+  const data = await response.json();
+  dispatch(remove(id))
+  return data
+}
+
 // add song to a playlist
 export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) => {
   // console.log('store song id', songId)
@@ -111,11 +136,12 @@ export const addToPlaylist = (userId, playlistId, songId) => async (dispatch) =>
   })
 
   const data = await response.json();
+  // console.log('add data', data)
   await dispatch(addSong(data, songId));
   return data;
 }
 
-export const removeFromPlaylist = (userId, index, playlistId) => async (dispatch) => {
+export const removeFromPlaylist = (userId, index, playlistId, songId) => async (dispatch) => {
   const response = await csrfFetch('/api/playlists/remove', {
     method: 'PUT',
     headers: {
@@ -124,13 +150,15 @@ export const removeFromPlaylist = (userId, index, playlistId) => async (dispatch
     body: JSON.stringify({
       userId,
       index,
-      playlistId
+      playlistId,
+      songId
     })
   })
 
   const data = await response.json();
-  await dispatch(removeSong(index, playlistId));
-  return data;
+  // console.log('store data', data)
+  await dispatch(removeSong(data.index2, playlistId));
+  return data.updatePlaylist;
 }
 
 // set current playlist
@@ -164,7 +192,8 @@ export const getPlaylistSongs = (playlist) => async dispatch => {
 const initialState = {playlistList: [], currentPlaylist: {}};
 
 const playlistsReducer = (state = initialState, action) => {
-  let newState;
+  let newState
+  let index
   switch(action.type) {
     case LOAD:
       newState = {...state}
@@ -178,14 +207,29 @@ const playlistsReducer = (state = initialState, action) => {
       newState = {...state}
       newState[action.playlist.id] = action.playlist
       return newState;
+    case REMOVE:
+      newState = {...state}
+      // console.log('store playlist', action.playlist)
+      delete newState[action.playlist.id]
+      return newState;
     case ADD_SONG:
       newState = {...state}
       // console.log(newState)
-      newState[action.payload.data.id].playlist.push(action.payload.songId)
+      index = action.payload.data.id
+      newState[index].playlist.push(action.payload.songId)
+      // console.log('store', index, state.currentPlaylist.id, newState[index].playlist)
+      if (index === state.currentPlaylist.id) {
+        newState.currentPlaylist = newState[index]
+      }
       return newState;
     case REMOVE_SONG:
       newState = {...state}
+      index = action.payload.playlistId
       newState[action.payload.playlistId].playlist.splice(action.payload.index, 1)
+      if (index === state.currentPlaylist.id) {
+        newState.currentPlaylist = newState[index]
+      }
+      return newState
     case SET_CURRENT:
       newState = {...state}
       newState.currentPlaylist = action.playlist
