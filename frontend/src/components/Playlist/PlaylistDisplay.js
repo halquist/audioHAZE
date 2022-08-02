@@ -14,6 +14,7 @@ import gear_icon from '../../images/gear_icon.svg'
 const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
   const dispatch = useDispatch();
   const playlist = useSelector(state => state.playlist);
+  const playlistGet = useSelector(state => state.playlist.currentPlaylist);
   const userId = useSelector((state) => state.session.user?.id)
 
   const [showPlaylistId, setShowPlaylistId] = useState('')
@@ -156,9 +157,15 @@ const PlaylistDisplay = ({ startPlaylist, updatePlaylist }) => {
             Create New Playlist
           </div>
           {playlistArr.map((playlist) => {
+            let idActive = 'playlistMenuItem'
+            if (playlist.id === playlistGet?.id) {
+              idActive = 'playlistMenuItemActive'
+            }
             return (
-              <div className='playlistMenuItem'  key={Math.random()}>
+              <div className={idActive}  key={Math.random()}>
                 <div className='playlistMenuText' onClick={async (e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
                   // console.log('playlist', playlist)
                   if (playlist.playlist.length) {
                     setSelectedPlaylist(playlist.title)

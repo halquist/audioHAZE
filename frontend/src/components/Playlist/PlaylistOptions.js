@@ -236,7 +236,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
 
   if (!loaded) {
     return (
-      <div>Loading...</div>
+      <div className='loadingText'>Loading...</div>
     )
   }
 
