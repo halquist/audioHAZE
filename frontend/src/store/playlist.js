@@ -197,23 +197,22 @@ export const getPlaylistSongs = (playlist) => async dispatch => {
 }
 
 //reorders the songlist
-export const reorderSongs = (playlist, userId) => async (dispatch) => {
+export const reorderSongs = (playlistId, playlist, userId) => async (dispatch) => {
   // console.log('store song id', songId)
-  const response = await csrfFetch('/api/playlists/add', {
+  const response = await csrfFetch(`/api/playlists/${playlistId}/update`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      userId,
       playlistId,
-      songId
+      playlist,
+      userId
     })
   })
 
   const data = await response.json();
-  // console.log('add data', data)
-  await dispatch(addSong(data, songId));
+  await dispatch(orderSongs(data));
   return data;
 }
 
@@ -261,6 +260,14 @@ const playlistsReducer = (state = initialState, action) => {
     case SET_CURRENT:
       newState = {...state}
       newState.currentPlaylist = action.playlist
+      return newState
+    case ORDER_SONGS:
+      newState = {...state}
+      index = action.playlist.id
+      newState[index] = action.playlist
+      if (index === state.currentPlaylist.id) {
+        newState.currentPlaylist = newState[index]
+      }
       return newState
     default:
       return state;

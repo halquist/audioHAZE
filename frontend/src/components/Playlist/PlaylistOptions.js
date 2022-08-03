@@ -52,6 +52,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
               .then((res) => {
                 setLoaded(true)
               })
+              return
             }
           })
         })
@@ -62,6 +63,21 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
   //  updatePlaylist(playlist)
   },[playlistState])
 
+  useEffect(() => {
+    dispatch(playlistActions.getPlaylistSongs(playlist))
+      .then((res) => {
+        setSongArr(res)
+        const orderArr = res.map(el => {
+          return el.id
+        })
+        setPlaylistOrder(orderArr)
+        // updatePlaylist(res)
+      })
+      .then((res) => {
+        setLoaded(true)
+      })
+    },[])
+
   const removeSong = async (songId, num, songTitle) => {
     let deleteId = document.getElementById(songId + '.' + num)
     deleteId.innerHTML =
@@ -70,7 +86,7 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
     await dispatch(playlistActions.removeFromPlaylist(sessionUser.id, index, playlist.id, songId))
       .then((ret) => {
         if (ret) {
-          console.log('removeplaylist return', ret)
+          // console.log('removeplaylist return', ret)
           // updatePlaylist(ret)
           setTrigger((prev) => !prev)
           reloadTrigger((prev) => !prev)
@@ -233,14 +249,36 @@ const PlaylistOptions = ({ playlist, showTrigger, reloadTrigger, playlistSend, r
     )
   }
 
+  // console.log('songArr', songArr)
+
   const handleOnDragEnd = (result) => {
     const newArr = playlistOrder
-    console.log('old', newArr)
+    // console.log('old', newArr)
     const [reorderedItem] = newArr.splice(result.source.index, 1);
     newArr.splice(result.destination.index, 0, reorderedItem);
     setPlaylistOrder(newArr)
-    dispatch(playlistActions.reorderSongs(newArr, sessionUser.id))
-    console.log('new', newArr)
+    dispatch(playlistActions.reorderSongs(playlist.id, newArr, sessionUser.id))
+      .then((ret) => {
+        console.log('this return', ret)
+        if (ret) {
+      dispatch(playlistActions.getPlaylistSongs(ret))
+        .then((res) => {
+          setSongArr(res)
+          const orderArr = res.map(el => {
+            return el.id
+          })
+          setPlaylistOrder(orderArr)
+          // updatePlaylist(res)
+        })
+        .then((res) => {
+          setLoaded(true)
+        })
+          // console.log('return', ret.playlist)
+          // setTrigger((prev) => !prev)
+          // reloadTrigger((prev) => !prev)
+        }
+      })
+    // console.log('new', newArr)
   }
 
   // // used to create a clone of each song list item which is used to display while click and dragging

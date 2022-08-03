@@ -60,6 +60,13 @@ module.exports = (sequelize, DataTypes) => {
     return playlistFind;
   }
 
+  Playlist.update = async function (playlist, id) {
+    const playlistFind = await Playlist.findByPk(id);
+    playlistFind.playlist = playlist
+    await playlistFind.save();
+    return playlistFind;
+  }
+
   Playlist.associate = function(models) {
     // associations can be defined here
     Playlist.belongsTo(models.User, { foreignKey: 'userId'})
