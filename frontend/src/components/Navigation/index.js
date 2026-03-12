@@ -26,20 +26,18 @@ function Navigation({ isLoaded }){
 
   return (
     <div className='navBar'>
-      <ul className='navContainer'>
-        <li className='navContent'>
-          <NavLink exact to="/" className='iconLink'>
-            <Icon />
-          </NavLink>
-          <NavLink exact to="/" className='homeText'>Home</NavLink>
-          {
-            sessionUser ? <NavLink exact to="/newSong" className='homeText'>Upload</NavLink> :
-            <LoginFormModalButton displayText='Upload' warning='Please Log In to Upload a Song' />
-          }
-          <NavLink exact to="/pyramid" className='homeText'><PyramidLogo /></NavLink>
-          {isLoaded && sessionLinks}
-        </li>
-      </ul>
+      <NavLink exact to="/" className='iconLink'>
+        <Icon />
+      </NavLink>
+      <div className='navButtons'>
+        <NavLink exact to="/" className='homeText'>Home</NavLink>
+        {
+          sessionUser ? <NavLink exact to="/newSong" className='homeText'>Upload</NavLink> :
+          <LoginFormModalButton displayText='Upload' warning='Please Log In to Upload a Song' />
+        }
+        <NavLink exact to="/pyramid" className='homeText'><PyramidLogo /></NavLink>
+        {isLoaded && sessionLinks}
+      </div>
     </div>
   );
 }

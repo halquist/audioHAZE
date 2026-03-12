@@ -47,20 +47,17 @@ const PlaylistAddForm = ({ songId, trigger, hideTrigger }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErrors([])
-    // console.log('user', userId, 'playlist', playlistId, 'song', songId)
     if (e.target.value === 'create') {
       setShowCreate(true)
     } else {
       const playlistId = parseInt(e.target.value, 10)
       let updatePlaylist = await dispatch(playlistActions.addToPlaylist(userId, playlistId, songId))
         .catch(async (res) => {
-          // console.log('errors', res)
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         })
         if (updatePlaylist) {
           hideTrigger(updatePlaylist.title)
-          // console.log('success')
         }
     }
   }
@@ -88,7 +85,7 @@ const PlaylistAddForm = ({ songId, trigger, hideTrigger }) => {
                 required
               >
                 <option value='default' disabled={true}>Pick Playlist</option>
-                <option value='create'>+Create New Playlist</option>
+                <option value='create'>+ Create New Playlist</option>
                 {playlistArr.map(playlist => (
                     <option key={playlist.id} value={playlist.id}>
                       {playlist.title}
@@ -104,7 +101,7 @@ const PlaylistAddForm = ({ songId, trigger, hideTrigger }) => {
       }
       {showCreate &&
         <div className='createListBlade'>
-          <PlaylistForm trigger={trigger} showTrigger={setDummyState}/>
+          <PlaylistForm trigger={trigger} showTrigger={setDummyState} reloadTrigger={setShowCreate} songId={songId} />
         </div>
       }
     </div>

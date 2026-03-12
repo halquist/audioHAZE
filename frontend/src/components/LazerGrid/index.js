@@ -5,7 +5,7 @@ const LazerGrid = () => {
 return (
   <div className='lazerDiv'>
     <svg className='pyramidGlow' version="1.1" id="Layer_15_copy" xmlns="http://www.w3.org/2000/svg" x="0px"
-    y="0px" width="1920px" height="1080px" viewBox="0 0 1920 1080" enableBackground="new 0 0 1920 1080" >
+    y="0px" width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMin slice" enableBackground="new 0 0 1920 1080" >
       <polyline id='glow1' className='glow' fill="none" stroke="#FFFFFF" strokeWidth="2.8346" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" points="
         960,581.667 960,561.667 985.009,557.936 983.282,538.194 1006.316,534.757 1003.052,516.244 981.641,519.438 980,500.683
         960,503.667 960,485.667 941.555,482.915 943.109,465.147 926.397,462.654 911.298,460.401 895.945,458.111 901.513,441.941
