@@ -1,7 +1,7 @@
 # Audiohaze
 Audiohaze is a Retrowave themed clone of soundcloud. Users can browse original Synthwave, Darkwave, and Chillwave music uploaded by other users, participate in a discussion about the songs, and upload their own music.
 
-Try it out at the live site: [Audiohaze](https://audiohaze.herokuapp.com/)
+Try it out at the live site: [Audiohaze](https://audiohaze.onrender.com/)
 
 ![Example photo](https://user-images.githubusercontent.com/20021488/167439079-65c5685d-0734-49ed-83dd-0403a5105cc4.jpg)
 
