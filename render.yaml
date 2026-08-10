@@ -1,0 +1,15 @@
+# Render Blueprint: one web service serves API + React frontend
+# Add DATABASE_URL and JWT_SECRET in Render Dashboard → Environment
+services:
+  - type: web
+    name: audiohaze
+    runtime: node
+    buildCommand: npm install && npm run build --prefix frontend
+    startCommand: npm start --prefix backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false

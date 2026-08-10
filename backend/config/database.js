@@ -2,7 +2,7 @@ const config = require('./index');
 // provides .env configuration environment vars to sequelize
 const db = config.db;
 const username = db.username;
-const password = db.password;
+const password = db.password || null;
 const database = db.database;
 const host = db.host;
 
